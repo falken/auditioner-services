@@ -47,7 +47,7 @@ public class ProductionMemberResourceTest extends TestResourceBase {
         FamilyMember familyMember = new FamilyMember();
         familyMember.setFirstName("Jane");
         familyMember.setLastName("Doe");
-        familyMember.setPreviousRoles("Clara, Sugar Plum Fairy");
+        familyMember.setPastRoles("Clara, Sugar Plum Fairy");
         familyMember.setWeight("280");
         familyMember.setYearsExperience("102");
         productionMember.setFamilyMember(familyMember);

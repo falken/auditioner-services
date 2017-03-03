@@ -13,4 +13,26 @@
 			</column>
 	</createTable>
 	</changeSet>
+	<changeSet id="family-add-contact" author="aconnelly">
+		<addColumn tableName="Family">
+			<column name="Email" type="varchar(256)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+		<addColumn tableName="Family">
+			<column name="Phone" type="varchar(10)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+		<addColumn tableName="Family">
+			<column name="Address" type="varchar(256)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+		<addColumn tableName="Family">
+			<column name="PreferredContactMethod" type="varchar(256)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
