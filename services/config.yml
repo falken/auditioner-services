@@ -12,3 +12,4 @@ database:
   url: jdbc:mysql://localhost/auditioner?useSSL=false
   properties:
     charSet: UTF-8
+useCors: true
