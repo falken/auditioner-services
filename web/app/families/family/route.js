@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   model(param){
     const familyService = this.get('familyService');
     return {
-      family: familyService.loadById(param.family_id),
+      family: familyService.loadFamilyById(param.family_id),
       familyMembers:Ember.A([
         Ember.Object.create({
           "firstName":"Tammy",

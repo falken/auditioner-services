@@ -28,7 +28,7 @@ public class FamilyResource {
     {
         long familyId = familyDAO.addFamily(family);
 
-        return Response.created(URI.create("/auditioner/family/" + familyId)).build();
+        return Response.created(URI.create("/auditioner/families/" + familyId)).build();
     }
 
     @GET

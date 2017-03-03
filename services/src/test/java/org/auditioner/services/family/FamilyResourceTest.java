@@ -40,16 +40,16 @@ public class FamilyResourceTest extends TestResourceBase {
         Family family = new Family();
         family.setName("MyName");
 
-        Response response = simplePost("/auditioner/family",family);
+        Response response = simplePost("/auditioner/families",family);
 
         assertEquals(201,response.getStatus());
-        assertEquals("http://localhost:9998/auditioner/family/14134",response.getLocation().toString());
+        assertEquals("http://localhost:9998/auditioner/families/14134",response.getLocation().toString());
     }
 
     @Test
     public void deleteFamilyRemovesFamily(){
 
-        Response response = simpleDelete("/auditioner/family/12");
+        Response response = simpleDelete("/auditioner/families/12");
 
         assertEquals(204,response.getStatus());
 
@@ -60,11 +60,11 @@ public class FamilyResourceTest extends TestResourceBase {
     public void getFamilyWillReturnFamily(){
         Family family = new Family();
         family.setName("theName");
-        family.setLocation("/auditioner/family/12");
+        family.setLocation("/auditioner/families/12");
 
         when(familyDAO.getFamily(12L)).thenReturn(family);
 
-        Family actualFamily = simpleGet("/auditioner/family/12",Family.class);
+        Family actualFamily = simpleGet("/auditioner/families/12",Family.class);
 
         assertEquals(actualFamily.getName(),family.getName());
         assertEquals(actualFamily.getLocation(),family.getLocation());
@@ -74,16 +74,16 @@ public class FamilyResourceTest extends TestResourceBase {
     public void getFamiliesWillReturnFamilyList(){
         Family family1 = new Family();
         family1.setName("one");
-        family1.setLocation("/auditioner/family/1");
+        family1.setLocation("/auditioner/families/1");
         Family family2 = new Family();
         family2.setName("two");
-        family2.setLocation("/auditioner/family/2");
+        family2.setLocation("/auditioner/families/2");
 
         List<Family> familyList = newArrayList(family1,family2);
 
         when(familyDAO.getFamilies()).thenReturn(familyList);
 
-        Response response = simpleGet("/auditioner/family");
+        Response response = simpleGet("/auditioner/families");
 
         assertEquals(asJsonString(familyList),getResponseBody(response));
     }
@@ -94,7 +94,7 @@ public class FamilyResourceTest extends TestResourceBase {
         Family family = new Family();
         family.setName("theName");
 
-        Response response = simplePut("/auditioner/family/12",family);
+        Response response = simplePut("/auditioner/families/12",family);
 
         assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
 

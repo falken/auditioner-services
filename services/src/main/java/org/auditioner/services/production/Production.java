@@ -6,6 +6,7 @@ public class Production{
     private String name;
     private Date auditionDate;
     private String season;
+    private String location;
 
     public String getName() {
         return name;
@@ -29,5 +30,13 @@ public class Production{
 
     public String getSeason() {
         return season;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

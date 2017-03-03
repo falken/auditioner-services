@@ -29,16 +29,19 @@ public class ProductionResourceTest extends org.auditioner.services.family.TestR
     }
 
     @Test
-    public void getProductionReturn200(){
+    public void getProductionWillReturnProduction(){
         Production production = new Production();
         production.setName("Jane Dane");
         production.setAuditionDate(new Date());
         production.setSeason("Spring 2017");
+        production.setLocation("/auditioner/productions/1337");
+        when(productionDAO.getProduction(1337L)).thenReturn(production);
 
-        when(productionDAO.getProduction()).thenReturn(production);
+        Production actualProduction = simpleGet("/auditioner/productions/1337", Production.class);
 
-        Response response = simpleGet("/auditioner/production");
-
-        assertEquals(200,response.getStatus());
+        assertEquals(actualProduction.getName(), production.getName());
+        assertEquals(actualProduction.getAuditionDate(), production.getAuditionDate());
+        assertEquals(actualProduction.getSeason(), production.getSeason());
+        assertEquals(actualProduction.getLocation(), production.getLocation());
     }
 }
