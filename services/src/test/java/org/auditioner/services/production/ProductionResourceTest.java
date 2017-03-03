@@ -2,23 +2,19 @@ package org.auditioner.services.production;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
-import org.eclipse.jetty.http.HttpStatus;
+import org.auditioner.services.production.Production;
+import org.auditioner.services.production.ProductionDAO;
+import org.auditioner.services.production.ProductionResource;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
 import javax.ws.rs.core.Response;
 
 import java.util.Date;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.any;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ProductionResourceTest extends TestResourceBase {
@@ -48,40 +44,5 @@ public class ProductionResourceTest extends TestResourceBase {
         assertEquals(actualProduction.getAuditionDate(), production.getAuditionDate());
         assertEquals(actualProduction.getSeason(), production.getSeason());
         assertEquals(actualProduction.getLocation(), production.getLocation());
-    }
-
-    @Test
-    public void deleteProductionRemovesProduction(){
-
-        Response response = simpleDelete("/auditioner/productions/12");
-
-        assertEquals(204,response.getStatus());
-
-        verify(productionDAO).deleteProduction(12L);
-    }
-
-    @Test
-    public void updateProductionChangesProduction(){
-        Production production = new Production();
-        production.setName("theName");
-
-        Response response = simplePut("/auditioner/productions/12",production);
-
-        assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
-        ArgumentCaptor<Production> argument = ArgumentCaptor.forClass(Production.class);
-        verify(productionDAO).updateProduction(eq(12L), argument.capture());
-        assertThat("theName",equalTo(argument.getValue().getName()));
-    }
-
-    @Test
-    public void addProductionCreatesProduction(){
-        Production production = new Production();
-        production.setName("MyName");
-        when(productionDAO.addProduction(any(Production.class))).thenReturn(14134L);
-
-        Response response = simplePost("/auditioner/productions",production);
-
-        assertEquals(201,response.getStatus());
-        assertEquals("http://localhost:9998/auditioner/productions/14134",response.getLocation().toString());
     }
 }
