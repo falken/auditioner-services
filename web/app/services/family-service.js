@@ -31,6 +31,12 @@ export default Ember.Service.extend({
 
     return family;
   },
+  saveFamily:function(family)
+  {
+    const client = this.get('client');
+
+    return client.putResource(family);
+  },
   reloadFamily:function(family)
   {
     const client = this.get('client');
@@ -64,6 +70,12 @@ export default Ember.Service.extend({
     const familyMember = FamilyMember.create();
     familyMember.set('client',client);
     return familyMember;
-  }
+  },
+  saveFamilyMember:function(saveFamilyMember)
+  {
+    const client = this.get('client');
+
+    return client.putResource(saveFamilyMember);
+  },
 
 });

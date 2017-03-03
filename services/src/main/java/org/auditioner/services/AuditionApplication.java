@@ -1,7 +1,10 @@
 package org.auditioner.services;
 
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.migrations.MigrationsBundle;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.auditioner.services.family.FamilyDAO;
 import org.auditioner.services.family.FamilyResource;
@@ -14,6 +17,17 @@ import java.util.EnumSet;
 
 public class AuditionApplication extends Application<AuditionConfiguration>
 {
+    @Override
+    public void initialize(Bootstrap<AuditionConfiguration> bootstrap) {
+        bootstrap.addBundle(new MigrationsBundle<AuditionConfiguration>() {
+            @Override
+            public DataSourceFactory getDataSourceFactory(
+                    AuditionConfiguration configuration) {
+                return configuration.getDataSourceFactory();
+            }
+        });
+    }
+
     @Override
     public void run(AuditionConfiguration configuration, Environment environment) throws Exception {
 

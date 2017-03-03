@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) {
         try {
             if (args.length == 0) {
-//                (new AuditionApplication()).run("db", "migrate", "config.yml");
+                (new AuditionApplication()).run("db", "migrate", "config.yml");
                 (new AuditionApplication()).run("server", "config.yml");
             } else {
                 (new AuditionApplication()).run(args);
