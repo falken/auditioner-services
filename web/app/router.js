@@ -10,6 +10,10 @@ Router.map(function() {
     this.route('family_new',{path:'/new'});
     this.route('family',{path:'/:family_id'});
   });
+  this.route('productions', function() {
+    this.route('production_new',{path:'/new'});
+    this.route('production',{path:'/:production_id'});
+  });
 });
 
 export default Router;
