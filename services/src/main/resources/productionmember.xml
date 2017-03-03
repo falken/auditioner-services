@@ -2,28 +2,28 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="familymember-1" author="ngujja">
-        <createTable tableName="FamilyMember">
+    <changeSet id="productionmember-1" author="aconnelly">
+        <createTable tableName="ProductionMember">
             <column name="id" type="bigint"  autoIncrement="true"  >
                 <constraints nullable="false" primaryKey="true" />
             </column>
-            <column name="family_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_fam_member" references="Family(Id)" />
+            <column name="family_member_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_fam_member" references="FamilyMember(Id)" />
             </column>
-            <column name="first_name" type="varchar(48)">
+            <column name="production_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_prod_member" references="Production(Id)" />
+            </column>
+            <column name="requested_roles" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="rehearsal_conflicts" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="image" type="blob">
+                <constraints nullable="true" />
+            </column>
+            <column name="audtion_number" type="varchar(8)">
                 <constraints nullable="false" />
-            </column>
-            <column name="last_name" type="varchar(48)">
-                <constraints nullable="false" />
-            </column>
-            <column name="weight" type="varchar(48)">
-                <constraints nullable="true" />
-            </column>
-            <column name="height" type="varchar(48)">
-                <constraints nullable="true" />
-            </column>
-            <column name="past_roles" type="text">
-                <constraints nullable="true" />
             </column>
         </createTable>
     </changeSet>
