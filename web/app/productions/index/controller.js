@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	productionService: Ember.inject.service('production-service'),
 	actions:{
 		addProduction: function() {
 			const productionService = this.get('productionService');

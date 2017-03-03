@@ -6,9 +6,9 @@ import ListResult from 'web/models/listResult';
 
 export default Ember.Service.extend({
   client: Ember.inject.service('client'),
-  search:function(){
+  searchProductions:function(){
     const client = this.get('client');
-    let results = ListResult.create({childType:Family});
+    let results = ListResult.create({childType:Production});
 
     let searchUrl = '/auditioner/productions';
 
