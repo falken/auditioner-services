@@ -20,6 +20,8 @@ public class App {
                 (new AuditionApplication()).run(args);
             }
         } catch (Exception e) {
+            System.out.println("error:" + e.getMessage());
+            e.printStackTrace(System.err);
             LOGGER.error("Failed to start.",e);
         }
     }
