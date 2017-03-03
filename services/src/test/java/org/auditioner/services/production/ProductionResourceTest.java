@@ -2,6 +2,9 @@ package org.auditioner.services.production;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
+import org.auditioner.services.production.Production;
+import org.auditioner.services.production.ProductionDAO;
+import org.auditioner.services.production.ProductionResource;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -15,9 +18,9 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
