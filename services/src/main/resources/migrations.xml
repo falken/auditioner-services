@@ -4,4 +4,5 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="family.xml"/>
     <include file="production.xml"/>
+    <include file="familymember.xml"/>
 </databaseChangeLog>

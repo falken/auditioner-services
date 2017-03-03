@@ -1,0 +1,30 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="familymember-1" author="ngujja">
+        <createTable tableName="FamilyMember">
+            <column name="id" type="bigint"  autoIncrement="true"  >
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="family_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_fam_member" references="Family(Id)" />
+            </column>
+            <column name="first_name" type="varchar(48)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(48)">
+                <constraints nullable="false" />
+            </column>
+            <column name="weight" type="varchar(48)">
+                <constraints nullable="true" />
+            </column>
+            <column name="height" type="varchar(48)">
+                <constraints nullable="true" />
+            </column>
+            <column name="roles" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,6 +1,5 @@
 package org.auditioner.services.family.member;
 
-import org.auditioner.services.family.Family;
 import org.auditioner.services.family.FamilyResultSetMapper;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
@@ -20,8 +19,8 @@ public interface FamilyMemberDAO {
     @Mapper(FamilyResultSetMapper.class)
     FamilyMember updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
-    @SqlUpdate("INSERT INTO FamilyMember (Name) "
-            + " VALUES (:family.name)")
+    @SqlUpdate("INSERT INTO FamilyMember (first_name,last_name,weight,height,roles) "
+            + " VALUES (:first_name,last_name,weight,height,roles)")
     @GetGeneratedKeys
     long addFamilyMember(@BindBean("familyMember") FamilyMember familyMember);
 
