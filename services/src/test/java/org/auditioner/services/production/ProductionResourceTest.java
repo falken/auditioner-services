@@ -11,7 +11,9 @@ import org.mockito.ArgumentCaptor;
 import javax.ws.rs.core.Response;
 
 import java.util.Date;
+import java.util.*;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Matchers.any;
 import static org.junit.Assert.assertEquals;
@@ -51,8 +53,23 @@ public class ProductionResourceTest extends TestResourceBase {
     }
 
     @Test
-    public void deleteProductionRemovesProduction(){
+    public void getProductionsWillReturnFamilyList(){
+        Production production1 = new Production();
+        production1.setName("one");
+        production1.setLocation("/auditioner/productions/1");
+        Production production2 = new Production();
+        production2.setName("two");
+        production2.setLocation("/auditioner/productions/2");
+        List<Production> productionList = newArrayList(production1,production2);
+        when(productionDAO.getProductions()).thenReturn(productionList);
 
+        Response response = simpleGet("/auditioner/productions");
+
+        assertEquals(asJsonString(productionList),getResponseBody(response));
+    }
+
+    @Test
+    public void deleteProductionRemovesProduction(){
         Response response = simpleDelete("/auditioner/productions/12");
 
         assertEquals(204,response.getStatus());
