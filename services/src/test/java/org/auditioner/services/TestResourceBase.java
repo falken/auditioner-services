@@ -1,4 +1,4 @@
-package org.auditioner.services.family;
+package org.auditioner.services;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

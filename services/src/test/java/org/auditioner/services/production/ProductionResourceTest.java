@@ -1,9 +1,7 @@
 package org.auditioner.services.production;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
-import org.auditioner.services.production.Production;
-import org.auditioner.services.production.ProductionDAO;
-import org.auditioner.services.production.ProductionResource;
+import org.auditioner.services.TestResourceBase;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -23,7 +21,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ProductionResourceTest extends org.auditioner.services.family.TestResourceBase {
+public class ProductionResourceTest extends TestResourceBase {
 
     private static final ProductionDAO productionDAO = mock(ProductionDAO.class);
 
@@ -73,5 +71,17 @@ public class ProductionResourceTest extends org.auditioner.services.family.TestR
         ArgumentCaptor<Production> argument = ArgumentCaptor.forClass(Production.class);
         verify(productionDAO).updateProduction(eq(12L), argument.capture());
         assertThat("theName",equalTo(argument.getValue().getName()));
+    }
+
+    @Test
+    public void addProductionCreatesProduction(){
+        Production production = new Production();
+        production.setName("MyName");
+        when(productionDAO.addProduction(any(Production.class))).thenReturn(14134L);
+
+        Response response = simplePost("/auditioner/productions",production);
+
+        assertEquals(201,response.getStatus());
+        assertEquals("http://localhost:9998/auditioner/productions/14134",response.getLocation().toString());
     }
 }

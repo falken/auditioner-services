@@ -1,6 +1,7 @@
 package org.auditioner.services.family;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
+import org.auditioner.services.TestResourceBase;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
