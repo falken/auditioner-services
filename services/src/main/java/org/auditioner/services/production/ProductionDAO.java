@@ -1,6 +1,7 @@
 package org.auditioner.services.production;
 
 import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 public interface ProductionDAO{
     @SqlUpdate("INSERT INTO Production (Name) "
@@ -18,8 +19,8 @@ public interface ProductionDAO{
     void updateFamily(@Bind("id") long productionId,@BindBean("production") Production production);
 
     @SqlQuery("SELECT id, Name " +
-            "FROM Family " +
+            "FROM Production " +
             "WHERE id=:id")
-    @Mapper(FamilyResultSetMapper.class)
-    Family getFamily(@Bind("id") long familyId);
+    @Mapper(ProductionResultSetMapper .class)
+    Production getProduction(@Bind("id") long familyId);
 }
