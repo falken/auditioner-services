@@ -16,8 +16,7 @@ public interface FamilyMemberDAO {
     @SqlUpdate("UPDATE FamilyMember " +
             "  SET Name=:family.name " +
             "WHERE id=:id")
-    @Mapper(FamilyResultSetMapper.class)
-    FamilyMember updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
+    void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
     @SqlUpdate("INSERT INTO FamilyMember (first_name,last_name,weight,height,roles) "
             + " VALUES (:first_name,last_name,weight,height,roles)")
