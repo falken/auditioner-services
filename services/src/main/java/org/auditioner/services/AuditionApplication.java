@@ -8,6 +8,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.auditioner.services.family.FamilyDAO;
 import org.auditioner.services.family.FamilyResource;
+import org.auditioner.services.family.member.FamilyMemberDAO;
+import org.auditioner.services.family.member.FamilyMemberResource;
 import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.production.ProductionResource;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
@@ -52,6 +54,9 @@ public class AuditionApplication extends Application<AuditionConfiguration>
 
         final FamilyDAO familyDAO = jdbi.onDemand(FamilyDAO.class);
         environment.jersey().register(new FamilyResource(familyDAO));
+
+        final FamilyMemberDAO familyMemberDAO = jdbi.onDemand(FamilyMemberDAO.class);
+        environment.jersey().register(new FamilyMemberResource(familyDAO,familyMemberDAO));
 
         final ProductionDAO productionDAO = jdbi.onDemand(ProductionDAO.class);
         environment.jersey().register(new ProductionResource(productionDAO));
