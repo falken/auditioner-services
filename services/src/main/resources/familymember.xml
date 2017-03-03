@@ -27,4 +27,14 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="familymember-role-1" author="ngujja">
+        <dropColumn tableName="FamilyMember" columnName="roles"/>
+    </changeSet>
+    <changeSet id="familymember-prevrole-1" author="ngujja">
+        <addColumn tableName="FamilyMember">
+            <column name="past_roles" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

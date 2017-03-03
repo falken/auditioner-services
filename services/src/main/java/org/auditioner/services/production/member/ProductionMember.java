@@ -9,6 +9,7 @@ public class ProductionMember {
     private FamilyMember familyMember;
     private String requestedRoles;
     private String auditionNumber;
+    private String location;
 
     private String rehearsalConflicts;
 
@@ -50,5 +51,13 @@ public class ProductionMember {
 
     public void setAuditionNumber(String auditionNumber) {
         this.auditionNumber = auditionNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
