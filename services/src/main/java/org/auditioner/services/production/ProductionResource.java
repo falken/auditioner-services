@@ -1,6 +1,8 @@
 package org.auditioner.services.production;
 
 
+import org.auditioner.services.family.Family;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,6 +24,11 @@ public class ProductionResource {
     @Path("/{production_id}")
     public Production getProduction(@PathParam("production_id") long productionId){
         return productionDAO.getProduction(productionId);
+    }
+
+    @GET
+    public List<Production> getProductions(){
+        return productionDAO.getProductions();
     }
 
     @POST

@@ -21,4 +21,16 @@ public class AuditionConfiguration extends Configuration {
     public void setDatabase(DataSourceFactory database) {
         this.database = database;
     }
+
+    @JsonProperty("useCors")
+    private boolean useCors = false;
+
+
+    public boolean isUseCors() {
+        return useCors;
+    }
+
+    public void setUseCors(boolean useCors) {
+        this.useCors = useCors;
+    }
 }

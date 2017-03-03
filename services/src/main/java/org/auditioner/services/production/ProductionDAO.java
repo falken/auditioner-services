@@ -7,8 +7,8 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import java.util.List;
 
 public interface ProductionDAO{
-    @SqlUpdate("INSERT INTO Production (Name) "
-            + " VALUES (:production.name)")
+    @SqlUpdate("INSERT INTO Production (name, audition_date, season, location) "
+            + " VALUES (:production.name, :production.auditionDate, :production.season, :production.location)")
     @GetGeneratedKeys
     long addProduction(@BindBean("production") Production production);
 

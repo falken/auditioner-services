@@ -69,7 +69,7 @@ public class FamilyResourceTest extends TestResourceBase {
 
         assertEquals(actualFamily.getName(),family.getName());
         assertEquals(actualFamily.getLocation(),family.getLocation());
-   }
+    }
 
     @Test
     public void getFamiliesWillReturnFamilyList(){
