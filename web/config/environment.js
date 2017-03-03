@@ -1,7 +1,7 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'web',
     environment: environment,
     baseURL: '/',
@@ -54,7 +54,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.API_URL = '/';
+    ENV.APP.API_URL = '';
 
   }
 

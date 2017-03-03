@@ -1,0 +1,30 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="productionmember-1" author="aconnelly">
+        <createTable tableName="ProductionMember">
+            <column name="id" type="bigint"  autoIncrement="true"  >
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="family_member_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_fam_member" references="FamilyMember(Id)" />
+            </column>
+            <column name="production_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_prod_member" references="Production(Id)" />
+            </column>
+            <column name="requested_roles" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="rehearsal_conflicts" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="image" type="blob">
+                <constraints nullable="true" />
+            </column>
+            <column name="audtion_number" type="varchar(8)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

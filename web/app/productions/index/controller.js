@@ -15,6 +15,12 @@ export default Ember.Controller.extend({
 			this.set('editingProduction',production);
 		},
 		deleteProduction: function(production) {
+      const productionService = this.get('productionService');
+      const list = this.get('model');
+      productionService.deleteProduction(production)
+        .then(function(){
+          list.reload();
+        });
 
 		},
 		cancelEditingProduction: function() {

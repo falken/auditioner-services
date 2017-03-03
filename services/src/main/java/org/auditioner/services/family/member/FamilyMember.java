@@ -6,8 +6,8 @@ public class FamilyMember {
     private String firstName;
     private String lastName;
     private String weight;
-    private List<String> previousRoles;
-    private String yearsExperiance;
+    private String previousRoles;
+    private String yearsExperience;
 
     public String getFirstName() {
         return firstName;
@@ -33,19 +33,19 @@ public class FamilyMember {
         this.weight = weight;
     }
 
-    public List<String> getPreviousRoles() {
+    public String getPreviousRoles() {
         return previousRoles;
     }
 
-    public void setPreviousRoles(List<String> previousRoles) {
+    public void setPreviousRoles(String previousRoles) {
         this.previousRoles = previousRoles;
     }
 
-    public String getYearsExperiance() {
-        return yearsExperiance;
+    public String getYearsExperience() {
+        return yearsExperience;
     }
 
-    public void setYearsExperiance(String yearsExperiance) {
-        this.yearsExperiance = yearsExperiance;
+    public void setYearsExperience(String yearsExperience) {
+        this.yearsExperience = yearsExperience;
     }
 }

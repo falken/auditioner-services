@@ -24,17 +24,25 @@ public class ProductionResource {
         return productionDAO.getProduction(productionId);
     }
 
+    @POST
+    public Response addProduction(Production production)
+    {
+        long productionId = productionDAO.addProduction(production);
+
+        return Response.created(URI.create("/auditioner/productions/" + productionId)).build();
+    }
+
+    @PUT
+    @Path("/{production_id}")
+    public void updateProduction(@PathParam("production_id") long productionId, Production production)
+    {
+        productionDAO.updateProduction(productionId, production);
+    }
+
     @DELETE
     @Path("/{production_id}")
     public void deleteProduction(@PathParam("production_id") long productionId)
     {
         productionDAO.deleteProduction(productionId);
-    }
-
-    @PUT
-    @Path("/{production_id}")
-    public void updateFamily(@PathParam("production_id") long productionId, Production production)
-    {
-        productionDAO.updateProduction(productionId, production);
     }
 }
