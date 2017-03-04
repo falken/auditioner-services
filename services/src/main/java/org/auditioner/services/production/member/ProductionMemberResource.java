@@ -11,7 +11,7 @@ import org.auditioner.services.util.ServiceContext;
 
 import static org.auditioner.services.util.CreatedResponse.pathFromString;
 
-@Path("/auditioner/production-members")
+@Path("/auditioner/productions/{production_id}/production-members")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProductionMemberResource {
@@ -25,13 +25,13 @@ public class ProductionMemberResource {
 
     @GET
     @Path("/{production_member_id}")
-    public ProductionMember getProductionMember(@PathParam("production_member_id") long productionMemberId){
-        return productionMemberDAO.getProductionMember(productionMemberId);
+    public ProductionMember getProductionMember(@PathParam("production_id") long productionId, @PathParam("production_member_id") long productionMemberId){
+        return productionMemberDAO.getProductionMember(productionId, productionMemberId);
     }
 
     @GET
-    public List<ProductionMember> getProductionMembers(){
-        return productionMemberDAO.getProductionMembers();
+    public List<ProductionMember> getProductionMembers(@PathParam("production_id") long productionId){
+        return productionMemberDAO.getProductionMembers(productionId);
     }
 
     @DELETE
@@ -49,11 +49,11 @@ public class ProductionMemberResource {
     }
 
     @POST
-    public Response addProductionMember(ProductionMember productionMember)
+    public Response addProductionMember(@PathParam("production_id") long productionId, ProductionMember productionMember)
     {
         long productionMemberId = productionMemberDAO.addProductionMember(productionMember);
 
-        String path = "/auditioner/production-members" + productionMemberId;
+        String path = "/auditioner/productions/" + productionId + "/production-members/" + productionMemberId;
         return Response.status(Response.Status.CREATED)
                 .entity(pathFromString(path))
                 .header("Location", serviceContext.createUriFromPath(path))
