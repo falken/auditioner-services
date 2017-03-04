@@ -1,7 +1,5 @@
 package org.auditioner.services.production;
 
-import java.util.Date;
-
 public class Production{
     private String name;
     private String auditionDate;
