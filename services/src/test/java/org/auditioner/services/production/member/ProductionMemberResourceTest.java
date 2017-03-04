@@ -72,4 +72,13 @@ public class ProductionMemberResourceTest extends TestResourceBase {
 
         assertEquals(asJsonString(productionMemberList),getResponseBody(response));
     }
+
+    @Test
+    public void deleteProductionMemberRemovesProductionMember(){
+        Response response = simpleDelete("/auditioner/production-members/12");
+
+        assertEquals(204,response.getStatus());
+
+        verify(productionMemberDAO).deleteProductionMember(12L);
+    }
 }

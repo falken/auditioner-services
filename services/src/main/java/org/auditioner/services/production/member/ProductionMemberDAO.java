@@ -24,5 +24,5 @@ public interface ProductionMemberDAO {
     long addProductionMember(@BindBean("productionMember") ProductionMember productionMember);
 
     @SqlUpdate("")
-    void deleteProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
+    void deleteProductionMember(@Bind("id") long productionMemberId);
 }

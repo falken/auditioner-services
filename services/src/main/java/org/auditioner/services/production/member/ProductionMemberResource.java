@@ -26,4 +26,11 @@ public class ProductionMemberResource {
     public List<ProductionMember> getProductionMembers(){
         return productionMemberDAO.getProductionMembers();
     }
+
+    @DELETE
+    @Path("/{production_member_id}")
+    public void deleteFamily(@PathParam("production_member_id") long productionMemberId)
+    {
+        productionMemberDAO.deleteProductionMember(productionMemberId);
+    }
 }
