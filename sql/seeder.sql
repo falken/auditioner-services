@@ -8,6 +8,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Smiths'),
     first_name = 'Tammy',
     last_name = 'Smith',
+	age = '56',
     weight = '90',
     height = '4\'4"';
 
@@ -15,6 +16,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Smiths'),
   first_name = 'Lisa',
   last_name = 'Smith',
+  age = '56',
   weight = '105',
   height = '4\'8"';
 
@@ -22,6 +24,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Hansons'),
   first_name = 'Jim',
   last_name = 'Hanson',
+  age = '56',
   weight = '115',
   height = '5\'0"';
 
@@ -29,6 +32,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Hansons'),
   first_name = 'Sally',
   last_name = 'Hanson',
+  age = '56',
   weight = '120',
   height = '6\'0"';
 
@@ -36,6 +40,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Jones'),
   first_name = 'Mary',
   last_name = 'Jones',
+  age = '56',
   weight = '112',
   height = '5\'2"';
 
@@ -56,14 +61,14 @@ set family_member_id = (select FamilyMember.id from FamilyMember where FamilyMem
   production_id = (select Production.id from Production where Production.name = 'Nutcracker'),
   requested_roles = 'role2',
   rehearsal_conflicts = 'none the conflicts',
-  audition_number = 'abcd';
+  audition_number = '5676';
 
 insert into ProductionMember
 set family_member_id = (select FamilyMember.id from FamilyMember where FamilyMember.first_name = 'Sally'),
   production_id = (select Production.id from Production where Production.name = 'Dracula'),
   requested_roles = 'role3',
   rehearsal_conflicts = 'all the conflicts',
-  audition_number = 'efgh';
+  audition_number = '5677';
 
 insert into ProductionMember
 set family_member_id = (select FamilyMember.id from FamilyMember where FamilyMember.first_name = 'Mary'),

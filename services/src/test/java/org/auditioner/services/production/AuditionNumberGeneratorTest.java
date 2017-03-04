@@ -56,4 +56,11 @@ public class AuditionNumberGeneratorTest {
         String auditionNumber = generator.generate("12", 175L);
         assertTrue(auditionNumber.endsWith("04"));
     }
+
+    @Test
+    public void numbersStartAtZero() {
+        when(productionDAO.lastAuditionNumberFor(175L)).thenReturn(null);
+        String auditionNumber = generator.generate("12", 175L);
+        assertTrue(auditionNumber.endsWith("00"));
+    }
 }
