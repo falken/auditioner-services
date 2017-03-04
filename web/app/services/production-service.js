@@ -50,6 +50,10 @@ export default Ember.Service.extend({
     const production = Production.create();
     production.set('client',client);
     return production;
+  },
+  saveProduction:function(production) {
+    const client = this.get('client');
+    return client.putResource(production);
   }
 
 });

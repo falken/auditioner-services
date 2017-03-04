@@ -36,7 +36,7 @@ var client = Ember.Service.extend({
         dataType:"json"
       }).done(function(data)
       {
-        result.set('path',urlPattern);
+        result.set('location',urlPattern);
         result.loadFromData(client,data);
         resolve(result);
       }).fail(function(){
@@ -50,7 +50,7 @@ var client = Ember.Service.extend({
     return new Ember.RSVP.Promise(function (resolve, reject) {
 
       Ember.$.ajax({
-        url:client.buildUrl(resource.get('path')),
+        url:client.buildUrl(resource.get('location')),
         async:true,
         type: 'PUT',
         data: resource.toJson(),
@@ -96,7 +96,7 @@ var client = Ember.Service.extend({
         dataType:"json"
       }).done(function(data)
       {
-        resource.set('path',data.url);
+        resource.set('location',data.url);
         resource.set('id',data.url.substring(data.url.lastIndexOf("/") + 1));
         resolve();
       }).fail(function(){

@@ -10,6 +10,7 @@ export default Ember.Object.extend({
 		this.set('id', data.location.substring(data.location.lastIndexOf("/") + 1));
 		this.set('location', data.location);
 		this.set('name', data.name);
-		this.set('auditionDate', data.name);
+		this.set('auditionDate', data.auditionDate);
+		this.set('season', data.season);
 	}
 });
