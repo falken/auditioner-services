@@ -1,4 +1,5 @@
 package org.auditioner.services.production.member;
+
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
 import org.auditioner.services.family.member.FamilyMember;
@@ -36,6 +37,7 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     public static final ResourceTestRule resources = wrapResource(new ProductionMemberResource(serviceContext, productionMemberDAO));
 
     private String hostNameRoot;
+
     @Before
     public void setUp() {
         super.setUp(resources);
@@ -47,79 +49,79 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     }
 
     @Test
-    public void getProductionMemberWillReturnProductionMember(){
+    public void getProductionMemberWillReturnProductionMember() {
         ProductionMember productionMember = new ProductionMember();
         productionMember.setFamilyMemberFirstName("First Name");
         productionMember.setFamilyMemberLastName("Last Name");
         productionMember.setRequestedRoles("Snow Queen, Dew Drop Fairy");
         productionMember.setAuditionNumber("3");
-        productionMember.setLocation("/auditioner/production-members/1337");
-        when(productionMemberDAO.getProductionMember(1337L)).thenReturn(productionMember);
+        productionMember.setLocation("/auditioner/productions/9999/production-members/1337");
+        when(productionMemberDAO.getProductionMember(9999l, 1337L)).thenReturn(productionMember);
 
-        Response response = simpleGet("/auditioner/production-members/1337");
+        Response response = simpleGet("/auditioner/productions/9999/production-members/1337");
 
-        assertEquals(asJsonString(productionMember),getResponseBody(response));
+        assertEquals(asJsonString(productionMember), getResponseBody(response));
     }
 
     @Test
-    public void getProductionMembersWillReturnProductionMembersList(){
+    public void getProductionMembersWillReturnProductionMembersList() {
         ProductionMember productionMember1 = new ProductionMember();
         productionMember1.setFamilyMemberFirstName("Jane");
         productionMember1.setFamilyMemberLastName("Doe");
         productionMember1.setAuditionNumber("2");
         productionMember1.setRehearsalConflicts("something");
-        productionMember1.setLocation("/auditioner/production-members/1");
+        productionMember1.setLocation("/auditioner/productions/9999/production-members/1");
         ProductionMember productionMember2 = new ProductionMember();
         productionMember1.setFamilyMemberFirstName("John");
         productionMember1.setFamilyMemberLastName("Smith");
         productionMember1.setAuditionNumber("3");
         productionMember1.setRehearsalConflicts("something other thing");
-        productionMember2.setLocation("/auditioner/production-members/2");
-        List<ProductionMember> productionMemberList = Arrays.asList(productionMember1,productionMember2);
-        when(productionMemberDAO.getProductionMembers()).thenReturn(productionMemberList);
+        productionMember2.setLocation("/auditioner/productions/9999/production-members/2");
+        List<ProductionMember> productionMemberList = Arrays.asList(productionMember1, productionMember2);
+        when(productionMemberDAO.getProductionMembers(9999L)).thenReturn(productionMemberList);
 
-        Response response = simpleGet("/auditioner/production-members");
+        Response response = simpleGet("/auditioner/productions/9999/production-members");
 
-        assertEquals(asJsonString(productionMemberList),getResponseBody(response));
+        assertEquals(asJsonString(productionMemberList), getResponseBody(response));
     }
 
     @Test
-    public void deleteProductionMemberRemovesProductionMember(){
-        Response response = simpleDelete("/auditioner/production-members/12");
+    public void deleteProductionMemberRemovesProductionMember() {
+        Response response = simpleDelete("/auditioner/productions/9999/production-members/12");
 
-        assertEquals(204,response.getStatus());
+        assertEquals(204, response.getStatus());
 
         verify(productionMemberDAO).deleteProductionMember(12L);
     }
 
     @Test
-    public void updateProductionMemberChangesProductionMember(){
+    public void updateProductionMemberChangesProductionMember() {
         ProductionMember productionMember = new ProductionMember();
         productionMember.setFamilyMemberFirstName("Jane");
         productionMember.setFamilyMemberLastName("Doe");
         productionMember.setAuditionNumber("2");
         productionMember.setRehearsalConflicts("something");
-        productionMember.setLocation("/auditioner/production-members/12");
+        productionMember.setLocation("/auditioner/productions/9999/production-members/12");
 
-        Response response = simplePut("/auditioner/production-members/12",productionMember);
+        Response response = simplePut("/auditioner/productions/9999/production-members/12", productionMember);
 
-        assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
+        assertEquals(HttpStatus.NO_CONTENT_204, response.getStatus());
         ArgumentCaptor<ProductionMember> argument = ArgumentCaptor.forClass(ProductionMember.class);
         verify(productionMemberDAO).updateProductionMember(eq(12L), argument.capture());
-        assertThat("Jane",equalTo(argument.getValue().getFamilyMemberFirstName()));
-        assertThat("Doe",equalTo(argument.getValue().getFamilyMemberLastName()));
-        assertThat("2",equalTo(argument.getValue().getAuditionNumber()));
-        assertThat("something",equalTo(argument.getValue().getRehearsalConflicts()));
+        assertThat("Jane", equalTo(argument.getValue().getFamilyMemberFirstName()));
+        assertThat("Doe", equalTo(argument.getValue().getFamilyMemberLastName()));
+        assertThat("2", equalTo(argument.getValue().getAuditionNumber()));
+        assertThat("something", equalTo(argument.getValue().getRehearsalConflicts()));
     }
 
     @Test
-    public void addProductionMemberCreatesProductionMember(){
+    public void addProductionMemberCreatesProductionMember() {
         ProductionMember productionMember = new ProductionMember();
         when(productionMemberDAO.addProductionMember(any(ProductionMember.class))).thenReturn(14134L);
 
-        Response response = simplePost("/auditioner/production-members",productionMember);
+        Response response = simplePost("/auditioner/productions/9999/production-members/", productionMember);
 
-        assertEquals(hostNameRoot+"/auditioner/production-members" + 14134, response.getHeaderString("Location"));
-        assertEquals(201,response.getStatus());
+        assertEquals(hostNameRoot + "/auditioner/productions/9999/production-members/" + 14134, response.getHeaderString("Location"));
+        assertEquals(201, response.getStatus());
     }
 }

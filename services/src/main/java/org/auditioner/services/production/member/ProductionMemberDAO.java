@@ -10,14 +10,15 @@ public interface ProductionMemberDAO {
 
     @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number" +
             "FROM ProductionMember pm join FamilyMember fm on pm.family_member_id=fm.id "+
-            "WHERE id=:id")
+            "WHERE id=:id and production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
-    ProductionMember getProductionMember(@Bind("id") long productionMemberId);
+    ProductionMember getProductionMember(@Bind("productionId") long productionId, @Bind("id") long productionMemberId);
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number" +
-            "FROM ProductionMember pm join FamilyMember fm on pm.family_member_id=fm.id")
+    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id" +
+            "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id)" +
+            "WHERE pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
-    List<ProductionMember> getProductionMembers();
+    List<ProductionMember> getProductionMembers(@Bind("productionId") long productionId);
 
     @SqlUpdate("UPDATE ProductionMember "+
             " SET audition_number=:productionMember.auditionNumber, "+

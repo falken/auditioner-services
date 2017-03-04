@@ -17,7 +17,7 @@ public interface FamilyDAO {
     private String zipCode;
     private String preferredContactMethod;
  */
-    @SqlUpdate("INSERT INTO Family (Name,Email,Phone,Address01,Address02,City,State,ZipCode,PreferredContactMethod) "
+    @SqlUpdate("INSERT INTO Family (`Name`,Email,Phone,Address01,Address02,City,State,ZipCode,PreferredContactMethod) "
             + " VALUES (:family.name, :family.email, :family.phone, :family.address01, :family.address02, :family.city," +
               " :family.state, :family.zipCode, :family.preferredContactMethod )")
     @GetGeneratedKeys

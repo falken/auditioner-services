@@ -24,7 +24,7 @@ export default Ember.Object.extend({
     this.set('mailingAddressCity', data.city);
     this.set('mailingAddressState', data.state);
     this.set('mailingAddressZip', data.zipCode);
-    this.set('preferredContactMethod', data.preferredMethodContact);
+    this.set('preferredContactMethod', data.preferredContactMethod);
 
 
   },

@@ -27,18 +27,17 @@ public class ProductionResource {
 
     @GET
     @Path("/{production_id}")
-    public Production getProduction(@PathParam("production_id") long productionId){
+    public Production getProduction(@PathParam("production_id") long productionId) {
         return productionDAO.getProduction(productionId);
     }
 
     @GET
-    public List<Production> getProductions(){
+    public List<Production> getProductions() {
         return productionDAO.getProductions();
     }
 
     @POST
-    public Response addProduction(Production production)
-    {
+    public Response addProduction(Production production) {
         long productionId = productionDAO.addProduction(production);
 
         String path = "/auditioner/productions/" + productionId;
@@ -50,15 +49,13 @@ public class ProductionResource {
 
     @PUT
     @Path("/{production_id}")
-    public void updateProduction(@PathParam("production_id") long productionId, Production production)
-    {
+    public void updateProduction(@PathParam("production_id") long productionId, Production production) {
         productionDAO.updateProduction(productionId, production);
     }
 
     @DELETE
     @Path("/{production_id}")
-    public void deleteProduction(@PathParam("production_id") long productionId)
-    {
+    public void deleteProduction(@PathParam("production_id") long productionId) {
         productionDAO.deleteProduction(productionId);
     }
 }
