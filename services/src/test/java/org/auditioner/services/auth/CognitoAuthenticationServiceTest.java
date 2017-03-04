@@ -7,11 +7,11 @@ import static org.junit.Assert.*;
 
 public class CognitoAuthenticationServiceTest extends TestResourceBase {
     @Test
-    public void testThing() {
+    public void testAdminInitiateAuth() {
         new CognitoAuthenticationService().adminInitiateAuth("tbrobston", "h/ul79Wa");
     }
     @Test
-    public void testOtherThing() {
+    public void testAdminCreateUser() {
         new CognitoAuthenticationService().adminCreateUser("tbrobston", "anthonybrobston@gmail.com");
     }
 }
