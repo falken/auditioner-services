@@ -28,14 +28,14 @@ public interface FamilyDAO {
     void deleteFamily(@Bind("id") long familyId);
 
     @SqlUpdate("UPDATE Family " +
-            "  SET Name=:family.name " +
-            "      Email=:family.email " +
-            "      Phone=:family.phone " +
-            "      Address01=:family.address01 " +
-            "      Address02=:family.address02 " +
-            "      City=:family.city " +
-            "      State=:family.state " +
-            "      ZipCode=:family.zipCode " +
+            "  SET Name=:family.name, " +
+            "      Email=:family.email, " +
+            "      Phone=:family.phone, " +
+            "      Address01=:family.address01, " +
+            "      Address02=:family.address02, " +
+            "      City=:family.city, " +
+            "      State=:family.state, " +
+            "      ZipCode=:family.zipCode, " +
             "      PreferredContactMethod=:family.preferredContactMethod " +
                "WHERE id=:id")
     void updateFamily(@Bind("id") long familyId,@BindBean("family") Family family);
