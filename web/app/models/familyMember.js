@@ -11,6 +11,21 @@ export default Ember.Object.extend({
     this.set('firstName', data.firstName);
     this.set('lastName', data.lastName);
     this.set('age', data.age);
+    this.set('height', data.height);
+    this.set('weight', data.weight);
+    this.set('pastRoles', data.pastRoles);
 
+  },
+
+  toJson: function() {
+    return JSON.stringify({
+      firstName: this.get('firstName'),
+      lastName: this.get('lastName'),
+      weight: this.get('weight'),
+      height: this.get('height'),
+      pastRoles: this.get('pastRoles'),
+      age: this.get('age')
+    });
   }
 });
+

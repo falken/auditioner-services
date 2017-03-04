@@ -80,7 +80,7 @@ export default Ember.Service.extend({
     const client = this.get('client');
     let results = ListResult.create({childType:FamilyMember});
 
-    let searchUrl = '/auditioner/families/' + familyId + '/famil_member/';
+    let searchUrl = '/auditioner/families/' + familyId + '/family_member/';
 
     client.getResource(searchUrl,results);
 
