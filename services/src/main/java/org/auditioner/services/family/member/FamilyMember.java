@@ -1,13 +1,19 @@
 package org.auditioner.services.family.member;
 
-import java.util.List;
-
 public class FamilyMember {
     private String firstName;
     private String lastName;
     private String weight;
-    private String previousRoles;
+    private String pastRoles;
     private String yearsExperience;
+    private String location;
+    private String height;
+
+    public String getPastRoles() { return pastRoles; }
+
+    public String getLocation() { return location; }
+
+    public String getHeight() { return height; }
 
     public String getFirstName() {
         return firstName;
@@ -33,14 +39,6 @@ public class FamilyMember {
         this.weight = weight;
     }
 
-    public String getPreviousRoles() {
-        return previousRoles;
-    }
-
-    public void setPreviousRoles(String previousRoles) {
-        this.previousRoles = previousRoles;
-    }
-
     public String getYearsExperience() {
         return yearsExperience;
     }
@@ -48,4 +46,10 @@ public class FamilyMember {
     public void setYearsExperience(String yearsExperience) {
         this.yearsExperience = yearsExperience;
     }
+
+    public void setLocation(String location) { this.location = location; }
+
+    public void setHeight(String height) { this.height = height; }
+
+    public void setPastRoles(String past_roles) { this.pastRoles = past_roles; }
 }
