@@ -24,7 +24,7 @@ public interface ProductionMemberDAO {
 
     @SqlQuery("SELECT fm.id,fm.first_name,fm.last_name,pm.requested_roles,pm.rehearsal_conflicts,pm.audition_number,pm.production_id, pm.family_member_id " +
             "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id) " +
-            "WHERE pm.production_id=:productionId")
+            "WHERE pm.production_id=:productionId ORDER BY pm.audition_number")
     @Mapper(ProductionMemberResultSetMapper.class)
     List<ProductionMember> getProductionMembers(@Bind("productionId") long productionId);
 
