@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ProductionMemberDAO {
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number" +
-            "FROM ProductionMember pm join FamilyMember fm on pm.family_member_id=fm.id "+
+    @SqlQuery("SELECT fm.id,fm.first_name,fm.last_name,pm.requested_roles,pm.rehearsal_conflicts,pm.audition_number,pm.production_id, pm.family_member_id " +
+            "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id) "+
             "WHERE pm.id=:id and pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
     ProductionMember getProductionMember(@Bind("productionId") long productionId, @Bind("id") long productionMemberId);
@@ -22,7 +22,7 @@ public interface ProductionMemberDAO {
     ProductionMember getMemberProductions(@Bind("familyMemberId") long familyMemberId);
 
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id " +
+    @SqlQuery("SELECT fm.id,fm.first_name,fm.last_name,pm.requested_roles,pm.rehearsal_conflicts,pm.audition_number,pm.production_id, pm.family_member_id " +
             "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id) " +
             "WHERE pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
@@ -35,10 +35,10 @@ public interface ProductionMemberDAO {
             "WHERE id=:id")
     void updateProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
 
-    @SqlUpdate("INSERT INTO ProductionMember (id,family_member_id,production_id,requested_roles,rehearsal_conflicts,audition_number) "
-            + " VALUES (:productionMember.id,:productionMember.familyMemberId,:productionMember.productionId,:productionMember.requestedRoles,:productionMember.rehearsalConflicts,:productionMember.auditionNumber)")
+    @SqlUpdate("INSERT INTO ProductionMember (family_member_id,production_id,requested_roles,rehearsal_conflicts,audition_number) "
+            + " VALUES (:productionMember.familyMemberId,:productionId,:productionMember.requestedRoles,:productionMember.rehearsalConflicts,:productionMember.auditionNumber)")
     @GetGeneratedKeys
-    long addProductionMember(@BindBean("productionMember") ProductionMember productionMember);
+    long addProductionMember(@Bind("productionId") long productionId, @BindBean("productionMember") ProductionMember productionMember);
 
     @SqlUpdate("DELETE FROM ProductionMember "
             + "WHERE id=:id")

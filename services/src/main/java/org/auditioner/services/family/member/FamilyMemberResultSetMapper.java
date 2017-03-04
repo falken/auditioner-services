@@ -17,6 +17,10 @@ public class FamilyMemberResultSetMapper  implements ResultSetMapper<FamilyMembe
         familyMember.setWeight(resultSet.getString("weight"));
         familyMember.setHeight(resultSet.getString("height"));
         familyMember.setPastRoles(resultSet.getString("past_roles"));
+        familyMember.setAcroExp(resultSet.getInt("acro_exp"));
+        familyMember.setBalletExp(resultSet.getInt("ballet_exp"));
+        familyMember.setJazzExp(resultSet.getInt("jazz_exp"));
+        familyMember.setTapExp(resultSet.getInt("tap_exp"));
         return familyMember;
     }
 }

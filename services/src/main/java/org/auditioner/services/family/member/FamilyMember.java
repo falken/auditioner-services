@@ -5,10 +5,45 @@ public class FamilyMember {
     private String lastName;
     private String weight;
     private String pastRoles;
-    private String yearsExperience;
     private String location;
     private String height;
     private String age;
+    private int acroExp;
+    private int balletExp;
+    private int jazzExp;
+    private int tapExp;
+
+    public int getAcroExp() {
+        return acroExp;
+    }
+
+    public void setAcroExp(int acroExp) {
+        this.acroExp = acroExp;
+    }
+
+    public int getBalletExp() {
+        return balletExp;
+    }
+
+    public void setBalletExp(int balletExp) {
+        this.balletExp = balletExp;
+    }
+
+    public int getJazzExp() {
+        return jazzExp;
+    }
+
+    public void setJazzExp(int jazzExp) {
+        this.jazzExp = jazzExp;
+    }
+
+    public int getTapExp() {
+        return tapExp;
+    }
+
+    public void setTapExp(int tapExp) {
+        this.tapExp = tapExp;
+    }
 
     public String getPastRoles() { return pastRoles; }
 
@@ -38,14 +73,6 @@ public class FamilyMember {
 
     public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public String getYearsExperience() {
-        return yearsExperience;
-    }
-
-    public void setYearsExperience(String yearsExperience) {
-        this.yearsExperience = yearsExperience;
     }
 
     public void setLocation(String location) { this.location = location; }
