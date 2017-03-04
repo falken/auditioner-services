@@ -11,7 +11,7 @@ public interface FamilyMemberDAO {
             " join FamilyExpDance fed on fed.family_member_id = fm.id " +
             "WHERE id=:id")
     @Mapper(FamilyResultSetMapper.class)
-    FamilyMember getFamilyMemberByFamilyId(@Bind("id") long familyMemberId);
+    FamilyMember getFamilyMember(@Bind("id") long familyMemberId);
 
     @SqlUpdate("UPDATE FamilyMember " +
             "  SET Name=:family.name " +
