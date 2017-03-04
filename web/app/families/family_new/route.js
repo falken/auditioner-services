@@ -15,8 +15,9 @@ export default Ember.Route.extend({
     this._super(controller,model);
     const productionService = this.get('productionService');
     controller.set('newFamilyMembers',Ember.A());
-    controller.addFamilyMember();
+    controller.addFamilyMemberToMemberList();
     controller.set('productions',productionService.searchProductions());
+    controller.set('canDeleteFamilyMamber',false);
   }
 
 });

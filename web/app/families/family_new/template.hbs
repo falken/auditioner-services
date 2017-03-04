@@ -2,135 +2,217 @@
   <div class="col-md-12 text-center"><h1>Register Family</h1></div>
 </div>
 <div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="col-sm-12">Productions</label>
-        <div class="col-sm-12">
-          {{#x-select class="form-control" value=selectedProduction action="selectProduction" as |xs|}}
-            {{#each productions.results as | production | }}
-              {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
+  <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-1 col-md-10">
+      <form class="form-horizontal">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Productions</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <div class="col-sm-12">
+                {{#x-select class="form-control" value=selectedProduction action="selectProduction" as |xs|}}
+                  {{#each productions.results as | production | }}
+                    {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Family Info</h3>
+          </div>
+          <div class="panel-body">
+
+            <div class="form-group">
+              <label class="col-sm-12">Name</label>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Last Name" value=model.family.name}}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12" for="contact">Contact</label>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Email" value=model.family.email}}
+              </div>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Phone" value=model.family.phone}}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12" for="contact">Address</label>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Address 01" value=model.family.address01}}
+              </div>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Address 02" value=model.family.address02}}
+              </div>
+              <div class="col-sm-6">
+                {{input type="text" class="form-control" placeholder="City" value=model.family.city}}
+              </div>
+              <div class="col-sm-3">
+                {{input type="text" class="form-control" placeholder="State" value=model.family.state}}
+              </div>
+              <div class="col-sm-3">
+                {{input type="text" class="form-control" placeholder="Zip" value=model.family.zipCode}}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12">Preferred Contact Method</label><br/>
+              <div class="col-sm-4">
+                {{#radio-button
+                  value="Phone"
+                  groupValue=model.family.preferredContactMethod
+                  changed="choosePreferredContactMethod"}}
+                  Phone
+                {{/radio-button}}
+              </div>
+              <div class="col-sm-4">
+                {{#radio-button
+                  value="Email"
+                  groupValue=model.family.preferredContactMethod
+                  changed="choosePreferredContactMethod"}}
+                  Email
+                {{/radio-button}}
+              </div>
+              <div class="col-sm-4">
+                {{#radio-button
+                  value="Mail"
+                  groupValue=model.family.preferredContactMethod
+                  changed="choosePreferredContactMethod"}}
+                  Mail
+                {{/radio-button}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Family Members</h3>
+          </div>
+          <div class="panel-body">
+
+            {{#each newFamilyMembers as |nfm|}}
+              <div class="form-group">
+                <label class="col-sm-10">Add New Family Member</label>
+                <div class="col-sm-2 text-right">
+                  {{#if canDeleteFamilyMamber }}
+                    <a {{action 'deleteFamilyMember' nfm}} >
+                      <span class="glyphicon glyphicon-trash"></span></a>
+                  {{/if}}
+                </div>
+                <div class="col-sm-6">
+                  {{input type="text" class="form-control" placeholder="First Name" value=nfm.familyMember.firstName}}
+                </div>
+                <div class="col-sm-6">
+                  {{input type="text" class="form-control" placeholder="Last Name" value=nfm.familyMember.lastName}}
+                </div>
+              </div>
+              <div class="form-group">
+
+                <label class="col-sm-12">Details</label>
+                <div class="col-sm-4">
+                  <label>
+                    <small>Height:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" value=editingFamilyMember.height}}
+                    <div class="input-group-addon">ft'in</div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <small>Weight:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" value=editingFamilyMember.weight}}
+                    <div class="input-group-addon">lbs</div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <small>Age:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" value=editingFamilyMember.age}}
+                    <div class="input-group-addon">Years</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-12">Experience</label>
+                <div class="col-sm-6">
+                  <label>
+                    <small>Ballet:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" placeholder="0"
+                            value=editingFamilyMember.experience.ballet}}
+                    <div class="input-group-addon">Years</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label>
+                    <small>Tap:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" placeholder="0" value=editingFamilyMember.experience.tap}}
+                    <div class="input-group-addon">Years</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label>
+                    <small>Jazz:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" placeholder="0" value=editingFamilyMember.experience.jazz}}
+                    <div class="input-group-addon">Years</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label>
+                    <small>Acro:</small>
+                  </label>
+                  <div class="input-group">
+                    {{input type="text" class="form-control" placeholder="0" value=editingFamilyMember.experience.acro}}
+                    <div class="input-group-addon">Years</div>
+                  </div>
+                </div>
+                <label class="col-sm-12 small">Prior Roles</label>
+                <div class="col-sm-12">
+                  {{textarea rows="4" class="form-control" placeholder="Eg: Nutcracker-Mouse, Dracula-Marie"
+                             value=nfm.familyMember.priorRoles}}
+                </div>
+                <label class="col-sm-12 small">Requested Roles</label>
+                <div class="col-sm-12">
+                  {{textarea rows="4" class="form-control" placeholder="Eg: Russian, Hungarian, Snow"
+                             value=nfm.memberRegistration.requestedRoles}}
+                </div>
+                <label class="col-sm-12 small">Rehearsal Conflicts</label>
+                <div class="col-sm-12">
+                  {{textarea rows="4" class="form-control" placeholder="Eg: Nov 8th 4-5pm"
+                             value=nfm.memberRegistration.rehearsalConflicts}}
+                </div>
+              </div>
             {{/each}}
-          {{/x-select}}
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-sm-12">Family Name</label>
-        <div class="col-sm-12">
-          {{input type="text" class="form-control" placeholder="Last Name" value=model.family.name}}
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-12" for="contact">Contact</label>
-        <div class="col-sm-12">
-          {{input type="text" class="form-control" placeholder="Email" value=model.family.email}}
-        </div>
-        <div class="col-sm-12">
-          {{input type="text" class="form-control" placeholder="Phone" value=model.family.phone}}
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-12" for="contact">Address</label>
-        <div class="col-sm-12">
-          {{input type="text" class="form-control" placeholder="Address 01" value=model.family.address01}}
-        </div>
-        <div class="col-sm-12">
-          {{input type="text" class="form-control" placeholder="Address 02" value=model.family.address02}}
-        </div>
-        <div class="col-sm-6">
-          {{input type="text" class="form-control" placeholder="City" value=model.family.city}}
-        </div>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="State" value=model.family.state}}
-        </div>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="Zip" value=model.family.zipCode}}
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-12">Preferred Contact Method</label><br/>
-        <div class="col-sm-4">
-          {{#radio-button
-            value="Phone"
-            groupValue=model.family.preferredContactMethod
-            changed="choosePreferredContactMethod"}}
-            Phone
-          {{/radio-button}}
-        </div>
-        <div class="col-sm-4">
-          {{#radio-button
-            value="Email"
-            groupValue=model.family.preferredContactMethod
-            changed="choosePreferredContactMethod"}}
-            Email
-          {{/radio-button}}
-        </div>
-        <div class="col-sm-4">
-          {{#radio-button
-            value="Mail"
-            groupValue=model.family.preferredContactMethod
-            changed="choosePreferredContactMethod"}}
-            Mail
-          {{/radio-button}}
-        </div>
-      </div>
-      {{#each newFamilyMembers as |nfm|}}
-      <div class="form-group">
-        <label class="col-sm-12">Add New Family Member</label>
-        <div class="col-sm-6">
-          {{input type="text" class="form-control" placeholder="First Name" value=nfm.familyMember.firstName}}
-        </div>
-        <div class="col-sm-6">
-          {{input type="text" class="form-control" placeholder="Last Name" value=nfm.familyMember.lastName}}
-        </div>
-        <div class="col-sm-4">
-          <div class="input-group">
-            {{input type="text" class="form-control" placeholder="Ht" value=nfm.familyMember.height}}
-            <div class="input-group-addon">ft/in</div>
+            <div class="form-group">
+              <div class="col-md-12">
+                <button class="form-control btn btn-primary" {{action "addFamilyMember"}}>Add Another Family Member
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="input-group">
-            {{input type="text" class="form-control" placeholder="Wt" value=nfm.familyMember.weight}}
-            <div class="input-group-addon">lbs</div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <button class="form-control btn btn-success" {{action "registerFamily"}}>Register
+            </button>
           </div>
         </div>
-        <div class="col-sm-4">
-            {{input type="text" class="form-control" placeholder="Age" value=nfm.familyMember.age}}
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-12">Experience</label>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="Ballet" value=nfm.familyMember.experience.ballet}}
-        </div>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="Tap" value=nfm.familyMember.experience.tap}}
-        </div>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="Jazz" value=nfm.familyMember.experience.jazz}}
-        </div>
-        <div class="col-sm-3">
-          {{input type="text" class="form-control" placeholder="Acro" value=nfm.familyMember.experience.acro}}
-        </div>
-        <div class="col-sm-12">
-          {{textarea rows="4" class="form-control" placeholder="Prior Roles" value=nfm.familyMember.priorRoles}}
-        </div>
-        <div class="col-sm-12">
-          {{textarea rows="4" class="form-control" placeholder="Requested Roles" value=nfm.memberRegistration.requestedRoles}}
-        </div>
-        <div class="col-sm-12">
-          {{textarea rows="4" class="form-control" placeholder="Rehearsal Conflicts" value=nfm.memberRegistration.rehearsalConflicts}}
-        </div>
-      </div>
-      {{/each}}
-      <div class="form-group">
-        <div class="col-md-offset-2 col-sm-8">
-          <button class="form-control btn btn-primary" {{action "addFamilyMember"}}>Add Another Family Member</button>
-        </div>
-      </div>
-
-    </form>
+      </form>
+    </div>
   </div>
 </div>
