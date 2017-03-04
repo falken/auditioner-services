@@ -8,10 +8,10 @@
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="family_member_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_fam_member" references="FamilyMember(Id)" />
+                <constraints nullable="false" foreignKeyName="productionmember_familymember_id" references="FamilyMember(Id)" />
             </column>
             <column name="production_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_prod_member" references="Production(Id)" />
+                <constraints nullable="false" foreignKeyName="productionmember_production_id" references="Production(id)" />
             </column>
             <column name="requested_roles" type="text">
                 <constraints nullable="true" />
