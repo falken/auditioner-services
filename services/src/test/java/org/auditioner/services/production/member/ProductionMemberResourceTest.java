@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Matchers.any;
@@ -38,27 +39,66 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     @Test
     public void getProductionMemberWillReturnProductionMember(){
         ProductionMember productionMember = new ProductionMember();
-        Production production = new Production();
-        production.setName("Nutcracker");
-        production.setAuditionDate(new Date());
-        production.setSeason("Spring 2017");
-        production.setLocation("/auditioner/productions/1337");
-        productionMember.setProduction(production);
-        FamilyMember familyMember = new FamilyMember();
-        familyMember.setFirstName("Jane");
-        familyMember.setLastName("Doe");
-        familyMember.setPastRoles("Clara, Sugar Plum Fairy");
-        familyMember.setWeight("280");
-        familyMember.setYearsExperience("102");
-        productionMember.setFamilyMember(familyMember);
+        productionMember.setFamilyMemberFirstName("First Name");
+        productionMember.setFamilyMemberLastName("Last Name");
         productionMember.setRequestedRoles("Snow Queen, Dew Drop Fairy");
         productionMember.setAuditionNumber("3");
-        productionMember.setLocation("/auditioner/productions-member/1337");
+        productionMember.setLocation("/auditioner/production-members/1337");
         when(productionMemberDAO.getProductionMember(1337L)).thenReturn(productionMember);
-        System.out.println(productionMember);
 
-        Response response = simpleGet("/auditioner/productions-member/1337");
+        Response response = simpleGet("/auditioner/production-members/1337");
 
         assertEquals(asJsonString(productionMember),getResponseBody(response));
+    }
+
+    @Test
+    public void getProductionMembersWillReturnProductionMembersList(){
+        ProductionMember productionMember1 = new ProductionMember();
+        productionMember1.setFamilyMemberFirstName("Jane");
+        productionMember1.setFamilyMemberLastName("Doe");
+        productionMember1.setAuditionNumber("2");
+        productionMember1.setRehearsalConflicts("something");
+        productionMember1.setLocation("/auditioner/production-members/1");
+        ProductionMember productionMember2 = new ProductionMember();
+        productionMember1.setFamilyMemberFirstName("John");
+        productionMember1.setFamilyMemberLastName("Smith");
+        productionMember1.setAuditionNumber("3");
+        productionMember1.setRehearsalConflicts("something other thing");
+        productionMember2.setLocation("/auditioner/production-members/2");
+        List<ProductionMember> productionMemberList = Arrays.asList(productionMember1,productionMember2);
+        when(productionMemberDAO.getProductionMembers()).thenReturn(productionMemberList);
+
+        Response response = simpleGet("/auditioner/production-members");
+
+        assertEquals(asJsonString(productionMemberList),getResponseBody(response));
+    }
+
+    @Test
+    public void deleteProductionMemberRemovesProductionMember(){
+        Response response = simpleDelete("/auditioner/production-members/12");
+
+        assertEquals(204,response.getStatus());
+
+        verify(productionMemberDAO).deleteProductionMember(12L);
+    }
+
+    @Test
+    public void updateProductionMemberChangesProductionMember(){
+        ProductionMember productionMember = new ProductionMember();
+        productionMember.setFamilyMemberFirstName("Jane");
+        productionMember.setFamilyMemberLastName("Doe");
+        productionMember.setAuditionNumber("2");
+        productionMember.setRehearsalConflicts("something");
+        productionMember.setLocation("/auditioner/production-members/12");
+
+        Response response = simplePut("/auditioner/production-members/12",productionMember);
+
+        assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
+        ArgumentCaptor<ProductionMember> argument = ArgumentCaptor.forClass(ProductionMember.class);
+        verify(productionMemberDAO).updateProductionMember(eq(12L), argument.capture());
+        assertThat("Jane",equalTo(argument.getValue().getFamilyMemberFirstName()));
+        assertThat("Doe",equalTo(argument.getValue().getFamilyMemberLastName()));
+        assertThat("2",equalTo(argument.getValue().getAuditionNumber()));
+        assertThat("something",equalTo(argument.getValue().getRehearsalConflicts()));
     }
 }

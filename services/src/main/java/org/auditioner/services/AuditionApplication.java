@@ -14,6 +14,7 @@ import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.production.ProductionResource;
 import org.auditioner.services.production.member.ProductionMemberDAO;
 import org.auditioner.services.production.member.ProductionMemberResource;
+import org.auditioner.services.util.ServiceContext;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.skife.jdbi.v2.DBI;
 
@@ -37,32 +38,32 @@ public class AuditionApplication extends Application<AuditionConfiguration>
     @Override
     public void run(AuditionConfiguration configuration, Environment environment) throws Exception {
 
-        if(configuration.isUseCors()) {
-            FilterRegistration.Dynamic filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+        FilterRegistration.Dynamic filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
 
-            // Add URL mapping
-            filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
-            filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
-            filter.setInitParameter(CrossOriginFilter.TIMING_ALLOW_ORIGIN_HEADER, "*");
-            filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
-            filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_EXPOSE_HEADERS_HEADER, "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,Location");
-            filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,Location");
-            filter.setInitParameter(CrossOriginFilter.ALLOW_CREDENTIALS_PARAM, "true");
-            filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-        }
+        // Add URL mapping
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+        filter.setInitParameter(CrossOriginFilter.TIMING_ALLOW_ORIGIN_HEADER, "*");
+        filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+        filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_EXPOSE_HEADERS_HEADER, "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,Location");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,Location");
+        filter.setInitParameter(CrossOriginFilter.ALLOW_CREDENTIALS_PARAM, "true");
+        filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
         DBIFactory dbiFactory = new DBIFactory();
+
+        ServiceContext context = new ServiceContext(configuration.getServiceContext());
 
         final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "auditioner-connection");
 
         final FamilyDAO familyDAO = jdbi.onDemand(FamilyDAO.class);
-        environment.jersey().register(new FamilyResource(familyDAO));
+        environment.jersey().register(new FamilyResource(context,familyDAO));
 
         final FamilyMemberDAO familyMemberDAO = jdbi.onDemand(FamilyMemberDAO.class);
         environment.jersey().register(new FamilyMemberResource(familyDAO,familyMemberDAO));
 
         final ProductionDAO productionDAO = jdbi.onDemand(ProductionDAO.class);
-        environment.jersey().register(new ProductionResource(productionDAO));
+        environment.jersey().register(new ProductionResource(context,productionDAO));
 
         final ProductionMemberDAO productionMemberDAO = jdbi.onDemand(ProductionMemberDAO.class);
         environment.jersey().register(new ProductionMemberResource(productionMemberDAO));

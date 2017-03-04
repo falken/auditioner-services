@@ -12,6 +12,10 @@ public interface ProductionMemberDAO {
     @Mapper(ProductionMemberResultSetMapper.class)
     ProductionMember getProductionMember(@Bind("id") long productionMemberId);
 
+    @SqlQuery("")
+    @Mapper(ProductionMemberResultSetMapper.class)
+    List<ProductionMember> getProductionMembers();
+
     @SqlUpdate("")
     void updateProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
 
@@ -20,5 +24,5 @@ public interface ProductionMemberDAO {
     long addProductionMember(@BindBean("productionMember") ProductionMember productionMember);
 
     @SqlUpdate("")
-    void deleteProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
+    void deleteProductionMember(@Bind("id") long productionMemberId);
 }

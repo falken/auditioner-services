@@ -5,6 +5,7 @@ import org.auditioner.services.family.FamilyDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/auditioner/families/{family_id}")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,9 +21,7 @@ public class FamilyMemberResource {
     }
 
     @GET
-    @Path("family-member/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/family_member/{id}")
     public FamilyMember getFamilyMember(@PathParam("family_id") long familyId,@PathParam("id")long id){
         Family family = familyDAO.getFamily(familyId);
         if(family!=null){
@@ -30,4 +29,12 @@ public class FamilyMemberResource {
         }
         return null;
     }
+
+//    @GET
+//    @Path("/family_member")
+//    public List<FamilyMember> getFamilyMembers(@PathParam("family_id") long familyId, )
+    //get list
+    //delete member
+    //put member (update)
+    //post member (create)
 }

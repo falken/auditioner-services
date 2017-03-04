@@ -96,8 +96,8 @@ var client = Ember.Service.extend({
         dataType:"json"
       }).done(function(data)
       {
-        resource.set('location',data.url);
-        resource.set('id',data.url.substring(data.url.lastIndexOf("/") + 1));
+        resource.set('location',data.location);
+        resource.set('id',data.location.substring(data.location.lastIndexOf("/") + 1));
         resolve();
       }).fail(function(){
         reject();

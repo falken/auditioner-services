@@ -31,6 +31,7 @@ export default Ember.Object.extend({
   reload:function(){
     let client = this.get('client');
 
-    client.getResource(this.get('path'),this);
+    console.log(this);
+    client.getResource(this.get('location'),this);
   }
 });

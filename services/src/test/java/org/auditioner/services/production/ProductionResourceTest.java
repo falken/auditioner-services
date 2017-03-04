@@ -5,6 +5,8 @@ import org.auditioner.services.TestResourceBase;
 import org.auditioner.services.production.Production;
 import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.production.ProductionResource;
+import org.auditioner.services.util.ServiceContext;
+import org.auditioner.services.util.ServiceContextConfiguration;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -29,13 +31,18 @@ import static org.mockito.Mockito.when;
 public class ProductionResourceTest extends TestResourceBase {
 
     private static final ProductionDAO productionDAO = mock(ProductionDAO.class);
+    private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
-    public static final ResourceTestRule resources = wrapResource(new ProductionResource(productionDAO));
+    public static final ResourceTestRule resources = wrapResource(new ProductionResource(serviceContext,productionDAO));
 
+    private String hostNameRoot;
     @Before
     public void setUp() {
+
         super.setUp(resources);
+        hostNameRoot = "http://lollypops.com";
+        serviceContext.getServiceConfiguration().setHostNameRoot(hostNameRoot);
     }
 
     @Test
@@ -101,7 +108,7 @@ public class ProductionResourceTest extends TestResourceBase {
 
         Response response = simplePost("/auditioner/productions",production);
 
+        assertEquals(hostNameRoot+"/auditioner/productions/" + 14134, response.getHeaderString("Location"));
         assertEquals(201,response.getStatus());
-        assertEquals("http://localhost:9998/auditioner/productions/14134",response.getLocation().toString());
     }
 }
