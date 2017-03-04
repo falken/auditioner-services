@@ -49,7 +49,7 @@ public class ProductionResourceTest extends TestResourceBase {
     public void getProductionWillReturnProduction(){
         Production production = new Production();
         production.setName("Jane Dane");
-        production.setAuditionDate(new Date());
+        production.setAuditionDate("2010-01-01");
         production.setSeason("Spring 2017");
         production.setLocation("/auditioner/productions/1337");
         when(productionDAO.getProduction(1337L)).thenReturn(production);

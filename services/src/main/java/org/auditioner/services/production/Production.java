@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Production{
     private String name;
-    private Date auditionDate;
+    private String auditionDate;
     private String season;
     private String location;
 
@@ -16,11 +16,11 @@ public class Production{
         this.name = name;
     }
 
-    public Date getAuditionDate() {
+    public String getAuditionDate() {
         return auditionDate;
     }
 
-    public void setAuditionDate(Date auditionDate) {
+    public void setAuditionDate(String auditionDate) {
         this.auditionDate = auditionDate;
     }
 

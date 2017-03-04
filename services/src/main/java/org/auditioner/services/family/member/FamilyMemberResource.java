@@ -7,7 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/auditioner/families/{family_id}")
+@Path("/auditioner/families/{family_id}/family_member")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class FamilyMemberResource {
@@ -21,7 +21,7 @@ public class FamilyMemberResource {
     }
 
     @GET
-    @Path("/family_member/{id}")
+    @Path("/{id}")
     public FamilyMember getFamilyMember(@PathParam("family_id") long familyId,@PathParam("id")long id){
         Family family = familyDAO.getFamily(familyId);
         if(family!=null){

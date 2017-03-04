@@ -44,6 +44,7 @@ public class FamilyResource {
     @GET
     @Path("/{family_id}")
     public Family getFamily(@PathParam("family_id") long familyId){
+
         return familyDAO.getFamily(familyId);
     }
 
@@ -60,6 +61,7 @@ public class FamilyResource {
     @Path("/{family_id}")
     public void deleteFamily(@PathParam("family_id") long familyId)
     {
+
         familyDAO.deleteFamily(familyId);
     }
 }

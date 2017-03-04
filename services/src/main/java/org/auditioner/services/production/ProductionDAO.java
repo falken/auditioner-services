@@ -17,7 +17,9 @@ public interface ProductionDAO{
     void deleteProduction(@Bind("id") long productionId);
 
     @SqlUpdate("UPDATE Production " +
-            "  SET Name=:production.name " +
+            "  SET Name=:production.name, " +
+            "      audition_date=:production.auditionDate, " +
+            "      season=:production.season " +
             "WHERE id=:id")
     void updateProduction(@Bind("id") long productionId,@BindBean("production") Production production);
 

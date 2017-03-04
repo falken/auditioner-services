@@ -13,7 +13,7 @@ public class ProductionResultSetMapper implements ResultSetMapper<Production> {
         Production production = new Production();
         production.setLocation("/auditioner/productions/" + resultSet.getLong("id"));
         production.setName(resultSet.getString("name"));
-        production.setAuditionDate(resultSet.getDate("audition_date"));
+        production.setAuditionDate(resultSet.getString("audition_date"));
         production.setSeason(resultSet.getString("season"));
         return production;
     }
