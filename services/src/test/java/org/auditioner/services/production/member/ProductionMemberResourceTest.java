@@ -3,6 +3,8 @@ import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
 import org.auditioner.services.family.member.FamilyMember;
 import org.auditioner.services.production.Production;
+import org.auditioner.services.util.ServiceContext;
+import org.auditioner.services.util.ServiceContextConfiguration;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -23,17 +25,25 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ProductionMemberResourceTest extends TestResourceBase {
 
     private static final ProductionMemberDAO productionMemberDAO = mock(ProductionMemberDAO.class);
+    private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
-    public static final ResourceTestRule resources = wrapResource(new ProductionMemberResource(productionMemberDAO));
+    public static final ResourceTestRule resources = wrapResource(new ProductionMemberResource(serviceContext, productionMemberDAO));
 
+    private String hostNameRoot;
     @Before
     public void setUp() {
         super.setUp(resources);
+
+        reset(productionMemberDAO);
+
+        hostNameRoot = "http://lollypops.com";
+        serviceContext.getServiceConfiguration().setHostNameRoot(hostNameRoot);
     }
 
     @Test
@@ -100,5 +110,16 @@ public class ProductionMemberResourceTest extends TestResourceBase {
         assertThat("Doe",equalTo(argument.getValue().getFamilyMemberLastName()));
         assertThat("2",equalTo(argument.getValue().getAuditionNumber()));
         assertThat("something",equalTo(argument.getValue().getRehearsalConflicts()));
+    }
+
+    @Test
+    public void addProductionMemberCreatesProductionMember(){
+        ProductionMember productionMember = new ProductionMember();
+        when(productionMemberDAO.addProductionMember(any(ProductionMember.class))).thenReturn(14134L);
+
+        Response response = simplePost("/auditioner/production-members",productionMember);
+
+        assertEquals(hostNameRoot+"/auditioner/production-members" + 14134, response.getHeaderString("Location"));
+        assertEquals(201,response.getStatus());
     }
 }
