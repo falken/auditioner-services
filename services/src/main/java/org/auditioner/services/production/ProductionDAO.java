@@ -34,5 +34,8 @@ public interface ProductionDAO{
     @Mapper(ProductionResultSetMapper.class)
     List<Production> getProductions();
 
-    String lastAuditionNumberFor(long productionId);
+    @SqlQuery("SELECT MAX(RIGHT(audition_number, 2)) " +
+            "FROM ProductionMember " +
+            "WHERE production_id = :id")
+    String lastAuditionNumberFor(@Bind("id") long productionId);
 }

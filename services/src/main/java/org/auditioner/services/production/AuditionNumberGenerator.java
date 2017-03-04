@@ -20,6 +20,11 @@ public class AuditionNumberGenerator {
 
     private Integer nextAuditionNumberFor(long productionId) {
         String lastNumber = productionDAO.lastAuditionNumberFor(productionId);
+
+        if(lastNumber == null) {
+            return 0;
+        }
+
         return Integer.parseInt(lastNumber) + 1;
     }
 }
