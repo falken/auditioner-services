@@ -33,16 +33,14 @@ export default Ember.Service.extend({
   reload:function(production)
   {
     const client = this.get('client');
-
     client.getResource(production.get('location'),production);
-
     return production;
   },
   deleteProduction:function(production)
   {
     const client = this.get('client');
-
     return client.deleteResource(production);
+
   },
   createProduction:function()
   {
@@ -53,7 +51,15 @@ export default Ember.Service.extend({
   },
   saveProduction:function(production) {
     const client = this.get('client');
-    return client.putResource(production);
+
+    console.log("production", production);
+
+    if (production.get('location')) {
+      return client.putResource(production);
+    } else {
+      return client.postResource(production);
+    }
+
   }
 
 });

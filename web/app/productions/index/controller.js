@@ -17,23 +17,28 @@ export default Ember.Controller.extend({
 		deleteProduction: function(production) {
 			const productionService = this.get('productionService');
 			const list = this.get('model');
+
+
 			productionService.deleteProduction(production).then(function(){
 				list.reload();
 			});
 		},
 		cancelEditingProduction: function() {
-
+			this.set('isEditing',false);
+			this.set('editingProduction',null);
 		},
 		saveEditingProduction: function() {
 			const productionService = this.get('productionService');
 			const editingProduction= this.get('editingProduction');
+			const list = this.get('model');
 
-			console.log(editingProduction);
+			var that = this;
+
 			productionService.saveProduction(editingProduction)
 				.then(function() {
-					this.set('isEditing',false);
-					this.set('editingProduction',null);
-
+					that.set('isEditing',false);
+					that.set('editingProduction',null);
+					list.reload();
 				});
 		}
 	}

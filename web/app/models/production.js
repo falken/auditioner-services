@@ -12,5 +12,12 @@ export default Ember.Object.extend({
 		this.set('name', data.name);
 		this.set('auditionDate', data.auditionDate);
 		this.set('season', data.season);
+	},
+	toJson: function() {
+		return JSON.stringify({
+			name: this.get('name'),
+			auditionDate: this.get('auditionDate'),
+			season: this.get('season')
+		});
 	}
 });
