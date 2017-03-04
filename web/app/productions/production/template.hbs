@@ -1,1 +1,22 @@
-production details!
+<div class="row">
+    {{#link-to 'productions.productions/production' model.production.id tagName='a'}}
+        {{model.production}}
+        Back to Production
+    {{/link-to}}
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="row">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{model.productionMember.familyMemberFirstName}} {{model.productionMember.familyMemberLastName}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
