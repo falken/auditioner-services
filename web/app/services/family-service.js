@@ -34,8 +34,12 @@ export default Ember.Service.extend({
   saveFamily:function(family)
   {
     const client = this.get('client');
-
-    return client.putResource(family);
+    if(family.get('location')) {
+      return client.putResource(family);
+    }
+    else {
+      return client.postResource("/auditioner/families", family);
+    }
   },
   reloadFamily:function(family)
   {

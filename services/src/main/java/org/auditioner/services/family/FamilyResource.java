@@ -1,10 +1,14 @@
 package org.auditioner.services.family;
 
+import org.auditioner.services.util.ServiceContext;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
+
+import static org.auditioner.services.util.CreatedResponse.pathFromString;
 
 @Path("/auditioner/families")
 @Produces(MediaType.APPLICATION_JSON)
@@ -12,9 +16,11 @@ import java.util.List;
 public class FamilyResource {
 
 
+    private ServiceContext serviceContext;
     private FamilyDAO familyDAO;
 
-    public FamilyResource(FamilyDAO familyDAO) {
+    public FamilyResource(ServiceContext serviceContext, FamilyDAO familyDAO) {
+        this.serviceContext = serviceContext;
         this.familyDAO = familyDAO;
     }
 
@@ -28,7 +34,11 @@ public class FamilyResource {
     {
         long familyId = familyDAO.addFamily(family);
 
-        return Response.created(URI.create("/auditioner/families/" + familyId)).build();
+        String path = "/auditioner/families/" + familyId;
+        return Response.status(Response.Status.CREATED)
+                .entity(pathFromString(path))
+                .header("Location", serviceContext.createUriFromPath(path))
+                .build();
     }
 
     @GET

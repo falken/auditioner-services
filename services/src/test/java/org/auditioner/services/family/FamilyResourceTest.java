@@ -2,6 +2,7 @@ package org.auditioner.services.family;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
+import org.auditioner.services.util.ServiceContext;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -10,6 +11,7 @@ import org.mockito.ArgumentCaptor;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,9 +24,10 @@ import static org.mockito.Mockito.*;
 public class FamilyResourceTest extends TestResourceBase {
 
     private static final FamilyDAO familyDAO = mock(FamilyDAO.class);
+    private static final ServiceContext serviceContext = mock(ServiceContext.class);
 
     @ClassRule
-    public static final ResourceTestRule resources = wrapResource(new FamilyResource(familyDAO));
+    public static final ResourceTestRule resources = wrapResource(new FamilyResource(serviceContext,familyDAO));
 
     @Before
     public void setUp() {

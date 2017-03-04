@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-
+  {{#if isEditing}}
   <div class="col-md-offset-1 col-md-5">
 
     <div class="row">
@@ -49,35 +49,42 @@
             </div>
 
             <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Contact Email" value=editingFamily.contactEmail}}
+              {{input type="text" class="form-control col-md-3" placeholder="Contact Email"
+                      value=editingFamily.contactEmail}}
             </div>
             <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Contact Phone" value=editingFamily.contactPhone}}
-            </div>
-
-            <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 1" value=editingFamily.mailingAddressLine1}}
+              {{input type="text" class="form-control col-md-3" placeholder="Contact Phone"
+                      value=editingFamily.contactPhone}}
             </div>
 
             <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 2" value=editingFamily.mailingAddressLine2}}
+              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 1"
+                      value=editingFamily.mailingAddressLine1}}
             </div>
 
             <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="City" value=editingFamily.mailingAddressCity}}
-              {{input type="text" class="form-control col-md-3" placeholder="State" value=editingFamily.mailingAddressState}}
-              {{input type="text" class="form-control col-md-3" placeholder="Zip" value=editingFamily.mailingAddressZip}}
+              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 2"
+                      value=editingFamily.mailingAddressLine2}}
+            </div>
+
+            <div class="form-group">
+              {{input type="text" class="form-control col-md-3" placeholder="City"
+                      value=editingFamily.mailingAddressCity}}
+              {{input type="text" class="form-control col-md-3" placeholder="State"
+                      value=editingFamily.mailingAddressState}}
+              {{input type="text" class="form-control col-md-3" placeholder="Zip"
+                      value=editingFamily.mailingAddressZip}}
             </div>
 
             <div class="row">
               <div class="col-sm-10">
-              <button {{action 'saveEditingFamily' }} class="btn btn-primary">
-                {{#if isAdd}}
-                  Add
+                <button {{action 'saveEditingFamily' }} class="btn btn-primary">
+                  {{#if isAdd}}
+                    Add
                   {{else}}
-                  Save
-                {{/if}}
-              </button>
+                    Save
+                  {{/if}}
+                </button>
                 <button {{action 'cancelEditingFamily' }} c class="btn btn-default">Cancel</button>
               </div>
             </div>
@@ -85,6 +92,6 @@
         </div>
       </div>
     </div>
-
   </div>
+  {{/if}}
 </div>

@@ -3,6 +3,7 @@ package org.auditioner.services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
+import org.auditioner.services.util.ServiceContextConfiguration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,15 +23,15 @@ public class AuditionConfiguration extends Configuration {
         this.database = database;
     }
 
-    @JsonProperty("useCors")
-    private boolean useCors = false;
+    @JsonProperty("serviceContext")
+    private ServiceContextConfiguration serviceContext = new ServiceContextConfiguration();
 
 
-    public boolean isUseCors() {
-        return useCors;
+    public ServiceContextConfiguration getServiceContext() {
+        return serviceContext;
     }
 
-    public void setUseCors(boolean useCors) {
-        this.useCors = useCors;
+    public void setServiceContext(ServiceContextConfiguration serviceContext) {
+        this.serviceContext = serviceContext;
     }
 }

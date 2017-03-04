@@ -10,5 +10,10 @@ export default Ember.Object.extend({
     this.set('location', data.location);
     this.set('name', data.name);
 
+  },
+  toJson: function () {
+    return JSON.stringify({
+      name: this.get('name'),
+    });
   }
 });
