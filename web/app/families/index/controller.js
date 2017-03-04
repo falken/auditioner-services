@@ -4,6 +4,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   familyService: Ember.inject.service('family-service'),
   actions:{
+    choosePreferredContactMethod(choice) {
+          console.log("preferred contact method is", choice);
+          this.set('preferredContactMethod', choice);
+    },
     addFamily:function(){
       const familyService = this.get('familyService');
 
@@ -15,6 +19,7 @@ export default Ember.Controller.extend({
 
       const familyService = this.get('familyService');
       const editingFamily = this.get('editingFamily');
+      editingFamily.preferredContactMethod = this.get('preferredContactMethod');
       const list = this.get('model');
       var controller = this;
 

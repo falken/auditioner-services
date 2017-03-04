@@ -10,6 +10,7 @@ export default Ember.Object.extend({
   city: null,
   state: null,
   zipCode: null,
+  preferredContactMethod: null,
     loadFromData: function (client, data) {
     this.set('client', client);
 
@@ -23,6 +24,7 @@ export default Ember.Object.extend({
     this.set('mailingAddressCity', data.city);
     this.set('mailingAddressState', data.state);
     this.set('mailingAddressZip', data.zipCode);
+    this.set('preferredContactMethod', data.preferredMethodContact);
 
 
   },
@@ -36,6 +38,8 @@ export default Ember.Object.extend({
       city: this.get('mailingAddressCity'),
       state: this.get('mailingAddressState'),
       zipCode: this.get('mailingAddressZip'),
+      preferredContactMethod: this.get('preferredContactMethod'),
+
     });
   }
 });
