@@ -81,4 +81,24 @@ public class ProductionMemberResourceTest extends TestResourceBase {
 
         verify(productionMemberDAO).deleteProductionMember(12L);
     }
+
+    @Test
+    public void updateProductionMemberChangesProductionMember(){
+        ProductionMember productionMember = new ProductionMember();
+        productionMember.setFamilyMemberFirstName("Jane");
+        productionMember.setFamilyMemberLastName("Doe");
+        productionMember.setAuditionNumber("2");
+        productionMember.setRehearsalConflicts("something");
+        productionMember.setLocation("/auditioner/production-members/12");
+
+        Response response = simplePut("/auditioner/production-members/12",productionMember);
+
+        assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
+        ArgumentCaptor<ProductionMember> argument = ArgumentCaptor.forClass(ProductionMember.class);
+        verify(productionMemberDAO).updateProductionMember(eq(12L), argument.capture());
+        assertThat("Jane",equalTo(argument.getValue().getFamilyMemberFirstName()));
+        assertThat("Doe",equalTo(argument.getValue().getFamilyMemberLastName()));
+        assertThat("2",equalTo(argument.getValue().getAuditionNumber()));
+        assertThat("something",equalTo(argument.getValue().getRehearsalConflicts()));
+    }
 }

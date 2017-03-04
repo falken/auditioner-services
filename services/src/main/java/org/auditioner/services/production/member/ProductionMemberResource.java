@@ -1,5 +1,7 @@
 package org.auditioner.services.production.member;
 
+import org.auditioner.services.family.Family;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,5 +34,12 @@ public class ProductionMemberResource {
     public void deleteFamily(@PathParam("production_member_id") long productionMemberId)
     {
         productionMemberDAO.deleteProductionMember(productionMemberId);
+    }
+
+    @PUT
+    @Path("/{production_member_id}")
+    public void updateFamily(@PathParam("production_member_id") long productionMemberId, ProductionMember productionMember)
+    {
+        productionMemberDAO.updateProductionMember(productionMemberId, productionMember);
     }
 }
