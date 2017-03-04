@@ -33,4 +33,6 @@ public interface ProductionDAO{
             "FROM Production")
     @Mapper(ProductionResultSetMapper.class)
     List<Production> getProductions();
+
+    String lastAuditionNumberFor(long productionId);
 }
