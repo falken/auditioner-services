@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
   familyService: Ember.inject.service('family-service'),
   actions:{
     choosePreferredContactMethod(choice) {
-          console.log("preferred contact method is", choice);
           this.set('preferredContactMethod', choice);
     },
     addFamily:function(){
