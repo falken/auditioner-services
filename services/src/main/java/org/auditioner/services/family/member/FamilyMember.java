@@ -8,6 +8,7 @@ public class FamilyMember {
     private String yearsExperience;
     private String location;
     private String height;
+    private String age;
 
     public String getPastRoles() { return pastRoles; }
 
@@ -52,4 +53,8 @@ public class FamilyMember {
     public void setHeight(String height) { this.height = height; }
 
     public void setPastRoles(String past_roles) { this.pastRoles = past_roles; }
+
+    public void setAge(String age) { this.age = age; }
+
+    public String getAge() { return this.age; }
 }

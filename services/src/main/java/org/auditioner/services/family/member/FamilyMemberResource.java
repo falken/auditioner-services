@@ -20,7 +20,7 @@ public class FamilyMemberResource {
     }
 
     @GET
-    @Path("family-member/{id}")
+    @Path("family_member/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public FamilyMember getFamilyMember(@PathParam("family_id") long familyId,@PathParam("id")long id){

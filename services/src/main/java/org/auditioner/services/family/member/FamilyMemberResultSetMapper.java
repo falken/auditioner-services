@@ -1,6 +1,5 @@
 package org.auditioner.services.family.member;
 
-import org.auditioner.services.family.Family;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -11,12 +10,13 @@ public class FamilyMemberResultSetMapper  implements ResultSetMapper<FamilyMembe
     @Override
     public FamilyMember map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         FamilyMember familyMember = new FamilyMember();
-        familyMember.setLocation("/auditioner/families/family_member" + resultSet.getLong("id"));
+        familyMember.setLocation("/auditioner/families//family_member" + resultSet.getLong("id"));
         familyMember.setFirstName(resultSet.getString("first_name"));
         familyMember.setLastName(resultSet.getString("last_name"));
-        familyMember.setWeight(resultSet.getString("weight"));
-        familyMember.setHeight(resultSet.getString("height"));
-        familyMember.setPastRoles(resultSet.getString("past_roles"));
+        familyMember.setAge(resultSet.getString("age"));
+//        familyMember.setWeight(resultSet.getString("weight"));
+//        familyMember.setHeight(resultSet.getString("height"));
+//        familyMember.setPastRoles(resultSet.getString("past_roles"));
         return familyMember;
     }
 }
