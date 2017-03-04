@@ -23,12 +23,14 @@ import static org.mockito.Mockito.*;
 
 public class FamilyResourceTest extends TestResourceBase {
 
+    public static final String FAMILIES_URL = "/auditioner/families";
+
     private static final FamilyDAO familyDAO = mock(FamilyDAO.class);
     private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
     public static final ResourceTestRule resources = wrapResource(new FamilyResource(serviceContext, familyDAO));
-    public static final String FAMILIES_URL = "/auditioner/families";
+    public static final long EXISTING_FAMILY_ID = 12L;
 
     private String hostNameRoot;
 
@@ -57,20 +59,23 @@ public class FamilyResourceTest extends TestResourceBase {
 
     @Test
     public void deleteFamilyRemovesFamily() {
-        Response response = simpleDelete(urlFor(12L));
+        Response response = simpleDelete(urlFor(EXISTING_FAMILY_ID));
 
         assertEquals(204, response.getStatus());
 
-        verify(familyDAO).deleteFamily(12L);
+        verify(familyDAO).deleteFamily(EXISTING_FAMILY_ID);
     }
 
     @Test
     public void getFamilyWillReturnFamily() {
-        Family family = familyNamed("theName");
-        family.setLocation(urlFor(12L));
-        when(familyDAO.getFamily(12L)).thenReturn(family);
+        String familyUrl = urlFor(EXISTING_FAMILY_ID);
 
-        Family actualFamily = simpleGet(urlFor(12L), Family.class);
+        Family family = familyNamed("theName");
+        family.setLocation(familyUrl);
+
+        when(familyDAO.getFamily(EXISTING_FAMILY_ID)).thenReturn(family);
+
+        Family actualFamily = simpleGet(familyUrl, Family.class);
 
         assertEquals(actualFamily.getName(), family.getName());
         assertEquals(actualFamily.getLocation(), family.getLocation());
@@ -92,18 +97,18 @@ public class FamilyResourceTest extends TestResourceBase {
     @Test
     public void updateFamilyChangesFamily() {
 
-        Response response = simplePut(urlFor(12L), familyNamed("theName"));
+        Response response = simplePut(urlFor(EXISTING_FAMILY_ID), familyNamed("theName"));
 
         assertEquals(HttpStatus.NO_CONTENT_204, response.getStatus());
         ArgumentCaptor<Family> argument = ArgumentCaptor.forClass(Family.class);
-        verify(familyDAO).updateFamily(eq(12L), argument.capture());
+        verify(familyDAO).updateFamily(eq(EXISTING_FAMILY_ID), argument.capture());
         assertThat("theName", equalTo(argument.getValue().getName()));
     }
 
     private Family familyNamed(String name) {
-        Family family1 = new Family();
-        family1.setName(name);
-        return family1;
+        Family f = new Family();
+        f.setName(name);
+        return f;
     }
 
     private String urlFor(long id) {
