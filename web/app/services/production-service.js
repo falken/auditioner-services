@@ -52,8 +52,6 @@ export default Ember.Service.extend({
   saveProduction:function(production) {
     const client = this.get('client');
 
-    console.log("production", production);
-
     if (production.get('location')) {
       return client.putResource(production);
     } else {
