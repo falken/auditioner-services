@@ -7,8 +7,9 @@ public class ProductionMember {
     private String requestedRoles;
     private String auditionNumber;
     private String location;
-
     private String rehearsalConflicts;
+    private long familyMemberId;
+
     public String getFamilyMemberFirstName() {
         return familyMemberFirstName;
     }
@@ -55,5 +56,13 @@ public class ProductionMember {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setFamilyMemberId(long familyMemberId) {
+        this.familyMemberId = familyMemberId;
+    }
+
+    public long getFamilyMemberId() {
+        return familyMemberId;
     }
 }
