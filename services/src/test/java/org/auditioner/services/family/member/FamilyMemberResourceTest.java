@@ -70,7 +70,7 @@ public class FamilyMemberResourceTest extends TestResourceBase {
     public void delete() throws Exception {
         Response response = simpleDelete("/auditioner/families/9999/family_member/1337");
 
-        verify(familyMemberDAO).deleteFamilyMember(1337);
+        verify(familyMemberDAO).deleteFamilyMember(1,1337);
         assertEquals(204,response.getStatus());
     }
 

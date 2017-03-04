@@ -42,8 +42,8 @@ public class FamilyMemberResource {
 
     @DELETE
     @Path("/{id}")
-    public void deleteFamilyMember(@PathParam("id") long familyMemberId) {
-        familyMemberDAO.deleteFamilyMember(familyMemberId);
+    public void deleteFamilyMember(@PathParam("family_id") long familyId,@PathParam("id") long familyMemberId) {
+        familyMemberDAO.deleteFamilyMember(familyId,familyMemberId);
     }
 
     @POST

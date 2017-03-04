@@ -26,7 +26,7 @@ public interface FamilyMemberDAO {
             "  weight=:familyMember.weight, " +
             "  height=:familyMember.height, " +
             "  past_roles=:familyMember.pastRoles " +
-            "WHERE id=:id")
+            "WHERE id=:id and family_id=:familyId")
     void updateFamilyMember(@Bind("familyId") long familyId, @Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
     @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,past_roles,age) "
@@ -35,8 +35,8 @@ public interface FamilyMemberDAO {
     long addFamilyMember(@Bind("familyId") long familyId, @BindBean("familyMember") FamilyMember familyMember);
 
     @SqlUpdate("DELETE FROM FamilyMember "
-            + "WHERE id=:id")
-    void deleteFamilyMember(@Bind("id") long familyMemberId);
+            + "WHERE id=:id and family_id=:familyId")
+    void deleteFamilyMember(@Bind("familyId") long familyId, @Bind("id") long familyMemberId);
 
     @SqlQuery("SELECT  fm.family_id, fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, fm.age " +
             "FROM FamilyMember fm " +
