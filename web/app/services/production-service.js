@@ -57,7 +57,7 @@ export default Ember.Service.extend({
     if (production.get('location')) {
       return client.putResource(production);
     } else {
-      return client.postResource(production);
+      return client.postResource('/auditioner/productions',production);
     }
 
   }
