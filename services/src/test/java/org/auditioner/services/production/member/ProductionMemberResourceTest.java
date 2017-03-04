@@ -38,27 +38,14 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     @Test
     public void getProductionMemberWillReturnProductionMember(){
         ProductionMember productionMember = new ProductionMember();
-        Production production = new Production();
-        production.setName("Nutcracker");
-        production.setAuditionDate(new Date());
-        production.setSeason("Spring 2017");
-        production.setLocation("/auditioner/productions/1337");
-        productionMember.setProduction(production);
-        FamilyMember familyMember = new FamilyMember();
-        familyMember.setFirstName("Jane");
-        familyMember.setLastName("Doe");
-        familyMember.setPastRoles("Clara, Sugar Plum Fairy");
-        familyMember.setWeight("280");
-        familyMember.setYearsExperience("102");
-        productionMember.setFamilyMember(familyMember);
+        productionMember.setFamilyMemberFirstName("Frist Name");
+        productionMember.setFamilyMemberLastName("Last Name");
         productionMember.setRequestedRoles("Snow Queen, Dew Drop Fairy");
         productionMember.setAuditionNumber("3");
         productionMember.setLocation("/auditioner/productions-member/1337");
         when(productionMemberDAO.getProductionMember(1337L)).thenReturn(productionMember);
         System.out.println(productionMember);
-
         Response response = simpleGet("/auditioner/productions-member/1337");
-
         assertEquals(asJsonString(productionMember),getResponseBody(response));
     }
 }
