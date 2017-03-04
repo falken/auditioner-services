@@ -64,18 +64,18 @@
               <label class="col-sm-12">Preferred Contact Method</label><br/>
               <div class="col-sm-4">
                 {{#radio-button
-                  value="Phone"
-                  groupValue=model.family.preferredContactMethod
-                  changed="choosePreferredContactMethod"}}
-                  Phone
-                {{/radio-button}}
-              </div>
-              <div class="col-sm-4">
-                {{#radio-button
                   value="Email"
                   groupValue=model.family.preferredContactMethod
                   changed="choosePreferredContactMethod"}}
                   Email
+                {{/radio-button}}
+              </div>
+              <div class="col-sm-4">
+                {{#radio-button
+                  value="Phone"
+                  groupValue=model.family.preferredContactMethod
+                  changed="choosePreferredContactMethod"}}
+                  Phone
                 {{/radio-button}}
               </div>
               <div class="col-sm-4">
