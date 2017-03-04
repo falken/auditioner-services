@@ -99,11 +99,16 @@ export default Ember.Service.extend({
     familyMember.set('client',client);
     return familyMember;
   },
-  saveFamilyMember:function(saveFamilyMember)
+  saveFamilyMember:function(familyId,saveFamilyMember)
   {
     const client = this.get('client');
 
-    return client.putResource(saveFamilyMember);
+    if (saveFamilyMember.get("location")) {
+      return client.putResource(saveFamilyMember);
+    }
+    else {
+      return client.postResource("/auditioner/families/" + familyId + "/family_member",saveFamilyMember);
+    }
   },
 
 });

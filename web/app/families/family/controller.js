@@ -30,12 +30,26 @@ export default Ember.Controller.extend({
     saveEditingFamilyMember:function(){
       const familyService = this.get('familyService');
       const editingFamilyMember = this.get('editingFamilyMember');
+      const list = this.get('model');
+      const familyId = this.get('model.family.id');
 
-      familyService.saveFamilyMember(editingFamilyMember)
+      const controller = this;
+
+      familyService.saveFamilyMember(familyId,editingFamilyMember)
         .then(function(){
-          this.set('isEditing',false);
-          this.set('editingFamilyMember',null);
+          controller.set('isEditing',false);
+          controller.set('editingFamilyMember',null);
+          list.familyMembers.reload();
         });
+    },
+    deleteFamilyMember: function(familyMember) {
+      const familyService = this.get('familyService');
+      const model = this.get('model');
+
+      familyService.deleteFamilyMember(familyMember)
+          .then(function(){
+            model.familyMembers.reload();
+          });
     },
     registerFamilyMembers: function() {
       const selectedProductionId = this.get("selectedProductionId");

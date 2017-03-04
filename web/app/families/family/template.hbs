@@ -19,7 +19,6 @@
             <tr>
               <td>Contact Phone</td>
               <td>{{model.family.contactPhone}}</td>
-              <td>&nbsp;</td>
             </tr>
             <tr>
               <td>Mailing Address</td>
@@ -28,7 +27,6 @@
                         {{model.family.mailingAddressLine2}}<br/>
                     {{/if}}
                     {{model.family.mailingAddressCity}}, {{model.family.mailingAddressState}} {{model.family.mailingAdressZip}}</td>
-              <td>&nbsp;</td>
             </tr>
             <tr>
                 {{#if model.family.preferredContactMethod}}
@@ -68,12 +66,11 @@
             </tr>
             </thead>
             <tbody>
-            {{#each model.familyMembers as | familyMember | }}
+            {{#each model.familyMembers.results as | familyMember | }}
             <tr>
               {{input type="checkbox" name="family_member_id" checked=familyMember.selected}}
               {{#link-to 'families.familyMember' model.family.id familyMember.id tagName='td'}}
                   {{familyMember.firstName}}
-                  {{familyMember.id}}-{{model.family.id}}
               {{/link-to}}
               <td>{{familyMember.lastName}}</td>
               <td>{{familyMember.age}}</td>
@@ -124,11 +121,6 @@
               {{input type="text" class="form-control col-md-3" placeholder="Age" value=editingFamilyMember.age}}
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Ballet">
-              <input type="text" class="form-control" placeholder="Jazz">
-              <input type="text" class="form-control" placeholder="Modern">
-            </div>
-            <div class="form-group">
               {{input type="textarea" cols="3" class="form-control" placeholder="Prior Roles" value=editingFamilyMember.priorRoles}}
             </div>
             <div class="row">
@@ -141,6 +133,7 @@
                 {{/if}}
               </button>
                 <button {{action 'cancelEditingFamilyMember' }} class="btn btn-default">Cancel</button>
+                  {{editingFamilyMember.location}}
               </div>
             </div>
           </form>
