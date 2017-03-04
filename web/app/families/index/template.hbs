@@ -38,71 +38,78 @@
   <div class="col-md-offset-1 col-md-5">
 
     <div class="row">
+      <form class="form-horizontal">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Add Family</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline">
             <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Family Name" value=editingFamily.name}}
-            </div>
-
-            <div class="form-group">
-              {{input type="email" class="form-control col-md-3" placeholder="Contact Email"
-                      value=editingFamily.contactEmail}}
-            </div>
-            <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Contact Phone"
-                      value=editingFamily.contactPhone}}
-            </div>
-
-            <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 1"
-                      value=editingFamily.mailingAddressLine1}}
-            </div>
-
-            <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="Mailing Address Line 2"
-                      value=editingFamily.mailingAddressLine2}}
-            </div>
-
-            <div class="form-group">
-              {{input type="text" class="form-control col-md-3" placeholder="City"
-                      value=editingFamily.mailingAddressCity}}
-              {{input type="text" class="form-control col-md-3" placeholder="State"
-                      value=editingFamily.mailingAddressState}}
-              {{input type="text" class="form-control col-md-3" placeholder="Zip"
-                      value=editingFamily.mailingAddressZip}}
-            </div>
-              <div class="panel-heading">
-                  <h4 class="panel-title">Preferred Contact Method</h4>
+              <label class="col-sm-12">Name</label>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Last Name" value=editingFamily.name}}
               </div>
-              <div class="form-group">
+            </div>
 
-                  {{#radio-button
-                          value="Phone"
-                          groupValue=preferredContactMethod
-                          changed="choosePreferredContactMethod"}}
-                      Phone
-                  {{/radio-button}}
-
-                  {{#radio-button
-                          value="Email"
-                          groupValue=preferredContactMethod
-                          changed="choosePreferredContactMethod"}}
-                      Email
-                  {{/radio-button}}
-                  {{#radio-button
-                          value="Mail"
-                          groupValue=preferredContactMethod
-                          changed="choosePreferredContactMethod"}}
-                      Mail
-                  {{/radio-button}}
+            <div class="form-group">
+              <label class="col-sm-12" for="contact">Contact</label>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Email" value=editingFamily.email}}
               </div>
+              <div class="col-sm-12">
+                {{input type="text" class="form-control" placeholder="Phone" value=editingFamily.phone}}
+              </div>
+            </div>
+
+          <div class="form-group">
+            <label class="col-sm-12" for="contact">Address</label>
+            <div class="col-sm-12">
+              {{input type="text" class="form-control" placeholder="Address 01" value=editingFamily.address01}}
+            </div>
+            <div class="col-sm-12">
+              {{input type="text" class="form-control" placeholder="Address 02" value=editingFamily.address02}}
+            </div>
+            <div class="col-sm-6">
+              {{input type="text" class="form-control" placeholder="City" value=editingFamily.city}}
+            </div>
+            <div class="col-sm-3">
+              {{input type="text" class="form-control" placeholder="State" value=editingFamily.state}}
+            </div>
+            <div class="col-sm-3">
+              {{input type="text" class="form-control" placeholder="Zip" value=editingFamily.zipCode}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-12">Preferred Contact Method</label><br/>
+            <div class="col-sm-4">
+              {{#radio-button
+                value="Phone"
+                groupValue=editingFamily.preferredContactMethod
+                changed="choosePreferredContactMethod"}}
+                Phone
+              {{/radio-button}}
+            </div>
+            <div class="col-sm-4">
+              {{#radio-button
+                value="Email"
+                groupValue=editingFamily.preferredContactMethod
+                changed="choosePreferredContactMethod"}}
+                Email
+              {{/radio-button}}
+            </div>
+            <div class="col-sm-4">
+              {{#radio-button
+                value="Mail"
+                groupValue=editingFamily.preferredContactMethod
+                changed="choosePreferredContactMethod"}}
+                Mail
+              {{/radio-button}}
+            </div>
+          </div>
 
             <div class="row">
-              <div class="col-sm-10">
+              <div class="col-sm-12 text-center">
                 <button {{action 'saveEditingFamily' }} class="btn btn-primary">
                   {{#if isAdd}}
                     Add
@@ -113,9 +120,9 @@
                 <button {{action 'cancelEditingFamily' }} c class="btn btn-default">Cancel</button>
               </div>
             </div>
-          </form>
         </div>
       </div>
+      </form>
     </div>
   </div>
   {{/if}}
