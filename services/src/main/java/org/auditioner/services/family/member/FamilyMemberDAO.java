@@ -32,7 +32,7 @@ public interface FamilyMemberDAO {
 
     @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,past_roles,age,acro_exp,ballet_exp,jazz_exp,tap_exp) "
             + " VALUES (:familyId, :familyMember.firstName,:familyMember.lastName,:familyMember.weight," +
-            ":familyMember.height,:familyMember.pastRoles,:familyMember.age,familyMember.acroExp,familyMember.balletExp,familyMember.jazzExp,familyMember.tapExp)")
+            ":familyMember.height,:familyMember.pastRoles,:familyMember.age,:familyMember.acroExp,:familyMember.balletExp,:familyMember.jazzExp,:familyMember.tapExp)")
     @GetGeneratedKeys
     long addFamilyMember(@Bind("familyId") long familyId, @BindBean("familyMember") FamilyMember familyMember);
 
