@@ -27,10 +27,10 @@ public interface ProductionMemberDAO {
             "WHERE id=:id")
     void updateProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
 
-    @SqlUpdate("INSERT INTO ProductionMember (id,family_member_id,production_id,requested_roles,rehearsal_conflicts,audition_number) "
-            + " VALUES (:productionMember.id,:productionMember.familyMemberId,:productionMember.productionId,:productionMember.requestedRoles,:productionMember.rehearsalConflicts,:productionMember.auditionNumber)")
+    @SqlUpdate("INSERT INTO ProductionMember (family_member_id,production_id,requested_roles,rehearsal_conflicts,audition_number) "
+            + " VALUES (:productionMember.familyMemberId,:productionId,:productionMember.requestedRoles,:productionMember.rehearsalConflicts,:productionMember.auditionNumber)")
     @GetGeneratedKeys
-    long addProductionMember(@BindBean("productionMember") ProductionMember productionMember);
+    long addProductionMember(@Bind("productionId") long productionId, @BindBean("productionMember") ProductionMember productionMember);
 
     @SqlUpdate("DELETE FROM ProductionMember "
             + "WHERE id=:id")

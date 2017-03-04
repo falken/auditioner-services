@@ -8,11 +8,7 @@ import java.util.List;
 
 public interface FamilyMemberDAO {
 
-    /*
-    @SqlQuery("SELECT fm.Id,fm.family_id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, fm.age " +
-            "FROM FamilyMember fm " +
-            "WHERE id=:id")
-            */
+
     @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles " +
             "FROM FamilyMember fm " +
             "WHERE fm.id=:id and fm.family_id = :familyId")
@@ -44,5 +40,9 @@ public interface FamilyMemberDAO {
     @Mapper(FamilyMemberResultSetMapper.class)
     List<FamilyMember> getFamilyMembers(@Bind("familyId") long familyId);
 
-    FamilyMember getFamilyMember(long familyMemberId);
+    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles " +
+            "FROM FamilyMember fm " +
+            "WHERE fm.id=:familyMemberId")
+    @Mapper(FamilyMemberResultSetMapper.class)
+    FamilyMember getFamilyMember(@Bind("familyMemberId") long familyMemberId);
 }

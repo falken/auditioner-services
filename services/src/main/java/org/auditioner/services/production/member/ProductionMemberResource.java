@@ -57,7 +57,7 @@ public class ProductionMemberResource {
 
         productionMember.setAuditionNumber(auditionNumber);
 
-        long productionMemberId = productionMemberDAO.addProductionMember(productionMember);
+        long productionMemberId = productionMemberDAO.addProductionMember(productionId,productionMember);
 
         String path = "/auditioner/productions/" + productionId + "/production-members/" + productionMemberId;
         return Response.status(Response.Status.CREATED)

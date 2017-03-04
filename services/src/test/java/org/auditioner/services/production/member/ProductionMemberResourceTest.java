@@ -110,12 +110,13 @@ public class ProductionMemberResourceTest extends TestResourceBase {
 
     @Test
     public void addProductionMemberCreatesProductionMember() {
-        when(productionMemberDAO.addProductionMember(any(ProductionMember.class))).thenReturn(14134L);
+        when(productionMemberDAO.addProductionMember(eq(PRODUCTION_ID),any(ProductionMember.class))).thenReturn(14134L);
         when(familyMemberDao.getFamilyMember(any(Long.class))).thenReturn(new FamilyMember());
 
-        Response response = simplePost("/auditioner/productions/9999/production-members/", jane);
 
-        assertEquals(hostNameRoot + "/auditioner/productions/9999/production-members/" + 14134, response.getHeaderString("Location"));
+        Response response = simplePost("/auditioner/productions/" + PRODUCTION_ID + "/production-members/", jane);
+
+        assertEquals(hostNameRoot + "/auditioner/productions/" + PRODUCTION_ID + "/production-members/" + 14134, response.getHeaderString("Location"));
         assertEquals(201, response.getStatus());
     }
 
@@ -130,6 +131,7 @@ public class ProductionMemberResourceTest extends TestResourceBase {
 
     @Test
     public void addingProductionMemberPopulatesAuditionNumberFromFamilyMemberDetails() {
+
         final long familyMemberId = 1L;
         final String janesAge = "24";
 
@@ -141,10 +143,10 @@ public class ProductionMemberResourceTest extends TestResourceBase {
         when(familyMemberDao.getFamilyMember(familyMemberId)).thenReturn(janesDetails);
         when(auditionNumberGenerator.generate(janesAge, PRODUCTION_ID)).thenReturn("2400");
 
-        simplePost("/auditioner/productions/9999/production-members/", jane);
+        simplePost("/auditioner/productions/" + PRODUCTION_ID + "/production-members/", jane);
 
         ArgumentCaptor<ProductionMember> argument = ArgumentCaptor.forClass(ProductionMember.class);
-        verify(productionMemberDAO).addProductionMember(argument.capture());
+        verify(productionMemberDAO).addProductionMember(eq(PRODUCTION_ID),argument.capture());
         assertThat(argument.getValue().getAuditionNumber(),equalTo("2400"));
     }
 
