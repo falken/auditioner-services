@@ -72,8 +72,12 @@
               {{#link-to 'families.familyMember' model.family.id familyMember.id tagName='td'}}
                   {{familyMember.firstName}}
               {{/link-to}}
-              <td>{{familyMember.lastName}}</td>
-              <td>{{familyMember.age}}</td>
+              {{#link-to 'families.familyMember' model.family.id familyMember.id tagName='td'}}
+                  {{familyMember.lastName}}
+              {{/link-to}}
+              {{#link-to 'families.familyMember' model.family.id familyMember.id tagName='td'}}
+                  {{familyMember.age}}
+              {{/link-to}}
               <td  class="text-right">
                 <a {{action 'editFamilyMember' familyMember}} ><span class="glyphicon glyphicon-pencil"></span></a>
               </td>
