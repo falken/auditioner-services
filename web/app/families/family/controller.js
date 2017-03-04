@@ -53,8 +53,20 @@ export default Ember.Controller.extend({
     },
     registerFamilyMembers: function() {
       const selectedProductionId = this.get("selectedProductionId");
-      console.log(this.model.familyMembers);
-      console.log(selectedProductionId);
+      const familyId = this.model.family.id;
+      const familyMembers = this.model.familyMembers;
+
+      var selectedIds = [];
+
+      for(var i=0; i< familyMembers.results.length; i++ ) {
+        var member = familyMembers.results[i];
+        if (member.selected) {
+          selectedIds.push(member.id);
+        }
+      }
+
+      this.transitionToRoute('families.registration',familyId,selectedProductionId,selectedIds.join("-"));
+
     },
     selectProduction: function(param) {
       this.set("selectedProductionId",param);

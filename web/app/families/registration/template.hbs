@@ -1,5 +1,7 @@
 <div class="row">
-  <a href="">Back to Family Members</a>
+    {{#link-to 'families.family' model.familyId tagName='a'}}
+        Back to Family Members
+    {{/link-to}}
 </div>
 <div class="row">
   <div class="col-md-7">
@@ -14,26 +16,25 @@
           <form class="form-horizontal">
             <div class="form-group">
               <label>Production To Register For</label>
-              <select class="form-control">
-                <option>Nutcraker</option>
-                <option>Dracula</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Tammy Smith</label>
-              {{input type="text" class="form-control" placeholder="Requeted Roles" value=""}}
-              {{input type="text" class="form-control" placeholder="Rehearsal Conflicts" value=""}}
+                {{#x-select class=form-group value=selectedProduction action="selectProduction" as |xs|}}
+                    {{#each model.productions.results as | production | }}
+                        {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
+                    {{/each}}
+                {{/x-select}}
+
             </div>
 
-            <div class="form-group">
-              <label>Lisa Smith Jr.</label>
-              {{input type="text" class="form-control" placeholder="Requeted Roles" value=""}}
-              {{input type="text" class="form-control" placeholder="Rehearsal Conflicts" value=""}}
-            </div>
+              {{#each model.members as |familyMember|}}
+                  <div class="form-group">
+                      <label>{{familyMember.firstName}} {{familyMember.lastName}}</label>
+                      {{input type="text" class="form-control" placeholder="Requeted Roles" value=familyMember.requestedRoles}}
+                      {{input type="text" class="form-control" placeholder="Rehearsal Conflicts" value=familyMember.rehearsalConflicts}}
+                  </div>
+              {{/each}}
 
             <div class="row">
               <div class="col-sm-10">
-                <button {{action 'saveEditingFamilyMember' }} class="btn btn-primary">Register</button>
+                <button {{action 'registerMembers' }} class="btn btn-primary">Register</button>
               </div>
             </div>
 
