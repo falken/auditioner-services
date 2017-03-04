@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
     saveEditingFamilyMember:function(){
       const familyService = this.get('familyService');
       const editingFamilyMember = this.get('editingFamilyMember');
-      const list = this.get('model');
+      const model = this.get('model');
       const familyId = this.get('model.family.id');
 
       const controller = this;
@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
         .then(function(){
           controller.set('isEditing',false);
           controller.set('editingFamilyMember',null);
-          list.familyMembers.reload();
+          model.familyMembers.reload();
         });
     },
     deleteFamilyMember: function(familyMember) {
