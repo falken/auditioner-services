@@ -6,5 +6,11 @@ export default Ember.Route.extend({
   model(){
     const familyService = this.get('familyService');
     return familyService.searchFamilies();
+  },
+  setupController: function (controller,model) {
+    this._super(controller,model);
+
+    controller.set('isEditing',false);
+    controller.set('editingFamily',null);
   }
 });
