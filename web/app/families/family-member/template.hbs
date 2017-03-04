@@ -1,0 +1,47 @@
+<div class="row">
+  <a href="">Back to Family Members</a>
+</div>
+<div class="row">
+  <div class="col-md-7">
+    <div class="row">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Registration</h3>
+        </div>
+        <div class="panel-body">
+
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label>Production To Register For</label>
+              <select class="form-control">
+                <option>Nutcraker</option>
+                <option>Dracula</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tammy Smith</label>
+              {{input type="text" class="form-control" placeholder="Requeted Roles" value=""}}
+              {{input type="text" class="form-control" placeholder="Rehearsal Conflicts" value=""}}
+            </div>
+
+            <div class="form-group">
+              <label>Lisa Smith Jr.</label>
+              {{input type="text" class="form-control" placeholder="Requeted Roles" value=""}}
+              {{input type="text" class="form-control" placeholder="Rehearsal Conflicts" value=""}}
+            </div>
+
+            <div class="row">
+              <div class="col-sm-10">
+                <button {{action 'saveEditingFamilyMember' }} class="btn btn-primary">Register</button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
