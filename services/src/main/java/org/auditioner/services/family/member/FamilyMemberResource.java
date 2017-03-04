@@ -20,18 +20,17 @@ public class FamilyMemberResource {
     private final ServiceContext serviceContext;
 
     FamilyMemberDAO familyMemberDAO;
-    FamilyDAO familyDAO;
 
-    public FamilyMemberResource(ServiceContext context, FamilyDAO familyDAO, FamilyMemberDAO familyMemberDAO) {
+    public FamilyMemberResource(ServiceContext context, FamilyMemberDAO familyMemberDAO) {
         this.serviceContext = context;
         this.familyMemberDAO = familyMemberDAO;
-        this.familyDAO = familyDAO;
+
     }
 
     @GET
     @Path("/{id}")
     public FamilyMember getFamilyMember(@PathParam("family_id") long familyId, @PathParam("id") long id) {
-        return familyMemberDAO.getFamilyMember(id);
+        return familyMemberDAO.getFamilyMember(familyId,id);
     }
 
     @PUT
@@ -59,7 +58,7 @@ public class FamilyMemberResource {
     }
 
     @GET
-    public List<FamilyMember> getFamilyMembers(){
-        return familyMemberDAO.getFamilyMembers();
+    public List<FamilyMember> getFamilyMembers(@PathParam("family_id") long familyId){
+        return familyMemberDAO.getFamilyMembers(familyId);
     }
 }

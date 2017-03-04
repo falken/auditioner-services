@@ -14,9 +14,9 @@ public class FamilyMemberResultSetMapper  implements ResultSetMapper<FamilyMembe
         familyMember.setFirstName(resultSet.getString("first_name"));
         familyMember.setLastName(resultSet.getString("last_name"));
         familyMember.setAge(resultSet.getString("age"));
-//        familyMember.setWeight(resultSet.getString("weight"));
-//        familyMember.setHeight(resultSet.getString("height"));
-//        familyMember.setPastRoles(resultSet.getString("past_roles"));
+        familyMember.setWeight(resultSet.getString("weight"));
+        familyMember.setHeight(resultSet.getString("height"));
+        familyMember.setPastRoles(resultSet.getString("past_roles"));
         return familyMember;
     }
 }

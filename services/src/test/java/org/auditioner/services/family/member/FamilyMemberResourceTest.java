@@ -31,7 +31,7 @@ public class FamilyMemberResourceTest extends TestResourceBase {
     private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
-    public static final ResourceTestRule resources = wrapResource(new FamilyMemberResource(serviceContext, mock(FamilyDAO.class), familyMemberDAO));
+    public static final ResourceTestRule resources = wrapResource(new FamilyMemberResource(serviceContext, familyMemberDAO));
     private String hostNameRoot;
 
     @Before
@@ -49,7 +49,7 @@ public class FamilyMemberResourceTest extends TestResourceBase {
         familyMember.setFirstName("First Name");
         familyMember.setLastName("Last Name");
         familyMember.setPastRoles("Snow Queen, Dew Drop Fairy");
-        when(familyMemberDAO.getFamilyMember(1337L)).thenReturn(familyMember);
+        //when(familyMemberDAO.getFamilyMember(1337L)).thenReturn(familyMember);
 
         Response response = simpleGet("/auditioner/families/9999/family_member/1337");
 
@@ -95,7 +95,7 @@ public class FamilyMemberResourceTest extends TestResourceBase {
         familyMember2.setFirstName("two");
         familyMember2.setLocation("/auditioner/families/9999/");
         List<FamilyMember> familyMemberList = newArrayList(familyMember1,familyMember2);
-        when(familyMemberDAO.getFamilyMembers()).thenReturn(familyMemberList);
+        //when(familyMemberDAO.getFamilyMembers()).thenReturn(familyMemberList);
 
         Response response = simpleGet("/auditioner/families/9999/family_member");
         Assert.assertEquals(asJsonString(familyMemberList),getResponseBody(response));

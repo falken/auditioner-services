@@ -8,20 +8,24 @@ import java.util.List;
 
 public interface FamilyMemberDAO {
 
-    @SqlQuery("SELECT f.id,fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.roles " +
-            "FROM FamilyMember fm join Family f on f.id = fm.family_id,fed.dance_name,fed.experience" +
-            " join FamilyExpDance fed on fed.family_member_id = fm.id " +
+    /*
+    @SqlQuery("SELECT fm.Id,fm.family_id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, fm.age " +
+            "FROM FamilyMember fm " +
             "WHERE id=:id")
-    @Mapper(FamilyResultSetMapper.class)
-    FamilyMember getFamilyMember(@Bind("id") long familyMemberId);
+            */
+    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles " +
+            "FROM FamilyMember fm " +
+            "WHERE fm.id=:id and fm.family_id = :familyId")
+    @Mapper(FamilyMemberResultSetMapper.class)
+    FamilyMember getFamilyMember(@Bind("familyId") long familyId, @Bind("id") long id);
 
     @SqlUpdate("UPDATE FamilyMember " +
-            "  SET Name=:family.name " +
+            "  SET first_name=:familyMember.first_name " +
             "WHERE id=:id")
     void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
-    @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,roles) "
-            + " VALUES (:familyId, :first_name,last_name,weight,height,roles)")
+    @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,roles,age) "
+            + " VALUES (:familyId, :first_name,:last_name,weight,height,roles)")
     @GetGeneratedKeys
     long addFamilyMember(@Bind("familyId") long familyId, @BindBean("familyMember") FamilyMember familyMember);
 
@@ -29,8 +33,9 @@ public interface FamilyMemberDAO {
             + "WHERE id=:id")
     void deleteFamilyMember(@Bind("id") long familyMemberId);
 
-    @SqlQuery("SELECT  f.id,fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.roles " +
-            "FROM FamilyMember")
+    @SqlQuery("SELECT  fm.family_id, fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, fm.age " +
+            "FROM FamilyMember fm " +
+            "WHERE fm.family_id = :familyId")
     @Mapper(FamilyMemberResultSetMapper.class)
-    List<FamilyMember> getFamilyMembers();
+    List<FamilyMember> getFamilyMembers(@Bind("familyId") long familyId);
 }
