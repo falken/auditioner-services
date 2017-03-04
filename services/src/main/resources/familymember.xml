@@ -44,4 +44,26 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="familymember-add-exp-1" author="phanson">
+        <addColumn tableName="FamilyMember">
+            <column name="acro_exp" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="FamilyMember">
+            <column name="ballet_exp" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="FamilyMember">
+            <column name="jazz_exp" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="FamilyMember">
+            <column name="tap_exp" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
