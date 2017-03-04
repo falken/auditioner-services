@@ -16,5 +16,11 @@ export default Ember.Route.extend({
       productions: productionService.searchProductions(),
       familyMembers: familyService.loadFamilyMembersByFamilyId(param.family_id)
     };
+  },
+  setupController: function (controller,model) {
+    this._super(controller,model);
+
+    controller.set('isEditing',false);
+    controller.set('editingFamilyMember',null);
   }
 });
