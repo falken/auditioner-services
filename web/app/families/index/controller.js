@@ -25,6 +25,13 @@ export default Ember.Controller.extend({
           list.reload();
         });
     },
+
+    editFamily: function(family) {
+      this.set('isEditing',true);
+      this.set('isAdd',false);
+      this.set('editingFamily',family);
+    },
+
     cancelEditingFamily:function(){
 
       this.set('isEditing',false);
