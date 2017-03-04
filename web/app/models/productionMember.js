@@ -6,7 +6,7 @@ export default Ember.Object.extend({
 	loadFromData: function (client, data) {
 		this.set('client', client);
 
-		this.set('id', data.location.substring(data.location.lastIndexOf("/") + 1));
+		//this.set('id', data.location.substring(data.location.lastIndexOf("/") + 1));
 		this.set('location', data.location);
 
 		this.set('requestedRoles', data.requestedRoles);
