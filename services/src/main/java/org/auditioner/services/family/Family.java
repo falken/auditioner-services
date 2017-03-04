@@ -1,5 +1,7 @@
 package org.auditioner.services.family;
 
+import org.auditioner.services.family.member.FamilyMember;
+
 public class Family {
     private String location;
     private String name;

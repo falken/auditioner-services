@@ -8,7 +8,6 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class ProductionMemberResultSetMapper implements ResultSetMapper<ProductionMember> {
 
@@ -16,6 +15,13 @@ public class ProductionMemberResultSetMapper implements ResultSetMapper<Producti
     @Override
     public ProductionMember map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         ProductionMember productionMember = new ProductionMember();
+        productionMember.setLocation("");
+        productionMember.setAuditionNumber(resultSet.getString("audition_number"));
+        productionMember.setFamilyMemberFirstName(resultSet.getString(""));
+        productionMember.setFamilyMemberLastName(resultSet.getString(""));
+        productionMember.setRehearsalConflicts(resultSet.getString("rehearsal_conflicts"));
+        productionMember.setRequestedRoles(resultSet.getString("requested_roles"));
+
         return productionMember;
     }
 }

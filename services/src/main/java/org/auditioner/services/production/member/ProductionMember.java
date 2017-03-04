@@ -1,32 +1,28 @@
 package org.auditioner.services.production.member;
 
 
-import org.auditioner.services.family.member.FamilyMember;
-import org.auditioner.services.production.Production;
-
 public class ProductionMember {
-    private Production production;
-    private FamilyMember familyMember;
+    private String familyMemberFirstName;
+    private String familyMemberLastName;
     private String requestedRoles;
     private String auditionNumber;
     private String location;
 
     private String rehearsalConflicts;
-
-    public Production getProduction() {
-        return production;
+    public String getFamilyMemberFirstName() {
+        return familyMemberFirstName;
     }
 
-    public void setProduction(Production production) {
-        this.production = production;
+    public void setFamilyMemberFirstName(String familyMemberFirstName) {
+        this.familyMemberFirstName = familyMemberFirstName;
     }
 
-    public FamilyMember getFamilyMember() {
-        return familyMember;
+    public String getFamilyMemberLastName() {
+        return familyMemberLastName;
     }
 
-    public void setFamilyMember(FamilyMember familyMember) {
-        this.familyMember = familyMember;
+    public void setFamilyMemberLastName(String familyMemberLastName) {
+        this.familyMemberLastName = familyMemberLastName;
     }
 
     public String getRequestedRoles() {

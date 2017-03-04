@@ -5,4 +5,5 @@
     <include file="family.xml"/>
     <include file="production.xml"/>
     <include file="familymember.xml"/>
+    <include file="productionmember.xml"/>
 </databaseChangeLog>
