@@ -155,6 +155,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-cognitoidp</artifactId>
+            <version>1.11.98</version>
+        </dependency>
+
 
     </dependencies>
 </project>
