@@ -57,7 +57,7 @@
             <tbody>
             {{#each model.familyMembers as | familyMember | }}
             <tr>
-              {{input type="checkbox" name="family_member_id"}}
+              {{input type="checkbox" name="family_member_id" checked=familyMember.selected}}
               {{#link-to 'families.familyMember' model.family.id familyMember.id tagName='td'}}
                   {{familyMember.firstName}}
                   {{familyMember.id}}-{{model.family.id}}
@@ -74,6 +74,14 @@
             {{/each}}
             </tbody>
           </table>
+
+          <div class="row">
+              {{#x-select value=selected_production as |xs|}}
+                {{#each model.productions.results as | production | }}
+                {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
+                {{/each}}
+              {{/x-select}}
+          </div>
 
           <div class="row">
             <button {{action 'registerFamilyMembers' }} class="btn btn-primary">Register</button>
