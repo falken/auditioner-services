@@ -38,9 +38,12 @@ export default Ember.Controller.extend({
         });
     },
     registerFamilyMembers: function() {
-      const selectedProductionId = this.get("selected_production");
-
+      const selectedProductionId = this.get("selectedProductionId");
+      console.log(this.model.familyMembers);
       console.log(selectedProductionId);
+    },
+    selectProduction: function(param) {
+      this.set("selectedProductionId",param);
     }
 
   }

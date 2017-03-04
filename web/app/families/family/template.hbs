@@ -76,9 +76,9 @@
           </table>
 
           <div class="row">
-              {{#x-select value=selected_production as |xs|}}
+              {{#x-select value=selectedProduction action="selectProduction" as |xs|}}
                 {{#each model.productions.results as | production | }}
-                {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
+                    {{#xs.option value=production.id}}{{production.name}}{{/xs.option}}
                 {{/each}}
               {{/x-select}}
           </div>
