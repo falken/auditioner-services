@@ -13,17 +13,23 @@ import java.util.Map;
 
 public class CognitoAuthenticationService implements AuthenticationService {
 
-    @Override
-    public AdminInitiateAuthResult adminInitiateAuth(String userName, String password) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
+    static final String CLIENT_ID = "5arcj0lrinm657auifjd0r94og";
+    static final String USER_POOL_ID = "us-east-1_vmUUwBDEg";
+    AWSCognitoIdentityProvider awsCognitoIdentityProvider;
+
+    public CognitoAuthenticationService() {
+        this.awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
                 .standard()
-                .withCredentials(awsCredentialsProvider)
+                .withCredentials(new ProfileCredentialsProvider("auditioner-services"))
                 .withRegion("us-east-1")
                 .build();
+    }
+
+    @Override
+    public AdminInitiateAuthResult adminInitiateAuth(String userName, String password) {
         AdminInitiateAuthRequest adminInitiateAuthRequest = new AdminInitiateAuthRequest();
-        adminInitiateAuthRequest.setClientId("5arcj0lrinm657auifjd0r94og");
-        adminInitiateAuthRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        adminInitiateAuthRequest.setClientId(CLIENT_ID);
+        adminInitiateAuthRequest.setUserPoolId(USER_POOL_ID);
         Map<String, String> authParameters = new HashMap<String, String>();
         authParameters.put("USERNAME", userName);
         authParameters.put("PASSWORD", password);
@@ -34,12 +40,6 @@ public class CognitoAuthenticationService implements AuthenticationService {
 
     @Override
     public AdminCreateUserResult adminCreateUser(String userName, String email) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
-                .standard()
-                .withCredentials(awsCredentialsProvider)
-                .withRegion("us-east-1")
-                .build();
         AdminCreateUserRequest adminCreateUserRequest = new AdminCreateUserRequest();
         adminCreateUserRequest.setUsername(userName);
         Collection<AttributeType> userAttributes = new ArrayList<AttributeType>();
@@ -53,68 +53,44 @@ public class CognitoAuthenticationService implements AuthenticationService {
         userAttributes.add(emailVerifiedAttribute);
         System.out.println(userAttributes);
         adminCreateUserRequest.setUserAttributes(userAttributes);
-        adminCreateUserRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        adminCreateUserRequest.setUserPoolId(USER_POOL_ID);
         return awsCognitoIdentityProvider.adminCreateUser(adminCreateUserRequest);
     }
 
     @Override
     public AdminRespondToAuthChallengeResult adminRespondToAuthChallenge(String challengeName, Map<String, String> challengeResponses, String session) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
-                .standard()
-                .withCredentials(awsCredentialsProvider)
-                .withRegion("us-east-1")
-                .build();
         AdminRespondToAuthChallengeRequest adminRespondToAuthChallengeRequest = new AdminRespondToAuthChallengeRequest();
         adminRespondToAuthChallengeRequest.setChallengeName(challengeName);
         adminRespondToAuthChallengeRequest.setChallengeResponses(challengeResponses);
-        adminRespondToAuthChallengeRequest.setClientId("5arcj0lrinm657auifjd0r94og");
         adminRespondToAuthChallengeRequest.setSession(session);
-        adminRespondToAuthChallengeRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        adminRespondToAuthChallengeRequest.setUserPoolId(USER_POOL_ID);
+        adminRespondToAuthChallengeRequest.setClientId(CLIENT_ID);
         return awsCognitoIdentityProvider.adminRespondToAuthChallenge(adminRespondToAuthChallengeRequest);
     }
 
     @Override
     public ForgotPasswordResult forgotPassword(String userName) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
-                .standard()
-                .withCredentials(awsCredentialsProvider)
-                .withRegion("us-east-1")
-                .build();
         ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest();
         forgotPasswordRequest.setUsername(userName);
-        forgotPasswordRequest.setClientId("5arcj0lrinm657auifjd0r94og");
+        forgotPasswordRequest.setClientId(CLIENT_ID);
         return awsCognitoIdentityProvider.forgotPassword(forgotPasswordRequest);
     }
 
     @Override
     public AdminDeleteUserResult adminDeleteUser(String userName) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
-                .standard()
-                .withCredentials(awsCredentialsProvider)
-                .withRegion("us-east-1")
-                .build();
         AdminDeleteUserRequest adminDeleteUserRequest = new AdminDeleteUserRequest();
         adminDeleteUserRequest.setUsername(userName);
-        adminDeleteUserRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        adminDeleteUserRequest.setUserPoolId(USER_POOL_ID);
         return awsCognitoIdentityProvider.adminDeleteUser(adminDeleteUserRequest);
     }
 
     @Override
     public ConfirmForgotPasswordResult confirmForgotPassword(String userName, String password, String confirmationCode) {
-        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
-        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
-                .standard()
-                .withCredentials(awsCredentialsProvider)
-                .withRegion("us-east-1")
-                .build();
         ConfirmForgotPasswordRequest confirmForgotPasswordRequest = new ConfirmForgotPasswordRequest();
         confirmForgotPasswordRequest.setUsername(userName);
         confirmForgotPasswordRequest.setPassword(password);
         confirmForgotPasswordRequest.setConfirmationCode(confirmationCode);
-        confirmForgotPasswordRequest.setClientId("5arcj0lrinm657auifjd0r94og");
+        confirmForgotPasswordRequest.setClientId(CLIENT_ID);
         return awsCognitoIdentityProvider.confirmForgotPassword(confirmForgotPasswordRequest);
     }
 }

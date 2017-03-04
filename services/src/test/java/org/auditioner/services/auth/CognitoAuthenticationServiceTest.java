@@ -2,6 +2,7 @@ package org.auditioner.services.auth;
 
 import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthResult;
 import org.auditioner.services.TestResourceBase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class CognitoAuthenticationServiceTest extends TestResourceBase {
     @Test
     public void testAdminInitiateAuth() {
@@ -26,7 +28,7 @@ public class CognitoAuthenticationServiceTest extends TestResourceBase {
         Map<String, String> challengeResponses = new HashMap<>();
         challengeResponses.put("USERNAME", "tbrobston");
         challengeResponses.put("NEW_PASSWORD", "Blipblip123!");
-        String session = "lPAtuLrvyJ0jaoc2AiC-z_JMwHOA0xfYXvM4QcCU6b2FCbQaajkJPbpKqHdnabqkvPZfpGeFcEGod0-u_VI896hXzpg46zmEF1Qu9DCuwX6Pwc-VePUgzFBbwJn0x-5mHRK38ICPgMqimeww0voMS-E4oa8_OZbwXE3PJ7sH5s8imcEBITQAcatmBE0epvtxXV0alinWBT6lMobXi8mtJKk6ZK5X8BL415Pg-ycWNxRmLwB3z8UiWIy2-OMIbjq5ROWFFJT7rKF-ZL0gsSxJmVPbVNqXtpjwW8fCrzIPfkAH-SiGBBBy3coHBJ8flx6OspAg4yszlWgUzlbNWGAP6jML4bivIC8pQwInAX0ZsH2VzwxQ1RXjiqpXcmeeV_ZYoO4kFuh-xhgti2TcWiGwRpvNfgPM27vpyCuwXRs7J2qwr8orn_9lJ82J_KvzLPA32djZ_Xts14m_BkvpQaSW2AnFPT7DtJ2CELpN8TYzPADgxVS-A7thQyVN3TJPrmvDjFpO7RB8nQUu6qci5-MieFpzizKaVjHqUG283Jkp_oXXfAZU41OFqNdb0ddg3ZvqFz0EEXQ8uCKa-ahArRwQ9Lqr2MEEzwaVwh4x7BmnHf83ox3m-Juj_xhrLygEeIKuM-PEuOulYJrg3FMWgTnUuys29AF3tEnwaIFSf5Ff5hzKTK2E34zMdvtVs9lTjEPSt4ttMSGjBONh0XML";
+        String session = "Jos3U1I3kaQOwkA8PtsHYUm_TL1pLCAMV9NqZCsvmiKluRtu6j4kbfbt4gGHiLjWkwnfURqRpfIOdgzMkuFTk6Y-reKcp-5jMewCLFU8_zENZxZInZdCFmbb8jKwA8-hgqVbczZn_-hpKc8q_UIjrYjQpjk9deVBcBYgUwXSBbLOJSDhnz6dcQYPbpY60vJLrbbD-f8qdc0Ui46RhQ0fuLtf968SQGwTxYbuV47HPA_RCGjjcj7iM0lyntdys5OlTNNaaPguohyoQvhhgztuoyCvnNz4Ark0O0iJ92xy_hz6ZTqo2Za9bHIgyk2phgFRjeG3ol2EB0gaeWnk1ftlvsid96RmLJJBfQn0oYpisU7DV3EKeOAnzSM10N_kDixPAT8l1h1_6CZn4T3LqDIgaBt8Jtda9JS6rhhRnNB0k7SHumBDr2PVLCzsPD1jawDPHJEmFXsUG-oXp3VzAO-4jcpN5_y1-zUyH_Zt8uUx0HDh3zkxcUYNzqLYmt5173-kdPziujwpEvGH95qN-65KY3bE5tq1Wbtuxm7O50B1AtaB4aOG7hBpa5BcW6tWBQHRWjjL-se0ON3ohMZH5QhCrZk6OaRToIyfIcyChkiw6-aOhUHix4l1G3YOOWajFSkanzDoz50rO7jD_WUw9i_gIykOHhBUyFNmsUAG1qnkkJ3XaXyXh-Ix3wr4YvxFGhACDgYgUegj0Zg";
         new CognitoAuthenticationService().adminRespondToAuthChallenge(challengeName, challengeResponses, session);
     }
 
@@ -42,6 +44,6 @@ public class CognitoAuthenticationServiceTest extends TestResourceBase {
 
     @Test
     public void testConfirmForgotPassword() {
-        new CognitoAuthenticationService().confirmForgotPassword("tbrobston", "Superawesomepassword123!", "838536");
+        new CognitoAuthenticationService().confirmForgotPassword("tbrobston", "Superawesomepassword123!", "996105");
     }
 }
