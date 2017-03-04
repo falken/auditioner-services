@@ -101,4 +101,20 @@ public class CognitoAuthenticationService implements AuthenticationService {
         adminDeleteUserRequest.setUserPoolId("us-east-1_vmUUwBDEg");
         return awsCognitoIdentityProvider.adminDeleteUser(adminDeleteUserRequest);
     }
+
+    @Override
+    public ConfirmForgotPasswordResult confirmForgotPassword(String userName, String password, String confirmationCode) {
+        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
+        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
+                .standard()
+                .withCredentials(awsCredentialsProvider)
+                .withRegion("us-east-1")
+                .build();
+        ConfirmForgotPasswordRequest confirmForgotPasswordRequest = new ConfirmForgotPasswordRequest();
+        confirmForgotPasswordRequest.setUsername(userName);
+        confirmForgotPasswordRequest.setPassword(password);
+        confirmForgotPasswordRequest.setConfirmationCode(confirmationCode);
+        confirmForgotPasswordRequest.setClientId("5arcj0lrinm657auifjd0r94og");
+        return awsCognitoIdentityProvider.confirmForgotPassword(confirmForgotPasswordRequest);
+    }
 }

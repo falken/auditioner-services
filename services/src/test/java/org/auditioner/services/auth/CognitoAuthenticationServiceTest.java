@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class CognitoAuthenticationServiceTest extends TestResourceBase {
     @Test
     public void testAdminInitiateAuth() {
-        new CognitoAuthenticationService().adminInitiateAuth("tbrobston", "Blipblip123!");
+        new CognitoAuthenticationService().adminInitiateAuth("tbrobston", "Superawesomepassword123!");
     }
 
     @Test
@@ -38,5 +38,10 @@ public class CognitoAuthenticationServiceTest extends TestResourceBase {
     @Test
     public void testAdminDeleteUser() {
         new CognitoAuthenticationService().adminDeleteUser("tbrobston");
+    }
+
+    @Test
+    public void testConfirmForgotPassword() {
+        new CognitoAuthenticationService().confirmForgotPassword("tbrobston", "Superawesomepassword123!", "838536");
     }
 }
