@@ -12,9 +12,13 @@ public class FamilyResultSetMapper implements ResultSetMapper<Family> {
         Family family = new Family();
         family.setLocation("/auditioner/families/" + resultSet.getLong("id"));
         family.setName(resultSet.getString("Name"));
-//        family.setEmail(resultSet.getString("Email"));
-//        family.setAddress(resultSet.getString("Address"));
-//        family.setPreferredContactMethod(resultSet.getString("PreferredContactMethod"));
+        family.setEmail(resultSet.getString("Email"));
+        family.setPreferredContactMethod(resultSet.getString("PreferredContactMethod"));
+        family.setAddress01(resultSet.getString("address01"));
+        family.setAddress02(resultSet.getString("address02"));
+        family.setCity(resultSet.getString("city"));
+        family.setState(resultSet.getString("state"));
+        family.setZipCode(resultSet.getString("zip_code"));
         return family;
     }
 }

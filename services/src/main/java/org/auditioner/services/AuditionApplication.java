@@ -60,7 +60,7 @@ public class AuditionApplication extends Application<AuditionConfiguration>
         environment.jersey().register(new FamilyResource(context,familyDAO));
 
         final FamilyMemberDAO familyMemberDAO = jdbi.onDemand(FamilyMemberDAO.class);
-        environment.jersey().register(new FamilyMemberResource(familyDAO,familyMemberDAO));
+        environment.jersey().register(new FamilyMemberResource(context, familyDAO,familyMemberDAO));
 
         final ProductionDAO productionDAO = jdbi.onDemand(ProductionDAO.class);
         environment.jersey().register(new ProductionResource(context,productionDAO));

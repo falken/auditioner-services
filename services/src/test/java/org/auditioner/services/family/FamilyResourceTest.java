@@ -108,11 +108,8 @@ public class FamilyResourceTest extends TestResourceBase {
         Response response = simplePut("/auditioner/families/12",family);
 
         assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
-
         ArgumentCaptor<Family> argument = ArgumentCaptor.forClass(Family.class);
-
         verify(familyDAO).updateFamily(eq(12L), argument.capture());
-
         assertThat("theName",equalTo(argument.getValue().getName()));
     }
 }
