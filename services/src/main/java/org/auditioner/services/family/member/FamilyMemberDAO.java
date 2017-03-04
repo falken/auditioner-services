@@ -27,7 +27,7 @@ public interface FamilyMemberDAO {
             "  height=:familyMember.height, " +
             "  past_roles=:familyMember.pastRoles " +
             "WHERE id=:id")
-    void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
+    void updateFamilyMember(@Bind("familyId") long familyId, @Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
     @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,past_roles,age) "
             + " VALUES (:familyId, :familyMember.firstName,:familyMember.lastName,:familyMember.weight,:familyMember.height,:familyMember.pastRoles,:familyMember.age)")

@@ -62,7 +62,7 @@ public class FamilyMemberResourceTest extends TestResourceBase {
 
         Response response = simplePut("/auditioner/families/9999/family_member/1337", familyMember);
 
-        verify(familyMemberDAO).updateFamilyMember(eq(1337L), any(FamilyMember.class));
+        verify(familyMemberDAO).updateFamilyMember(eq(1L),eq(1337L), any(FamilyMember.class));
         assertEquals(HttpStatus.NO_CONTENT_204,response.getStatus());
     }
 

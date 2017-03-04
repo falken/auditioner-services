@@ -35,9 +35,9 @@ public class FamilyMemberResource {
 
     @PUT
     @Path("/{id}")
-    public void updateFamilyMember(@PathParam("id") long id, FamilyMember familyMember) {
+    public void updateFamilyMember(@PathParam("family_id") long familyId,@PathParam("id") long id, FamilyMember familyMember) {
 
-        familyMemberDAO.updateFamilyMember(id, familyMember);
+        familyMemberDAO.updateFamilyMember(familyId, id, familyMember);
     }
 
     @DELETE
