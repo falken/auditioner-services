@@ -4,9 +4,11 @@ import org.auditioner.services.family.FamilyResultSetMapper;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
+import java.util.List;
+
 public interface FamilyMemberDAO {
 
-    @SqlQuery("SELECT f.id,fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.roles" +
+    @SqlQuery("SELECT f.id,fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.roles " +
             "FROM FamilyMember fm join Family f on f.id = fm.family_id,fed.dance_name,fed.experience" +
             " join FamilyExpDance fed on fed.family_member_id = fm.id " +
             "WHERE id=:id")
@@ -27,5 +29,8 @@ public interface FamilyMemberDAO {
             + "WHERE id=:id")
     void deleteFamilyMember(@Bind("id") long familyMemberId);
 
-
+    @SqlQuery("SELECT  f.id,fm.Id,fm.first_name,fm.last_name, fm.weight, fm.height, fm.roles " +
+            "FROM FamilyMember")
+    @Mapper(FamilyMemberResultSetMapper.class)
+    List<FamilyMember> getFamilyMembers();
 }

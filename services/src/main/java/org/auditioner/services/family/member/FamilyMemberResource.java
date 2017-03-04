@@ -8,6 +8,8 @@ import org.eclipse.jetty.server.Response;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import java.util.List;
+
 import static org.auditioner.services.util.CreatedResponse.pathFromString;
 
 @Path("/auditioner/families/{family_id}/family_member")
@@ -54,5 +56,10 @@ public class FamilyMemberResource {
                 .entity(pathFromString(path))
                 .header("Location", serviceContext.createUriFromPath(path))
                 .build();
+    }
+
+    @GET
+    public List<FamilyMember> getFamilyMembers(){
+        return familyMemberDAO.getFamilyMembers();
     }
 }

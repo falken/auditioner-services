@@ -15,6 +15,9 @@ import org.mockito.ArgumentCaptor;
 
 import javax.ws.rs.core.Response;
 
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static junit.framework.TestCase.assertEquals;
@@ -81,5 +84,20 @@ public class FamilyMemberResourceTest extends TestResourceBase {
 
         Assert.assertEquals(hostNameRoot + "/auditioner/families/9999/family_member/" + 14134, response.getHeaderString("Location"));
         Assert.assertEquals(201,response.getStatus());
+    }
+
+    @Test
+    public void getFamiliesWillReturnFamilyList(){
+        FamilyMember familyMember1 = new FamilyMember();
+        familyMember1.setFirstName("one");
+        familyMember1.setLocation("/auditioner/families/9999/");
+        FamilyMember familyMember2 = new FamilyMember();
+        familyMember2.setFirstName("two");
+        familyMember2.setLocation("/auditioner/families/9999/");
+        List<FamilyMember> familyMemberList = newArrayList(familyMember1,familyMember2);
+        when(familyMemberDAO.getFamilyMembers()).thenReturn(familyMemberList);
+
+        Response response = simpleGet("/auditioner/families/9999/family_member");
+        Assert.assertEquals(asJsonString(familyMemberList),getResponseBody(response));
     }
 }
