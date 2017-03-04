@@ -21,6 +21,7 @@ public class ProductionMemberResultSetMapper implements ResultSetMapper<Producti
         productionMember.setFamilyMemberLastName(resultSet.getString(""));
         productionMember.setRehearsalConflicts(resultSet.getString("rehearsal_conflicts"));
         productionMember.setRequestedRoles(resultSet.getString("requested_roles"));
+        productionMember.setFamilyMemberId(resultSet.getLong("family_member_id"));
 
         return productionMember;
     }

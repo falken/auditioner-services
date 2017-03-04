@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ProductionMemberDAO {
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number" +
+    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number, pm.family_member_id" +
             "FROM ProductionMember pm join FamilyMember fm on pm.family_member_id=fm.id "+
             "WHERE id=:id and production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
     ProductionMember getProductionMember(@Bind("productionId") long productionId, @Bind("id") long productionMemberId);
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id" +
+    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id, pm.family_member_id" +
             "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id)" +
             "WHERE pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)

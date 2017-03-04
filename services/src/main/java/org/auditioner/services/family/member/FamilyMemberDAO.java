@@ -43,4 +43,6 @@ public interface FamilyMemberDAO {
             "WHERE fm.family_id = :familyId")
     @Mapper(FamilyMemberResultSetMapper.class)
     List<FamilyMember> getFamilyMembers(@Bind("familyId") long familyId);
+
+    FamilyMember getFamilyMember(long familyMemberId);
 }
