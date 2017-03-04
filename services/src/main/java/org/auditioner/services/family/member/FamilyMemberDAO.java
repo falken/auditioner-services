@@ -9,8 +9,8 @@ import java.util.List;
 public interface FamilyMemberDAO {
 
 
-    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles " +
-            " fm.acro_exp, fm.ballet_exp, fm.jazz_exp, fm.tap.exp "+
+    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, " +
+            " fm.acro_exp, fm.ballet_exp, fm.jazz_exp, fm.tap_exp " +
             "FROM FamilyMember fm " +
             "WHERE fm.id=:id and fm.family_id = :familyId")
     @Mapper(FamilyMemberResultSetMapper.class)
@@ -46,7 +46,8 @@ public interface FamilyMemberDAO {
     @Mapper(FamilyMemberResultSetMapper.class)
     List<FamilyMember> getFamilyMembers(@Bind("familyId") long familyId);
 
-    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles " +
+    @SqlQuery("SELECT fm.Id,fm.family_id,fm.age,fm.first_name,fm.last_name, fm.weight, fm.height, fm.past_roles, " +
+            "fm.acro_exp, fm.ballet_exp, fm.jazz_exp, fm.tap_exp " +
             "FROM FamilyMember fm " +
             "WHERE fm.id=:familyMemberId")
     @Mapper(FamilyMemberResultSetMapper.class)
