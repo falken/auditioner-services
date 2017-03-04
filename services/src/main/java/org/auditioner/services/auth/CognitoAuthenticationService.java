@@ -47,10 +47,11 @@ public class CognitoAuthenticationService implements AuthenticationService {
         emailAttribute.setName("email");
         emailAttribute.setValue(email);
         userAttributes.add(emailAttribute);
-//        AttributeType emailVerifiedAttribute = new AttributeType();
-//        emailAttribute.setName("email_verified");
-//        emailAttribute.setValue("true");
-//        userAttributes.add(emailVerifiedAttribute);
+        AttributeType emailVerifiedAttribute = new AttributeType();
+        emailVerifiedAttribute.setName("email_verified");
+        emailVerifiedAttribute.setValue("true");
+        userAttributes.add(emailVerifiedAttribute);
+        System.out.println(userAttributes);
         adminCreateUserRequest.setUserAttributes(userAttributes);
         adminCreateUserRequest.setUserPoolId("us-east-1_vmUUwBDEg");
         return awsCognitoIdentityProvider.adminCreateUser(adminCreateUserRequest);
@@ -73,4 +74,31 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.adminRespondToAuthChallenge(adminRespondToAuthChallengeRequest);
     }
 
+    @Override
+    public ForgotPasswordResult forgotPassword(String userName) {
+        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
+        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
+                .standard()
+                .withCredentials(awsCredentialsProvider)
+                .withRegion("us-east-1")
+                .build();
+        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest();
+        forgotPasswordRequest.setUsername(userName);
+        forgotPasswordRequest.setClientId("5arcj0lrinm657auifjd0r94og");
+        return awsCognitoIdentityProvider.forgotPassword(forgotPasswordRequest);
+    }
+
+    @Override
+    public AdminDeleteUserResult adminDeleteUser(String userName) {
+        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
+        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
+                .standard()
+                .withCredentials(awsCredentialsProvider)
+                .withRegion("us-east-1")
+                .build();
+        AdminDeleteUserRequest adminDeleteUserRequest = new AdminDeleteUserRequest();
+        adminDeleteUserRequest.setUsername(userName);
+        adminDeleteUserRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        return awsCognitoIdentityProvider.adminDeleteUser(adminDeleteUserRequest);
+    }
 }

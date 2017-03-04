@@ -1,5 +1,6 @@
 package org.auditioner.services.auth;
 
+import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthResult;
 import org.auditioner.services.TestResourceBase;
 import org.junit.Test;
 
@@ -25,7 +26,17 @@ public class CognitoAuthenticationServiceTest extends TestResourceBase {
         Map<String, String> challengeResponses = new HashMap<>();
         challengeResponses.put("USERNAME", "tbrobston");
         challengeResponses.put("NEW_PASSWORD", "Blipblip123!");
-        String session = "k0oUA0MXRSKnQi--YbiqsBA6kQjhSsTvQcBpq2JZCdU0-V7JyJ1UkyDeEtD0PtQCaFXzeFcLMzri1vYTLoIozfqE-njBDqE3StnLBnL5jO2n11QdYajPxLr26AatWHxmlR_uIq4RBIp9sWWaVF8GWUsHDCt4IEea-a8Im2JgmFzWQ-aGCa7cLgc2rn0Tw6srUc5yst4kcmT8XBcWlyxoaCLjxnWdAEHGp0erX787SSncsOR95EEnLZ_W-AI0MWzUqrFR38BtY431IG0PP6QRV7-eTK0BN0SQcLMbp011V4Rb2DSCEPYUCTpxz-SqDjd3QjmPnt2xKC6l5mjherY8iFUt0jeo3WiFMjWHtpDHdsGmD_upc3p1j32lRT7qgWSMnXliMhw_rbR_cCG-Q3yZUs674VRhBH7tFJRD_qNXUziy32puYFv4RtwgVQ2ouBGzUaVq0E37TorWP8PDBkaAwJtjX-KDC-I_Q-dUmlTSP5QnpIdgn59f1XKguAEqjK-pX6hj0PAWAbQNQg_YfXqhSEtZxIqe7GGkvRt9VgRtiqVbwp--MjUuzZTT4Ulkxy0Pjn0wfyIUVduYdhCbOCKZ1IDwXguvkoMM7IMb3RA16aCUYQC9vLeeWYBQviwBwf068r_L6_ULZZQoQFklG7-eZcgSuxTLRwPfNCNQUXraL9POhzofrGWjVvLESZiBN60OUQzylA";
+        String session = "lPAtuLrvyJ0jaoc2AiC-z_JMwHOA0xfYXvM4QcCU6b2FCbQaajkJPbpKqHdnabqkvPZfpGeFcEGod0-u_VI896hXzpg46zmEF1Qu9DCuwX6Pwc-VePUgzFBbwJn0x-5mHRK38ICPgMqimeww0voMS-E4oa8_OZbwXE3PJ7sH5s8imcEBITQAcatmBE0epvtxXV0alinWBT6lMobXi8mtJKk6ZK5X8BL415Pg-ycWNxRmLwB3z8UiWIy2-OMIbjq5ROWFFJT7rKF-ZL0gsSxJmVPbVNqXtpjwW8fCrzIPfkAH-SiGBBBy3coHBJ8flx6OspAg4yszlWgUzlbNWGAP6jML4bivIC8pQwInAX0ZsH2VzwxQ1RXjiqpXcmeeV_ZYoO4kFuh-xhgti2TcWiGwRpvNfgPM27vpyCuwXRs7J2qwr8orn_9lJ82J_KvzLPA32djZ_Xts14m_BkvpQaSW2AnFPT7DtJ2CELpN8TYzPADgxVS-A7thQyVN3TJPrmvDjFpO7RB8nQUu6qci5-MieFpzizKaVjHqUG283Jkp_oXXfAZU41OFqNdb0ddg3ZvqFz0EEXQ8uCKa-ahArRwQ9Lqr2MEEzwaVwh4x7BmnHf83ox3m-Juj_xhrLygEeIKuM-PEuOulYJrg3FMWgTnUuys29AF3tEnwaIFSf5Ff5hzKTK2E34zMdvtVs9lTjEPSt4ttMSGjBONh0XML";
         new CognitoAuthenticationService().adminRespondToAuthChallenge(challengeName, challengeResponses, session);
+    }
+
+    @Test
+    public void testForgotPassword() {
+        new CognitoAuthenticationService().forgotPassword("tbrobston");
+    }
+
+    @Test
+    public void testAdminDeleteUser() {
+        new CognitoAuthenticationService().adminDeleteUser("tbrobston");
     }
 }
