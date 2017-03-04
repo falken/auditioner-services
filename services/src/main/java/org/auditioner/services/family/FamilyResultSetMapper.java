@@ -16,9 +16,9 @@ public class FamilyResultSetMapper implements ResultSetMapper<Family> {
         family.setPreferredContactMethod(resultSet.getString("PreferredContactMethod"));
         family.setAddress01(resultSet.getString("address01"));
         family.setAddress02(resultSet.getString("address02"));
-        family.setCity(resultSet.getString("city"));
-        family.setState(resultSet.getString("state"));
-        family.setZipCode(resultSet.getString("zip_code"));
+        family.setCity(resultSet.getString("City"));
+        family.setState(resultSet.getString("State"));
+        family.setZipCode(resultSet.getString("ZipCode"));
         return family;
     }
 }
