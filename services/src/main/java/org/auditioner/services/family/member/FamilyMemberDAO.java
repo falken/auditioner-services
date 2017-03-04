@@ -29,8 +29,8 @@ public interface FamilyMemberDAO {
             "WHERE id=:id")
     void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
-    @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,roles,age) "
-            + " VALUES (:familyId, :first_name,:last_name,weight,height,roles)")
+    @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,past_roles,age) "
+            + " VALUES (:familyId, :familyMember.firstName,:familyMember.lastName,:familyMember.weight,:familyMember.height,:familyMember.pastRoles,:familyMember.age)")
     @GetGeneratedKeys
     long addFamilyMember(@Bind("familyId") long familyId, @BindBean("familyMember") FamilyMember familyMember);
 
