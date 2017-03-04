@@ -9,11 +9,13 @@ export default Ember.Route.extend({
       family: familyService.loadFamilyById(param.family_id),
       familyMembers:Ember.A([
         Ember.Object.create({
+          "id": 1,
           "firstName":"Tammy",
           "lastName":"Smith Jr",
           "age":14
         }),
         Ember.Object.create({
+          "id": 2,
           "firstName":"Lisa",
           "lastName":"Smith",
           "age":12
