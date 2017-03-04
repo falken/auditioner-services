@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.SecureRandom;
 
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -57,11 +58,13 @@ public abstract class TestResourceBase {
     }
     
     protected Response simplePost(String uri,Object entity) {
-        return resources.client().target(uri)
-                .request(MediaType.APPLICATION_JSON_TYPE)
+        MediaType applicationJsonType = MediaType.APPLICATION_JSON_TYPE;
+        Entity<Object> entity1 = Entity.entity(entity, MediaType.APPLICATION_JSON_TYPE);
+        Client client = resources.client();
+        return client.target(uri)
+                .request(applicationJsonType)
                 .header("Authorization", "Bearer Dummy")
-                .post(Entity.entity(entity, MediaType.APPLICATION_JSON_TYPE));
-
+                .post(entity1);
     }
     
     protected Response simpleDelete(String uri) {
