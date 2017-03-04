@@ -39,10 +39,6 @@ export default Ember.Controller.extend({
         .then(function(){
           model.reload();
         });
-    },
-    cancelEditingFamily: function() {
-      this.set('isEditing',false);
-      this.set('editingFamily',null);
     }
   }
 
