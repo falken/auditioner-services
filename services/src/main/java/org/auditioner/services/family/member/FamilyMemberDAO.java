@@ -18,10 +18,10 @@ public interface FamilyMemberDAO {
             "WHERE id=:id")
     void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
-    @SqlUpdate("INSERT INTO FamilyMember (first_name,last_name,weight,height,roles) "
-            + " VALUES (:first_name,last_name,weight,height,roles)")
+    @SqlUpdate("INSERT INTO FamilyMember (family_id, first_name,last_name,weight,height,roles) "
+            + " VALUES (:familyId, :first_name,last_name,weight,height,roles)")
     @GetGeneratedKeys
-    long addFamilyMember(@BindBean("familyMember") FamilyMember familyMember);
+    long addFamilyMember(@Bind("familyId") long familyId, @BindBean("familyMember") FamilyMember familyMember);
 
     @SqlUpdate("DELETE FROM FamilyMember "
             + "WHERE id=:id")

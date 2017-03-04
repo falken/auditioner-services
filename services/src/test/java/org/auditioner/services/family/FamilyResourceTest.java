@@ -44,14 +44,11 @@ public class FamilyResourceTest extends TestResourceBase {
 
     @Test
     public void addFamilyCreatesFamily(){
-
         when(familyDAO.addFamily(any(Family.class))).thenReturn(14134L);
-
         Family family = new Family();
         family.setName("MyName");
 
         Response response = simplePost("/auditioner/families",family);
-
 
         assertEquals(hostNameRoot+"/auditioner/families/" + 14134, response.getHeaderString("Location"));
         assertEquals(201,response.getStatus());
@@ -59,7 +56,6 @@ public class FamilyResourceTest extends TestResourceBase {
 
     @Test
     public void deleteFamilyRemovesFamily(){
-
         Response response = simpleDelete("/auditioner/families/12");
 
         assertEquals(204,response.getStatus());
@@ -72,7 +68,6 @@ public class FamilyResourceTest extends TestResourceBase {
         Family family = new Family();
         family.setName("theName");
         family.setLocation("/auditioner/families/12");
-
         when(familyDAO.getFamily(12L)).thenReturn(family);
 
         Family actualFamily = simpleGet("/auditioner/families/12",Family.class);
@@ -89,9 +84,7 @@ public class FamilyResourceTest extends TestResourceBase {
         Family family2 = new Family();
         family2.setName("two");
         family2.setLocation("/auditioner/families/2");
-
         List<Family> familyList = newArrayList(family1,family2);
-
         when(familyDAO.getFamilies()).thenReturn(familyList);
 
         Response response = simpleGet("/auditioner/families");
