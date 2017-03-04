@@ -4,6 +4,8 @@
 .mtj.tmp/
 
 services/target
+services/*.iml
+services/dependency-reduced-pom.xml
 
 # Package Files #
 *.jar
@@ -31,3 +33,4 @@ web/coverage/*
 web/libpeerconnection.log
 web/npm-debug.log
 web/testem.log
+documentation/documentation.iml
