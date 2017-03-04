@@ -15,10 +15,10 @@ public class ProductionMemberResultSetMapper implements ResultSetMapper<Producti
     @Override
     public ProductionMember map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         ProductionMember productionMember = new ProductionMember();
-        productionMember.setLocation("/auditioner/productions/"+resultSet.getLong("production_id")+ "/family_member" + resultSet.getLong("id"));
+        productionMember.setLocation("/auditioner/productions/"+resultSet.getLong("production_id")+ "/family_member/" + resultSet.getLong("id"));
         productionMember.setAuditionNumber(resultSet.getString("audition_number"));
-        productionMember.setFamilyMemberFirstName(resultSet.getString(""));
-        productionMember.setFamilyMemberLastName(resultSet.getString(""));
+        productionMember.setFamilyMemberFirstName(resultSet.getString("first_name"));
+        productionMember.setFamilyMemberLastName(resultSet.getString("last_name"));
         productionMember.setRehearsalConflicts(resultSet.getString("rehearsal_conflicts"));
         productionMember.setRequestedRoles(resultSet.getString("requested_roles"));
 
