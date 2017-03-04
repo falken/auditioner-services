@@ -36,7 +36,7 @@ export default Ember.Service.extend({
       let results = ListResult.create({childType:ProductionMember});
       const url = '/auditioner/productions/' + productionId +'/production-members/';
 
-      client.getResource(url,productionId);
+      client.getResource(url,results);
 
       return results;
   },

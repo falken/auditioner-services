@@ -2,18 +2,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    familyService: Ember.inject.service('family-service'),
     productionService: Ember.inject.service('production-service'),
     model(param){
-        const familyService = this.get('familyService');
         const productionService = this.get('productionService');
 
-        console.log(productionService.loadProductionMembersById(param.production_id));
-
         return {
-            family: familyService.loadFamilyById(param.family_id),
-            productions: productionService.searchProductions(),
-            familyMembers: familyService.loadFamilyMembersByFamilyId(param.family_id)
+            production: productionService.loadById(param.production_id),
+            productionMembers: productionService.loadProductionMembersById(param.production_id)
         };
     },
     setupController: function (controller,model) {

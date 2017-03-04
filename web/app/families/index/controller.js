@@ -35,6 +35,9 @@ export default Ember.Controller.extend({
     editFamily: function(family) {
       this.set('isEditing',true);
       this.set('isAdd',false);
+      if(!family.get('preferredContactMethod')){
+        family.set('preferredContactMethod','Email');
+      }
       this.set('editingFamily',family);
     },
 
