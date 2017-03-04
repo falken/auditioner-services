@@ -5,6 +5,7 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
 import com.amazonaws.services.cognitoidp.model.*;
+import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +27,7 @@ public class CognitoAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public AdminInitiateAuthResult adminInitiateAuth(String userName, String password) {
+    public CognitoAdminInitiateAuthResult adminInitiateAuth(String userName, String password) {
         AdminInitiateAuthRequest adminInitiateAuthRequest = new AdminInitiateAuthRequest();
         adminInitiateAuthRequest.setClientId(CLIENT_ID);
         adminInitiateAuthRequest.setUserPoolId(USER_POOL_ID);
@@ -35,10 +36,11 @@ public class CognitoAuthenticationService implements AuthenticationService {
         authParameters.put("PASSWORD", password);
         adminInitiateAuthRequest.setAuthParameters(authParameters);
         adminInitiateAuthRequest.setAuthFlow("ADMIN_NO_SRP_AUTH");
-        return awsCognitoIdentityProvider.adminInitiateAuth(adminInitiateAuthRequest);
+        AdminInitiateAuthResult adminInitiateAuthResult = awsCognitoIdentityProvider.adminInitiateAuth(adminInitiateAuthRequest);
+        return new CognitoAdminInitiateAuthResult(adminInitiateAuthResult);
     }
 
-    @Override
+//    @Override
     public AdminCreateUserResult adminCreateUser(String userName, String email) {
         AdminCreateUserRequest adminCreateUserRequest = new AdminCreateUserRequest();
         adminCreateUserRequest.setUsername(userName);
@@ -57,7 +59,7 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.adminCreateUser(adminCreateUserRequest);
     }
 
-    @Override
+//    @Override
     public AdminRespondToAuthChallengeResult adminRespondToAuthChallenge(String challengeName, Map<String, String> challengeResponses, String session) {
         AdminRespondToAuthChallengeRequest adminRespondToAuthChallengeRequest = new AdminRespondToAuthChallengeRequest();
         adminRespondToAuthChallengeRequest.setChallengeName(challengeName);
@@ -68,7 +70,7 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.adminRespondToAuthChallenge(adminRespondToAuthChallengeRequest);
     }
 
-    @Override
+//    @Override
     public ForgotPasswordResult forgotPassword(String userName) {
         ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest();
         forgotPasswordRequest.setUsername(userName);
@@ -76,7 +78,7 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.forgotPassword(forgotPasswordRequest);
     }
 
-    @Override
+//    @Override
     public AdminDeleteUserResult adminDeleteUser(String userName) {
         AdminDeleteUserRequest adminDeleteUserRequest = new AdminDeleteUserRequest();
         adminDeleteUserRequest.setUsername(userName);
@@ -84,7 +86,7 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.adminDeleteUser(adminDeleteUserRequest);
     }
 
-    @Override
+//    @Override
     public ConfirmForgotPasswordResult confirmForgotPassword(String userName, String password, String confirmationCode) {
         ConfirmForgotPasswordRequest confirmForgotPasswordRequest = new ConfirmForgotPasswordRequest();
         confirmForgotPasswordRequest.setUsername(userName);

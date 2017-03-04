@@ -1,6 +1,5 @@
 package org.auditioner.services.auth;
 
-import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthResult;
 import org.auditioner.services.util.ServiceContext;
 
 import javax.ws.rs.Consumes;
@@ -8,23 +7,21 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/auditioner/authentication")
 @Produces( MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CognitioAuthenticationResource {
-
-    private CognitoAuthenticationService cognitoAuthenticationService;
     private ServiceContext serviceContext;
+    private CognitoAuthenticationService cognitoAuthenticationService;
 
     public CognitioAuthenticationResource( ServiceContext serviceContext, CognitoAuthenticationService cognitoAuthenticationService) {
-        this.cognitoAuthenticationService = cognitoAuthenticationService;
         this.serviceContext = serviceContext;
+        this.cognitoAuthenticationService = cognitoAuthenticationService;
     }
 
     @POST
-    public void intiateAuth(AuthUser authUser) {
-
+    public AdminInitiateAuthResult intiateAuth(AuthenticationUser authenticationUser) {
+        return cognitoAuthenticationService.adminInitiateAuth(authenticationUser.getUserName(), authenticationUser.getPassword());
     }
 }

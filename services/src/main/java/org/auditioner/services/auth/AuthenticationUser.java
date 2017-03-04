@@ -1,21 +1,24 @@
 package org.auditioner.services.auth;
 
-public class AuthUser{
-    private String username;
+public class AuthenticationUser {
+    private String userName;
     private String password;
     private String location;
 
-    public AuthUser(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUsername() {
-        return username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getLocation() {

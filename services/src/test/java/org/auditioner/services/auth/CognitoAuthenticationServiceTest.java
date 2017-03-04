@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class CognitoAuthenticationServiceTest extends TestResourceBase {
     @Test
     public void testAdminInitiateAuth() {
-        new CognitoAuthenticationService().adminInitiateAuth("tbrobston", "Superawesomepassword123!");
+        new CognitoAuthenticationService().adminInitiateAuth("tbrobston", "3VgCdW6#");
     }
 
     @Test
