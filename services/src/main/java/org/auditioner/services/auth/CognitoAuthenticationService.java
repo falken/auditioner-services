@@ -1,10 +1,8 @@
 package org.auditioner.services.auth;
 
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
-import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
 import com.amazonaws.services.cognitoidp.model.*;
 
@@ -58,5 +56,21 @@ public class CognitoAuthenticationService implements AuthenticationService {
         return awsCognitoIdentityProvider.adminCreateUser(adminCreateUserRequest);
     }
 
+    @Override
+    public AdminRespondToAuthChallengeResult adminRespondToAuthChallenge(String challengeName, Map<String, String> challengeResponses, String session) {
+        AWSCredentialsProvider awsCredentialsProvider = new ProfileCredentialsProvider("auditioner-services");
+        AWSCognitoIdentityProvider awsCognitoIdentityProvider = AWSCognitoIdentityProviderClientBuilder
+                .standard()
+                .withCredentials(awsCredentialsProvider)
+                .withRegion("us-east-1")
+                .build();
+        AdminRespondToAuthChallengeRequest adminRespondToAuthChallengeRequest = new AdminRespondToAuthChallengeRequest();
+        adminRespondToAuthChallengeRequest.setChallengeName(challengeName);
+        adminRespondToAuthChallengeRequest.setChallengeResponses(challengeResponses);
+        adminRespondToAuthChallengeRequest.setClientId("5arcj0lrinm657auifjd0r94og");
+        adminRespondToAuthChallengeRequest.setSession(session);
+        adminRespondToAuthChallengeRequest.setUserPoolId("us-east-1_vmUUwBDEg");
+        return awsCognitoIdentityProvider.adminRespondToAuthChallenge(adminRespondToAuthChallengeRequest);
+    }
 
 }
