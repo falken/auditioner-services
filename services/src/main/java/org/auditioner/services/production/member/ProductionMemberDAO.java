@@ -10,12 +10,20 @@ public interface ProductionMemberDAO {
 
     @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number" +
             "FROM ProductionMember pm join FamilyMember fm on pm.family_member_id=fm.id "+
-            "WHERE id=:id and production_id=:productionId")
+            "WHERE pm.id=:id and pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
     ProductionMember getProductionMember(@Bind("productionId") long productionId, @Bind("id") long productionMemberId);
 
-    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id" +
-            "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id)" +
+    @SqlQuery("SELECT pm.id,p.Name,pm.requested_roles,pm.audition_number " +
+            "FROM ProductionMember pm  "+
+            "join Production p on pm.production_id=p.id "+
+            "WHERE pm.family_member_id=:familyMemberId")
+    @Mapper(ProductionMemberResultSetMapper.class)
+    ProductionMember getMemberProductions(@Bind("familyMemberId") long familyMemberId);
+
+
+    @SqlQuery("SELECT fm.first_name,fm.last_name,pm.requested_roles,pm.audition_number,pm.production_id " +
+            "FROM ProductionMember pm join FamilyMember fm on (pm.family_member_id=fm.id) " +
             "WHERE pm.production_id=:productionId")
     @Mapper(ProductionMemberResultSetMapper.class)
     List<ProductionMember> getProductionMembers(@Bind("productionId") long productionId);
@@ -23,7 +31,7 @@ public interface ProductionMemberDAO {
     @SqlUpdate("UPDATE ProductionMember "+
             " SET audition_number=:productionMember.auditionNumber, "+
             "requested_roles=:productionMember.requestedRoles,"+
-            "rehearsal_conflicts=:productionMember.rehearsalConflicts"+
+            "rehearsal_conflicts=:productionMember.rehearsalConflicts "+
             "WHERE id=:id")
     void updateProductionMember(@Bind("id") long productionMemberId, @BindBean("productionMember") ProductionMember productionMember);
 

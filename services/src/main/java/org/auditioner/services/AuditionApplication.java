@@ -14,6 +14,7 @@ import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.production.ProductionResource;
 import org.auditioner.services.production.member.ProductionMemberDAO;
 import org.auditioner.services.production.member.ProductionMemberResource;
+import org.auditioner.services.family.member.FamilyMemberProductionResource;
 import org.auditioner.services.util.ServiceContext;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.skife.jdbi.v2.DBI;
@@ -67,5 +68,6 @@ public class AuditionApplication extends Application<AuditionConfiguration>
 
         final ProductionMemberDAO productionMemberDAO = jdbi.onDemand(ProductionMemberDAO.class);
         environment.jersey().register(new ProductionMemberResource(context, productionMemberDAO));
+        environment.jersey().register(new FamilyMemberProductionResource(context, productionMemberDAO));
     }
 }
