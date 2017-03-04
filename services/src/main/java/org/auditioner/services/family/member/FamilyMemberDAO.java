@@ -20,7 +20,12 @@ public interface FamilyMemberDAO {
     FamilyMember getFamilyMember(@Bind("familyId") long familyId, @Bind("id") long id);
 
     @SqlUpdate("UPDATE FamilyMember " +
-            "  SET first_name=:familyMember.first_name " +
+            "  SET first_name=:familyMember.firstName, " +
+            "  last_name=:familyMember.lastName, " +
+            "  age=:familyMember.age, " +
+            "  weight=:familyMember.weight, " +
+            "  height=:familyMember.height, " +
+            "  past_roles=:familyMember.pastRoles " +
             "WHERE id=:id")
     void updateFamilyMember(@Bind("id") long familyMemberId,@BindBean("familyMember") FamilyMember familyMember);
 
