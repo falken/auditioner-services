@@ -25,7 +25,9 @@
             <tbody>
             {{#each model.results as | production | }}
             <tr>
-              <td>{{production.name}}</td>
+              {{#link-to 'productions.production' production.id tagName='td' class="col-md-10"}}
+                  {{production.name}}
+              {{/link-to}}
               <td>{{production.auditionDate}}</td>
               <td  class="text-right">
                 <a {{action 'editProduction' production}} ><span class="glyphicon glyphicon-pencil"></span></a>
