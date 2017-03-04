@@ -17,4 +17,18 @@
 			</column>
 	</createTable>
 	</changeSet>
+
+	<changeSet id="production-2" author="snelson">
+		<addColumn tableName="Production">
+			<column name="Name" type="varchar(48)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="audition_date" type="date">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		<dropColumn tableName="Production" columnName="auditionDate"/>
+
+
+	</changeSet>
 </databaseChangeLog>
