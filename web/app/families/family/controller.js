@@ -36,7 +36,11 @@ export default Ember.Controller.extend({
           this.set('isEditing',false);
           this.set('editingFamilyMember',null);
         });
+    },
+    registerFamilyMembers: function() {
+
     }
+
   }
 
 });
