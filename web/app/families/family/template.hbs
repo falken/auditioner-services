@@ -10,18 +10,31 @@
             <tbody>
             <tr>
               <td>Contact Email</td>
-              <td>bob@bob.com</td>
-              <td>(preferred)</td>
+              <td>{{model.family.contactEmail}}</td>
+                {{#if preferEmail}}
+                    <td>(preferred)</td>
+                {{/if}}
+
             </tr>
             <tr>
               <td>Contact Phone</td>
-              <td>1-800-druidia</td>
+              <td>{{model.family.contactPhone}}</td>
               <td>&nbsp;</td>
             </tr>
             <tr>
               <td>Mailing Address</td>
-              <td>440 W. North St <br/>Clive, IA 50325</td>
+                <td>{{model.family.mailingAddressLine1}}<br/>
+                    {{#if model.family.mailingAddressLine2}}
+                        {{model.family.mailingAddressLine2}}<br/>
+                    {{/if}}
+                    {{model.family.mailingAddressCity}}, {{model.family.mailingAddressState}} {{model.family.mailingAdressZip}}</td>
               <td>&nbsp;</td>
+            </tr>
+            <tr>
+                {{#if model.family.preferredContactMethod}}
+                    <td>Preferred Contact Method</td>
+                    <td>{{model.family.preferredContactMethod}}</td>
+                {{/if}}
             </tr>
             </tbody>
           </table>
