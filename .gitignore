@@ -7,6 +7,9 @@ services/target
 services/*.iml
 services/dependency-reduced-pom.xml
 
+# Vim swap files #
+*.swp
+
 # Package Files #
 *.jar
 *.war

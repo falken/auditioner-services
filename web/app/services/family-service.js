@@ -62,6 +62,30 @@ export default Ember.Service.extend({
     family.set('client',client);
     return family;
   },
+  loadFamilyMemberById:function(familyId,familyMemberId)
+  {
+    const client = this.get('client');
+    const url = '/auditioner/families/' + familyId + '/family_member/' + familyMemberId;
+
+    const familyMember = FamilyMember.create();
+
+    familyMember.set('client',client);
+    familyMember.set('path',url);
+
+    client.getResource(url,familyMember);
+
+    return familyMember;
+  },
+  loadFamilyMembersByFamilyId: function(familyId) {
+    const client = this.get('client');
+    let results = ListResult.create({childType:FamilyMember});
+
+    let searchUrl = '/auditioner/families/' + familyId + '/family_member/';
+
+    client.getResource(searchUrl,results);
+
+    return results;
+  },
   deleteFamilyMember:function(familyMember)
   {
     const client = this.get('client');
@@ -75,11 +99,16 @@ export default Ember.Service.extend({
     familyMember.set('client',client);
     return familyMember;
   },
-  saveFamilyMember:function(saveFamilyMember)
+  saveFamilyMember:function(familyId,saveFamilyMember)
   {
     const client = this.get('client');
 
-    return client.putResource(saveFamilyMember);
+    if (saveFamilyMember.get("location")) {
+      return client.putResource(saveFamilyMember);
+    }
+    else {
+      return client.postResource("/auditioner/families/" + familyId + "/family_member",saveFamilyMember);
+    }
   },
 
 });

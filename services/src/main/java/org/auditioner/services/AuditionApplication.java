@@ -10,6 +10,7 @@ import org.auditioner.services.family.FamilyDAO;
 import org.auditioner.services.family.FamilyResource;
 import org.auditioner.services.family.member.FamilyMemberDAO;
 import org.auditioner.services.family.member.FamilyMemberResource;
+import org.auditioner.services.production.AuditionNumberGenerator;
 import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.production.ProductionResource;
 import org.auditioner.services.production.member.ProductionMemberDAO;
@@ -60,12 +61,12 @@ public class AuditionApplication extends Application<AuditionConfiguration>
         environment.jersey().register(new FamilyResource(context,familyDAO));
 
         final FamilyMemberDAO familyMemberDAO = jdbi.onDemand(FamilyMemberDAO.class);
-        environment.jersey().register(new FamilyMemberResource(context, familyDAO,familyMemberDAO));
+        environment.jersey().register(new FamilyMemberResource(context,familyMemberDAO));
 
         final ProductionDAO productionDAO = jdbi.onDemand(ProductionDAO.class);
         environment.jersey().register(new ProductionResource(context,productionDAO));
 
         final ProductionMemberDAO productionMemberDAO = jdbi.onDemand(ProductionMemberDAO.class);
-        environment.jersey().register(new ProductionMemberResource(context, productionMemberDAO));
+        environment.jersey().register(new ProductionMemberResource(context, productionMemberDAO, new AuditionNumberGenerator(productionDAO), familyMemberDAO));
     }
 }

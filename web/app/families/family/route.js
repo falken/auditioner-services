@@ -7,23 +7,20 @@ export default Ember.Route.extend({
   model(param){
     const familyService = this.get('familyService');
     const productionService = this.get('productionService');
+
+
+    console.log(familyService.loadFamilyById(param.family_id));
+
     return {
       family: familyService.loadFamilyById(param.family_id),
       productions: productionService.searchProductions(),
-      familyMembers:Ember.A([
-        Ember.Object.create({
-          "id": 1,
-          "firstName":"Tammy",
-          "lastName":"Smith Jr",
-          "age":14
-        }),
-        Ember.Object.create({
-          "id": 2,
-          "firstName":"Lisa",
-          "lastName":"Smith",
-          "age":12
-        })
-      ])
+      familyMembers: familyService.loadFamilyMembersByFamilyId(param.family_id)
     };
+  },
+  setupController: function (controller,model) {
+    this._super(controller,model);
+
+    controller.set('isEditing',false);
+    controller.set('editingFamilyMember',null);
   }
 });

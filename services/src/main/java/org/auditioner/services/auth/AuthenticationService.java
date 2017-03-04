@@ -10,4 +10,5 @@ public interface AuthenticationService {
     AdminRespondToAuthChallengeResult adminRespondToAuthChallenge(String challengeName, Map<String, String> challengeResponses, String session);
     ForgotPasswordResult forgotPassword(String userName);
     AdminDeleteUserResult adminDeleteUser(String userName);
+    ConfirmForgotPasswordResult confirmForgotPassword(String userName, String password, String confirmationCode);
 }
