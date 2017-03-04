@@ -6,6 +6,7 @@ import java.net.URI;
 public class ServiceContext {
     private ServiceContextConfiguration serviceConfiguration;
 
+
     public ServiceContext(ServiceContextConfiguration serviceConfiguration) {
         this.serviceConfiguration = serviceConfiguration;
     }

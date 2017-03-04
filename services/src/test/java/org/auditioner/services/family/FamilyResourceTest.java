@@ -3,6 +3,7 @@ package org.auditioner.services.family;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.auditioner.services.TestResourceBase;
 import org.auditioner.services.util.ServiceContext;
+import org.auditioner.services.util.ServiceContextConfiguration;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -12,6 +13,7 @@ import org.mockito.ArgumentCaptor;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.ServiceConfigurationError;
+import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,16 +26,20 @@ import static org.mockito.Mockito.*;
 public class FamilyResourceTest extends TestResourceBase {
 
     private static final FamilyDAO familyDAO = mock(FamilyDAO.class);
-    private static final ServiceContext serviceContext = mock(ServiceContext.class);
+    private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
     public static final ResourceTestRule resources = wrapResource(new FamilyResource(serviceContext,familyDAO));
 
+    private String hostNameRoot;
     @Before
     public void setUp() {
         super.setUp(resources);
 
         reset(familyDAO);
+
+        hostNameRoot = "http://lollypops.com";
+        serviceContext.getServiceConfiguration().setHostNameRoot(hostNameRoot);
     }
 
     @Test
@@ -46,8 +52,9 @@ public class FamilyResourceTest extends TestResourceBase {
 
         Response response = simplePost("/auditioner/families",family);
 
+
+        assertEquals(hostNameRoot+"/auditioner/families/" + 14134, response.getHeaderString("Location"));
         assertEquals(201,response.getStatus());
-        assertEquals("http://localhost:9998/auditioner/families/14134",response.getLocation().toString());
     }
 
     @Test
