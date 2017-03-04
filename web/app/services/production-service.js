@@ -1,8 +1,7 @@
-
-import Ember from 'ember';
-import Production from 'web/models/production';
+import Ember from "ember";
+import Production from "web/models/production";
 import ProductionMember from 'web/models/productionMember';
-import ListResult from 'web/models/listResult';
+import ListResult from "web/models/listResult";
 
 
 export default Ember.Service.extend({
@@ -30,6 +29,16 @@ export default Ember.Service.extend({
     client.getResource(url,production);
 
     return production;
+  },
+  loadProductionMembersById:function(productionId)
+  {
+      const client = this.get('client');
+      let results = ListResult.create({childType:ProductionMember});
+      const url = '/auditioner/productions/' + productionId +'/production-members/';
+
+      client.getResource(url,results);
+
+      return results;
   },
   reload:function(production)
   {

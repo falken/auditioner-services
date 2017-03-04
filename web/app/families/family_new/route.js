@@ -6,17 +6,19 @@ export default Ember.Route.extend({
   productionService: Ember.inject.service('production-service'),
   model(){
     const familyService = this.get('familyService');
-    const model =  {
-      family:familyService.createFamily(),
+    const family = familyService.createFamily();
+    family.set('preferredContactMethod','Email');
+    return {
+      family:family,
     };
-    return model;
   },
   setupController: function (controller,model) {
     this._super(controller,model);
     const productionService = this.get('productionService');
     controller.set('newFamilyMembers',Ember.A());
-    controller.addFamilyMember();
+    controller.addFamilyMemberToMemberList();
     controller.set('productions',productionService.searchProductions());
+    controller.set('canDeleteFamilyMamber',false);
   }
 
 });

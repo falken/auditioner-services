@@ -12,24 +12,30 @@ export default Ember.Controller.extend({
       this.set('selectedProduction',production);
     },
     addFamilyMember:function(){
-      const familyService = this.get('familyService');
-      const familyMemberList = this.get('newFamilyMembers');
-
-      familyMemberList.addObject({
-        familyMember:familyService.createFamilyMember(),
-        memberRegistration:Ember.Object.create()
-      });
+      this.addFamilyMemberToMemberList();
+      this.set('canDeleteFamilyMamber',true);
     },
     deleteFamilyMember:function(familyMember){
       const familyMemberList = this.get('newFamilyMembers');
 
       familyMemberList.removeObject(familyMember);
-    },
-    cancelFamilyMember:function(){
-      const familyService = this.get('familyService');
 
-      this.set('newFamilyMember',familyService.createFamilyMember());
+      if(familyMemberList.length < 2){
+        this.set('canDeleteFamilyMamber',false);
+      }
+    },
+    registerFamily:function(){
+
     }
+  },
+  addFamilyMemberToMemberList:function(){
+    const familyService = this.get('familyService');
+    const familyMemberList = this.get('newFamilyMembers');
+
+    familyMemberList.addObject({
+      familyMember:familyService.createFamilyMember(),
+      memberRegistration:Ember.Object.create()
+    });
   }
 
 });

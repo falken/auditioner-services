@@ -14,6 +14,9 @@ export default Ember.Object.extend({
 		this.set('auditionNumber', data.auditionNumber);
 		this.set('familyMemberFirstName', data.familyMemberFirstName);
 		this.set('familyMemberLastName', data.familyMemberLastName);
+
+		this.set('familyMemberId', data.family_member_id);
+		this.set('productionId', data.production_id);
 	},
 
 	toJson: function() {
@@ -24,4 +27,3 @@ export default Ember.Object.extend({
 		});
 	}
 });
-

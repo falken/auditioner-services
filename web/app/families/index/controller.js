@@ -5,22 +5,24 @@ export default Ember.Controller.extend({
   familyService: Ember.inject.service('family-service'),
   actions:{
     choosePreferredContactMethod(choice) {
-          this.set('preferredContactMethod', choice);
+      const editingFamily = this.get('editingFamily');
+      editingFamily.set('preferredContactMethod', choice);
     },
     addFamily:function(){
       const familyService = this.get('familyService');
-
+      const editingFamily = familyService.createFamily();
+      editingFamily.set('preferredContactMethod','Email');
       this.set('isEditing',true);
       this.set('isAdd',true);
-      this.set('editingFamily',familyService.createFamily());
+
+      this.set('editingFamily',editingFamily);
     },
     saveEditingFamily:function(){
 
       const familyService = this.get('familyService');
       const editingFamily = this.get('editingFamily');
-      editingFamily.preferredContactMethod = this.get('preferredContactMethod');
       const list = this.get('model');
-      var controller = this;
+      const controller = this;
 
       familyService.saveFamily(editingFamily)
         .then(function(){
@@ -33,6 +35,9 @@ export default Ember.Controller.extend({
     editFamily: function(family) {
       this.set('isEditing',true);
       this.set('isAdd',false);
+      if(!family.get('preferredContactMethod')){
+        family.set('preferredContactMethod','Email');
+      }
       this.set('editingFamily',family);
     },
 

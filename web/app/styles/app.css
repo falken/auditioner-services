@@ -4,3 +4,11 @@ body {
 }
 
 
+.main-body {
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.edit-panel {
+  margin-left:10px;
+}
