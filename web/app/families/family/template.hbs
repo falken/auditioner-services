@@ -10,7 +10,7 @@
             <tbody>
             <tr>
               <td>Contact Email</td>
-              <td>{{model.family.contactEmail}}</td>
+              <td>{{model.family.email}}</td>
               {{#if preferEmail}}
                 <td>(preferred)</td>
               {{/if}}
@@ -18,16 +18,16 @@
             </tr>
             <tr>
               <td>Contact Phone</td>
-              <td>{{model.family.contactPhone}}</td>
+              <td>{{model.family.phone}}</td>
             </tr>
             <tr>
               <td>Mailing Address</td>
-              <td>{{model.family.mailingAddressLine1}}<br/>
-                {{#if model.family.mailingAddressLine2}}
-                  {{model.family.mailingAddressLine2}}<br/>
+              <td>{{model.family.address01}}<br/>
+                {{#if model.family.address02}}
+                  {{model.family.address02}}<br/>
                 {{/if}}
-                {{model.family.mailingAddressCity}}
-                , {{model.family.mailingAddressState}} {{model.family.mailingAdressZip}}</td>
+
+                {{model.family.city}}{{#if model.family.city}}, {{/if}}{{model.family.state}} {{model.family.zipCode}}</td>
             </tr>
             <tr>
               {{#if model.family.preferredContactMethod}}
