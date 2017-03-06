@@ -12,3 +12,188 @@ body {
 .edit-panel {
   margin-left:10px;
 }
+
+
+.navbar-default {
+  background: powderblue;
+  border-radius: 0;
+}
+.navbar-default a {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.panel-default>.panel-heading {
+  background-color: powderblue;
+  text-transform: uppercase;
+}
+.panel-default>.panel-heading h3 {
+  font-weight: bold!important;
+  color: #777;
+}
+.hp-links {
+  background: powderblue;
+  color: #777;
+  padding:5px 15px;
+  margin-bottom: 20px;
+  float: left;
+  width:100%;
+  border-radius: 5px;
+}
+.hp-links:hover {
+  text-decoration: none;
+  color: black;
+  background: rgba(217, 237, 247, 0.8);
+}
+.panel-body {
+  background: #fcfcfc;
+}
+input {
+  margin-bottom: 15px
+}
+.btn-primary {
+  background: powderblue;
+  border-color: powderblue;
+  color: #333;
+}
+.btn-primary:hover {
+  background: #999;
+  border-color: #999;
+}
+.glyphicon {
+  color: #333;
+}
+label {
+  color: #333;
+}
+.navbar-default {
+  background: powderblue;
+  border-radius: 0;
+}
+.navbar-default a {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.panel-default>.panel-heading {
+  background-color: powderblue;
+  text-transform: uppercase;
+}
+.panel-default>.panel-heading h3 {
+  font-weight: bold!important;
+  color: #777;
+}
+.hp-links {
+  background: powderblue;
+  color: #777;
+  padding:5px 15px;
+  margin-bottom: 20px;
+  float: left;
+  width:100%;
+  border-radius: 5px;
+}
+.hp-links:hover {
+  text-decoration: none;
+  color: black;
+  background: rgba(217, 237, 247, 0.8);
+}
+.panel-body {
+  background: #fcfcfc;
+}
+input {
+  margin-bottom: 15px
+}
+.btn-primary {
+  background: powderblue;
+  border-color: powderblue;
+  color: #333;
+}
+.btn-primary:hover {
+  background: #999;
+  border-color: #999;
+}
+.glyphicon {
+  color: #333;
+}
+label {
+  color: #333;
+}
+.navbar-default {
+  background: powderblue;
+  border-radius: 0;
+}
+.navbar-default a {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.panel-default>.panel-heading {
+  background-color: powderblue;
+  text-transform: uppercase;
+}
+.panel-default>.panel-heading h3 {
+  font-weight: bold!important;
+  color: #777;
+}
+.hp-links {
+  background: powderblue;
+  color: #777;
+  padding:5px 15px;
+  margin-bottom: 20px;
+  float: left;
+  width:100%;
+  border-radius: 5px;
+}
+.hp-links:hover {
+  text-decoration: none;
+  color: black;
+  background: rgba(217, 237, 247, 0.8);
+}
+.panel-body {
+  background: #fcfcfc;
+}
+input {
+  margin-bottom: 15px
+}
+.btn-primary {
+  background: powderblue;
+  border-color: powderblue;
+  color: #333;
+}
+.btn-primary:hover {
+  background: #999;
+  border-color: #999;
+}
+.glyphicon {
+  color: #333;
+}
+label {
+  color: #333;
+}
+.panel-default {
+  border-color: powderblue;
+}
+.panel-body {
+  background: aliceblue;
+}
+tr {
+  background: aliceblue;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background: #e2eeff;
+}
+.table-hover>tbody>tr:hover, .table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active {
+  background:powderblue;
+}
