@@ -82,30 +82,14 @@
 
           <div class="form-group">
             <label class="col-sm-12">Preferred Contact Method</label><br/>
-            <div class="col-sm-4">
-              {{#radio-button
-                value="Email"
-                groupValue=editingFamily.preferredContactMethod
-                changed="choosePreferredContactMethod"}}
-                Email
-              {{/radio-button}}
-            </div>
-            <div class="col-sm-4">
-              {{#radio-button
-                value="Phone"
-                groupValue=editingFamily.preferredContactMethod
-                changed="choosePreferredContactMethod"}}
-                Phone
-              {{/radio-button}}
-            </div>
-            <div class="col-sm-4">
-              {{#radio-button
-                value="Mail"
-                groupValue=editingFamily.preferredContactMethod
-                changed="choosePreferredContactMethod"}}
-                Mail
-              {{/radio-button}}
-            </div>
+            {{#bs-button-group class="col-sm-12"
+                               value=editingFamily.preferredContactMethod
+                               type="radio"
+                               onChange=(action "choosePreferredContactMethod") as |bg|}}
+              {{#bg.button value="Email" class="col-sm-4"}}Email{{/bg.button}}
+              {{#bg.button value="Phone" class="col-sm-4"}}Phone{{/bg.button}}
+              {{#bg.button value="Mail" class="col-sm-4"}}Mail{{/bg.button}}
+            {{/bs-button-group}}
           </div>
 
             <div class="row">
