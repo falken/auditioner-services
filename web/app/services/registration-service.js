@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import Production from 'web/models/production';
 import ProductionMember from 'web/models/productionMember';
-import ListResult from 'web/models/listResult';
 
 
 export default Ember.Service.extend({
@@ -19,13 +17,7 @@ export default Ember.Service.extend({
 		const client = this.get('client');
 		const url = '/auditioner/productions/' + productionId + '/production-members';
 
-
-
 		return client.postResource(url,productionMembers[0]);
-	},
-
-	register: function(productionId,familyMemberId,requestedRoles,rehearsalConflict) {
-
 	}
 
 });

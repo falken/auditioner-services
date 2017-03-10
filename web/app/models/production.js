@@ -12,12 +12,14 @@ export default Ember.Object.extend({
 		this.set('name', data.name);
 		this.set('auditionDate', data.auditionDate);
 		this.set('season', data.season);
+    this.set('ageCutoffDate',data.ageCutoffDate);
 	},
 	toJson: function() {
 		return JSON.stringify({
 			name: this.get('name'),
 			auditionDate: this.get('auditionDate'),
-			season: this.get('season')
+			season: this.get('season'),
+      ageCutoffDate: this.get('ageCutoffDate')
 		});
 	}
 });

@@ -5,6 +5,7 @@ public class Production{
     private String auditionDate;
     private String season;
     private String location;
+    private String ageCutoffDate;
 
     public String getName() {
         return name;
@@ -36,5 +37,13 @@ public class Production{
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getAgeCutoffDate() {
+        return ageCutoffDate;
+    }
+
+    public void setAgeCutoffDate(String ageCutoffDate) {
+        this.ageCutoffDate = ageCutoffDate;
     }
 }

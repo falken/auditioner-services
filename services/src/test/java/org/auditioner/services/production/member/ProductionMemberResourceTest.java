@@ -5,6 +5,8 @@ import org.auditioner.services.TestResourceBase;
 import org.auditioner.services.family.member.FamilyMember;
 import org.auditioner.services.family.member.FamilyMemberDAO;
 import org.auditioner.services.production.AuditionNumberGenerator;
+import org.auditioner.services.production.Production;
+import org.auditioner.services.production.ProductionDAO;
 import org.auditioner.services.util.ServiceContext;
 import org.auditioner.services.util.ServiceContextConfiguration;
 import org.eclipse.jetty.http.HttpStatus;
@@ -14,44 +16,49 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import javax.ws.rs.core.Response;
-
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 public class ProductionMemberResourceTest extends TestResourceBase {
 
     private static final FamilyMemberDAO familyMemberDao = mock(FamilyMemberDAO.class);
     private static final ProductionMemberDAO productionMemberDAO = mock(ProductionMemberDAO.class);
+    private static final ProductionDAO productionDAO = mock(ProductionDAO.class);
     private static final AuditionNumberGenerator auditionNumberGenerator = mock(AuditionNumberGenerator.class);
 
     private static final ServiceContext serviceContext = new ServiceContext(new ServiceContextConfiguration());
 
     @ClassRule
-    public static final ResourceTestRule resources = wrapResource(new ProductionMemberResource(serviceContext, productionMemberDAO, auditionNumberGenerator, familyMemberDao));
-    public static final long PRODUCTION_ID = 9999L;
+    public static final ResourceTestRule resources = wrapResource(new ProductionMemberResource(serviceContext, productionMemberDAO, auditionNumberGenerator, familyMemberDao, productionDAO));
 
     private String hostNameRoot;
     private ProductionMember jane;
+    private FamilyMember janesDetails;
+    private static final long PRODUCTION_ID = 9999L;
 
     @Before
     public void setUp() {
         super.setUp(resources);
 
         reset(productionMemberDAO);
+        reset(productionDAO);
         reset(auditionNumberGenerator);
 
         hostNameRoot = "http://lollypops.com";
         serviceContext.getServiceConfiguration().setHostNameRoot(hostNameRoot);
+
+        Production nutcracker = new Production();
+        nutcracker.setName("Nutcracker");
+        nutcracker.setAgeCutoffDate("2016-10-1");
+
+        when(productionDAO.getProduction(PRODUCTION_ID)).thenReturn(nutcracker);
 
         jane = new ProductionMember();
         jane.setFamilyMemberFirstName("Jane");
@@ -59,6 +66,10 @@ public class ProductionMemberResourceTest extends TestResourceBase {
         jane.setAuditionNumber("2");
         jane.setRehearsalConflicts("something");
         jane.setLocation("/auditioner/productions/9999/production-members/1");
+
+        janesDetails = new FamilyMember();
+        janesDetails.setBirthDate("2010-10-01");
+
     }
 
     @Test
@@ -111,7 +122,7 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     @Test
     public void addProductionMemberCreatesProductionMember() {
         when(productionMemberDAO.addProductionMember(eq(PRODUCTION_ID),any(ProductionMember.class))).thenReturn(14134L);
-        when(familyMemberDao.getFamilyMember(any(Long.class))).thenReturn(new FamilyMember());
+        when(familyMemberDao.getFamilyMember(any(Long.class))).thenReturn(janesDetails);
 
 
         Response response = simplePost("/auditioner/productions/" + PRODUCTION_ID + "/production-members/", jane);
@@ -133,21 +144,18 @@ public class ProductionMemberResourceTest extends TestResourceBase {
     public void addingProductionMemberPopulatesAuditionNumberFromFamilyMemberDetails() {
 
         final long familyMemberId = 1L;
-        final String janesAge = "24";
 
         jane.setFamilyMemberId(familyMemberId);
 
-        FamilyMember janesDetails = new FamilyMember();
-        janesDetails.setAge(janesAge);
 
         when(familyMemberDao.getFamilyMember(familyMemberId)).thenReturn(janesDetails);
-        when(auditionNumberGenerator.generate(janesAge, PRODUCTION_ID)).thenReturn("2400");
+        when(auditionNumberGenerator.generate(PRODUCTION_ID,6)).thenReturn("600");
 
         simplePost("/auditioner/productions/" + PRODUCTION_ID + "/production-members/", jane);
 
         ArgumentCaptor<ProductionMember> argument = ArgumentCaptor.forClass(ProductionMember.class);
         verify(productionMemberDAO).addProductionMember(eq(PRODUCTION_ID),argument.capture());
-        assertThat(argument.getValue().getAuditionNumber(),equalTo("2400"));
+        assertThat(argument.getValue().getAuditionNumber(),equalTo("600"));
     }
 
 }

@@ -23,8 +23,6 @@ export default Ember.Object.extend({
     this.set('state', data.state);
     this.set('zipCode', data.zipCode);
     this.set('preferredContactMethod', data.preferredContactMethod);
-
-
   },
   toJson: function () {
 
@@ -44,7 +42,7 @@ export default Ember.Object.extend({
       city: this.get('city'),
       state: this.get('state'),
       zipCode: this.get('zipCode'),
-      preferredContactMethod: this.get('preferredContactMethod'),
+      preferredContactMethod: this.get('preferredContactMethod')
 
     });
   }

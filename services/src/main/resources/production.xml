@@ -28,7 +28,14 @@
 			</column>
 		</addColumn>
 		<dropColumn tableName="Production" columnName="auditionDate"/>
-
-
 	</changeSet>
+
+	<changeSet id="production-3" author="snelson">
+		<addColumn tableName="Production">
+			<column name="age_cutoff_date" type="date">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>

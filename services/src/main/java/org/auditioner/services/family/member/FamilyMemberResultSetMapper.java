@@ -13,7 +13,7 @@ public class FamilyMemberResultSetMapper  implements ResultSetMapper<FamilyMembe
         familyMember.setLocation("/auditioner/families/"+resultSet.getLong("family_id")+ "/family_member/" + resultSet.getLong("id"));
         familyMember.setFirstName(resultSet.getString("first_name"));
         familyMember.setLastName(resultSet.getString("last_name"));
-        familyMember.setAge(resultSet.getString("age"));
+        familyMember.setBirthDate(resultSet.getString("birth_date"));
         familyMember.setWeight(resultSet.getString("weight"));
         familyMember.setHeight(resultSet.getString("height"));
         familyMember.setPastRoles(resultSet.getString("past_roles"));

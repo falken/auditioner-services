@@ -1,7 +1,11 @@
 /* jshint node: true */
 
+
 module.exports = function(environment) {
   var ENV = {
+    moment: {
+      allowEmpty: true // default: false
+    },
     modulePrefix: 'web',
     environment: environment,
     baseURL: '/',

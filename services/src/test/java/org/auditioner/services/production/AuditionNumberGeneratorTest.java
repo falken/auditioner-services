@@ -3,6 +3,8 @@ package org.auditioner.services.production;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -17,7 +19,8 @@ public class AuditionNumberGeneratorTest {
     @Before
     public void setUp() throws Exception {
         productionDAO = mock(ProductionDAO.class);
-        when(productionDAO.lastAuditionNumberFor(0L)).thenReturn("0");
+
+        when(productionDAO.lastAuditionNumberFor(0L,16)).thenReturn("04");
 
         generator = new AuditionNumberGenerator(productionDAO);
     }
@@ -25,42 +28,45 @@ public class AuditionNumberGeneratorTest {
     @Test
     public void numbersStartWithMembersAge() {
 
-        String auditionNumber = generator.generate("16", 0);
+        String auditionNumber = generator.generate(0,16);
 
-        assertTrue(auditionNumber.startsWith("16"));
+        assertThat("1605",equalTo(auditionNumber));
     }
 
     @Test
-    public void singleDigitAgesArePaddedWithLeadingZeros() {
+    public void singleDigitAgesAreNotPaddedWithLeadingZeros() {
 
-        String auditionNumber = generator.generate("5", 0);
+        String auditionNumber = generator.generate(0,5);
 
-        assertTrue(auditionNumber.startsWith("05"));
+        assertThat("501",equalTo(auditionNumber));
     }
 
     @Test
     public void numbersAreFourDigitsLong() {
-        assertEquals(4, generator.generate("16", 0).length());
+
+        String auditionNumber = generator.generate(0,16);
+
+        assertEquals(4, auditionNumber.length());
     }
 
     @Test
     public void numbersAreUniqueWithinAProduction() {
-        generator.generate("24", 0L);
+        generator.generate(0L, 24);
 
-        verify(productionDAO).lastAuditionNumberFor(0L);
+        verify(productionDAO).lastAuditionNumberFor(0L,24);
     }
 
     @Test
     public void numbersAreIncrementedForEachProduction() {
-        when(productionDAO.lastAuditionNumberFor(175L)).thenReturn("3");
-        String auditionNumber = generator.generate("12", 175L);
+        when(productionDAO.lastAuditionNumberFor(175L, 12)).thenReturn("3");
+        String auditionNumber = generator.generate(175L,12);
         assertTrue(auditionNumber.endsWith("04"));
     }
 
     @Test
-    public void numbersStartAtZero() {
-        when(productionDAO.lastAuditionNumberFor(175L)).thenReturn(null);
-        String auditionNumber = generator.generate("12", 175L);
-        assertTrue(auditionNumber.endsWith("00"));
+    public void numbersStartAtOne() {
+        when(productionDAO.lastAuditionNumberFor(175L,12)).thenReturn(null);
+        String auditionNumber = generator.generate(175L,12);
+        assertTrue(auditionNumber.endsWith("01"));
     }
 }

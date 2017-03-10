@@ -16,8 +16,9 @@
           <table class="table table-striped table-condensed">
             <thead>
             <tr>
-              <th class="col-md-7">Name</th>
-              <th class="col-md-3">Audition Date</th>
+              <th class="col-md-6">Name</th>
+              <th class="col-md-2 text-right">Audition Date</th>
+              <th class="col-md-2 text-right">Age Cutoff Date</th>
               <th class="col-md-1">&nbsp;</th>
               <th class="col-md-1">&nbsp;</th>
             </tr>
@@ -28,7 +29,9 @@
               {{#link-to 'productions.production' production.id tagName='td'}}
                   {{production.name}}
               {{/link-to}}
-              <td>{{production.auditionDate}}</td>
+              <td  class="text-right">{{moment-format production.auditionDate 'M/D/YY'}}</td>
+              <td  class="text-right">{{moment-format production.ageCutoffDate 'M/D/YY'}}</td>
+
               <td  class="text-right">
                 <a {{action 'editProduction' production}} ><span class="glyphicon glyphicon-pencil"></span></a>
               </td>
@@ -58,8 +61,14 @@
               </div>
             </div>
             <div class="form-group">
+
               <div class="col-sm-12">
-              {{input type="text" class="form-control col-md-3" placeholder="Audition Date" value=editingProduction.auditionDate}}
+                {{pikaday-input class="form-control col-md-3" format="M/D/YYYY" placeholder="Audition Data"
+                                useUTC=true onSelection=(action 'updateAuditionDate') value=editingProduction.auditionDate}}
+              </div>
+              <div class="col-sm-12">
+                {{pikaday-input class="form-control col-md-3" format="M/D/YYYY" placeholder="Age Cutoff Date"
+                                useUTC=true onSelection=(action 'updateAgeCutoffDate') value=editingProduction.ageCutoffDate}}
               </div>
             </div>
             <div class="form-group">

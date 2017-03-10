@@ -1,5 +1,6 @@
 package org.auditioner.services.production.member;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.auditioner.services.production.ProductionResultSetMapper;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;

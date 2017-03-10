@@ -27,4 +27,15 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="productionmember-2" author="snelson">
+        <addUniqueConstraint
+                columnNames="production_id, audition_number"
+                constraintName="uq_production_audition_number"
+                tableName="ProductionMember"/>
+        <addUniqueConstraint
+                columnNames="production_id, family_member_id "
+                constraintName="uq_production_family_member"
+                tableName="ProductionMember"/>
+    </changeSet>
+
 </databaseChangeLog>

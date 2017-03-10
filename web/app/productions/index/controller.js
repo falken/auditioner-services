@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
 	productionService: Ember.inject.service('production-service'),
@@ -23,10 +24,24 @@ export default Ember.Controller.extend({
 				list.reload();
 			});
 		},
-		cancelEditingProduction: function() {
-			this.set('isEditing',false);
-			this.set('editingProduction',null);
+    cancelEditingProduction: function() {
+      this.set('isEditing',false);
+      this.set('editingProduction',null);
+    },
+    updateAuditionDate: function(newDate) {
+      const editingProduction= this.get('editingProduction');
+
+      const formattedDate = moment(newDate).utc().format('YYYY-MM-DD');
+
+      editingProduction.set('auditionDate',formattedDate);
 		},
+    updateAgeCutoffDate: function(newDate) {
+      const editingProduction= this.get('editingProduction');
+
+      const formattedDate = moment(newDate).utc().format('YYYY-MM-DD');
+
+      editingProduction.set('ageCutoffDate',formattedDate);
+    },
 		saveEditingProduction: function() {
 			const productionService = this.get('productionService');
 			const editingProduction= this.get('editingProduction');

@@ -8,7 +8,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Smiths'),
     first_name = 'Tammy',
     last_name = 'Smith',
-	age = '56',
+    birth_date = '1956/10/01',
     weight = '90',
     height = '4\'4"';
 
@@ -16,7 +16,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Smiths'),
   first_name = 'Lisa',
   last_name = 'Smith',
-  age = '56',
+  birth_date = '1956/10/01',
   weight = '105',
   height = '4\'8"';
 
@@ -24,7 +24,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Hansons'),
   first_name = 'Jim',
   last_name = 'Hanson',
-  age = '56',
+  birth_date = '1956/10/01',
   weight = '115',
   height = '5\'0"';
 
@@ -32,7 +32,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Hansons'),
   first_name = 'Sally',
   last_name = 'Hanson',
-  age = '56',
+  birth_date = '1956/10/01',
   weight = '120',
   height = '6\'0"';
 
@@ -40,7 +40,7 @@ insert into FamilyMember
 set family_id = (select Family.id from Family where Family.name = 'Jones'),
   first_name = 'Mary',
   last_name = 'Jones',
-  age = '56',
+  birth_date = '1956/10/01',
   weight = '112',
   height = '5\'2"';
 

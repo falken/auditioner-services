@@ -27,24 +27,24 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="familymember-role-1" author="ngujja">
+    <changeSet id="familymember-2" author="ngujja">
         <dropColumn tableName="FamilyMember" columnName="roles"/>
     </changeSet>
-    <changeSet id="familymember-prevrole-1" author="ngujja">
+    <changeSet id="familymember-3" author="ngujja">
         <addColumn tableName="FamilyMember">
             <column name="past_roles" type="text">
                 <constraints nullable="true"/>
             </column>
         </addColumn>
     </changeSet>
-    <changeSet id="familymember-add-age-1" author="phanson">
+    <changeSet id="familymember-4" author="phanson">
         <addColumn tableName="FamilyMember">
             <column name="age" type="int">
                 <constraints nullable="false"/>
             </column>
         </addColumn>
     </changeSet>
-    <changeSet id="familymember-add-exp-1" author="phanson">
+    <changeSet id="familymember-5" author="phanson">
         <addColumn tableName="FamilyMember">
             <column name="acro_exp" type="int" defaultValueNumeric="0">
                 <constraints nullable="false"/>
@@ -66,4 +66,13 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="familymember-6" author="snelson">
+        <dropColumn tableName="FamilyMember" columnName="age"/>
+        <addColumn tableName="FamilyMember">
+            <column name="birth_date" type="date">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

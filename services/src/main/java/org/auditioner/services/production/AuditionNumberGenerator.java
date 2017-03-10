@@ -9,20 +9,20 @@ public class AuditionNumberGenerator {
         this.productionDAO = productionDAO;
     }
 
-    public String generate(String age, long productionId) {
-        Integer auditionNumber = nextAuditionNumberFor(productionId);
-        return zeroPadded(age) + zeroPadded(auditionNumber);
+    public String generate(long productionId,int age) {
+        Integer auditionNumber = nextAuditionNumberFor(productionId,age);
+        return age + zeroPadded(auditionNumber);
     }
 
     private String zeroPadded(Object str) {
         return StringUtils.leftPad(str.toString(), 2, "0");
     }
 
-    private Integer nextAuditionNumberFor(long productionId) {
-        String lastNumber = productionDAO.lastAuditionNumberFor(productionId);
+    private Integer nextAuditionNumberFor(long productionId,int age) {
+        String lastNumber = productionDAO.lastAuditionNumberFor(productionId, age);
 
         if(lastNumber == null) {
-            return 0;
+            lastNumber = "0";
         }
 
         return Integer.parseInt(lastNumber) + 1;

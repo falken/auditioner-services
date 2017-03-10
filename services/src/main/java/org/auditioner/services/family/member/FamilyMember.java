@@ -7,7 +7,7 @@ public class FamilyMember {
     private String pastRoles;
     private String location;
     private String height;
-    private String age;
+    private String birthDate;
     private int acroExp;
     private int balletExp;
     private int jazzExp;
@@ -81,7 +81,11 @@ public class FamilyMember {
 
     public void setPastRoles(String past_roles) { this.pastRoles = past_roles; }
 
-    public void setAge(String age) { this.age = age; }
+    public String getBirthDate() {
+        return birthDate;
+    }
 
-    public String getAge() { return this.age; }
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
 }

@@ -11,23 +11,20 @@ export default Ember.Route.extend({
 		const productionService = this.get('productionService');
 
 
-		var members = Ember.A([]);
+		const members = Ember.A([]);
 
-		var memberIds = param.family_member_ids.split("-");
+    const memberIds = param.family_member_ids.split("-");
 
 		console.log(memberIds);
 
-		for(var i = 0; i < memberIds.length; i++) {
-			var familyMemberId = memberIds[i];
-			var member = familyService.loadFamilyMemberById(param.family_id,familyMemberId);
+		for(let i = 0; i < memberIds.length; i++) {
+      const familyMemberId = memberIds[i];
+      const member = familyService.loadFamilyMemberById(param.family_id,familyMemberId);
 
 			members.push(member);
 		}
 
 		// refactor this into list processing
-
-
-		console.log(member);
 		return {
 			familyId: param.family_id,
 			productions: productionService.searchProductions(),
